@@ -9,6 +9,8 @@
 
 本地数据持久化，支持sqlite 和 MySQL ，但是用户可以在不使用客户端的情况，就一个钱包就可以使用。
 
+在线体验  https://app.ethtweet.io/#/home
+
 ## mysql配置
 
 修改```tweet.yaml```配置文件，正确配置 MySQL 连接信息。
@@ -23,7 +25,7 @@ https://github.com/techknowlogick/xgo
 ```
 docker pull techknowlogick/xgo:latest
 #export GOPATH="当前目录"
-xgo   -targets=darwin/amd64,windows-6.0/amd64,linux/amd64,linux/arm64 -ldflags="-w -s" .
+xgo -out EthTweet_0.1.9  -targets="darwin/amd64,windows-6.0/amd64,linux/amd64,linux/arm64" -ldflags="-w -s" .
 ```
 
 window下编译安卓
