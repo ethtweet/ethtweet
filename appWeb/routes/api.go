@@ -18,7 +18,7 @@ func RegisterApiRoutes(app *iris.Application) {
 	})
 
 	app.Get("/webui", func(ctx iris.Context) {
-		ctx.Redirect("https://ipfs.io/ipns/share.chaintweet.io")
+		ctx.Redirect("https://ipfs.io/ipns/share.ethtweet.io")
 	})
 
 	v0 := app.Party("/api/v0", crs).AllowMethods(iris.MethodOptions)

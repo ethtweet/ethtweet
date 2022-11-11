@@ -15,7 +15,7 @@ db:
     max_open_counts: 50
   sqlite:
     dir: ./databases
-    dbName: chaintweet.0.2.db
+    dbName: ethtweet.0.2.db
 
 log:
   isPrint: true #是否打印日志文件
