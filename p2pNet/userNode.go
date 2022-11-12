@@ -28,7 +28,6 @@ import (
 	routing2 "github.com/libp2p/go-libp2p/p2p/discovery/routing"
 	libp2ptcp "github.com/libp2p/go-libp2p/p2p/transport/tcp"
 	websocket "github.com/libp2p/go-libp2p/p2p/transport/websocket"
-	"github.com/multiformats/go-multiaddr"
 )
 
 const MaxOnlineNodesNum = 128
@@ -268,12 +267,6 @@ func (usr *UserNode) ConnectP2p() error {
 		return err
 	}
 
-	ma, err := multiaddr.NewMultiaddr("/dnsaddr/ipfs.lubar.me/p2p/QmRWvGqZPFzWMQWpkdRXXRtwMx56oKoizen2PaSLeZDgLH")
-	BootstrapPeers := append(dht.DefaultBootstrapPeers, ma)
-	ma, err = multiaddr.NewMultiaddr("/ip4/172.31.11.59/tcp/4001/p2p/16Uiu2HAmVE4K3fsMnWqzUDHj9n3YMmA8cwdmhkDs1hHVkFBSnS2v")
-	BootstrapPeers = append(BootstrapPeers, ma)
-	ma, err = multiaddr.NewMultiaddr("/ip4/45.79.58.112/udp/4001/p2p/16Uiu2HAm9Tc3Dg6bCtt52Wp2PhLna1ugX6qBk4ox8WXGAQXc1s2P")
-	BootstrapPeers = append(BootstrapPeers, ma)
 	//每分钟广播一次
 	go func() {
 		time.Sleep(time.Minute * 1)

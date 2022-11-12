@@ -170,7 +170,8 @@ func main() {
 		}
 	}
 
-	deleteOldFiles()
+	go deleteOldFiles()
+	go global.ReloadIpfsGateway()
 
 	fmt.Printf("EthTweet %s\n", global.Version)
 	fmt.Printf("System version: %s\n", runtime.GOARCH+"/"+runtime.GOOS)
@@ -199,12 +200,15 @@ func main() {
 
 	//询问最新用户资料
 	logs.PrintlnInfo("ask user info ..............")
-	err = broadcastMsg.SyncUserInfo(models.GetCurrentUser(), true)
-	if err != nil {
-		logs.PrintlnWarning("do ask err fail ", err)
-	} else {
-		logs.PrintlnSuccess("do ask is ok ")
-	}
+	go func() {
+		err = broadcastMsg.SyncUserInfo(models.GetCurrentUser(), true)
+		if err != nil {
+			logs.PrintlnWarning("do ask err fail ", err)
+		} else {
+			logs.PrintlnSuccess("do ask is ok ")
+		}
+	}()
+
 	go func() {
 		tasks.RunTasks(global.GetGlobalCtx())
 	}()
