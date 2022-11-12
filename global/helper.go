@@ -12,7 +12,7 @@ import (
 	shell "github.com/ipfs/go-ipfs-api"
 	"github.com/libp2p/go-libp2p/core/crypto"
 	"github.com/mr-tron/base58"
-	"io/ioutil"
+	"io"
 	"log"
 	"math/rand"
 	"net"
@@ -43,7 +43,7 @@ func ReloadIpfsGateway() error {
 		return err
 	}
 	defer r.Body.Close()
-	b, err := ioutil.ReadAll(r.Body)
+	b, err := io.ReadAll(r.Body)
 	if err != nil {
 		return err
 	}
@@ -66,7 +66,7 @@ func GetIpfsInfo(h string) ([]byte, error) {
 			err = err2
 			continue
 		}
-		b, err2 := ioutil.ReadAll(r.Body)
+		b, err2 := io.ReadAll(r.Body)
 		_ = r.Body.Close()
 		if err2 != nil {
 			err = err2
