@@ -41,6 +41,7 @@ func init() {
 	if err != nil {
 		logs.Fatal("reload config", err)
 	}
+	global.IpfsApi = config.Cfg.IpfsApi
 
 	//注册需要编码传输的接口类型
 	gob.Register(&broadcastMsg.TweetInfo{})
