@@ -11,7 +11,7 @@ db:
     database: eth-tweet
     charset: utf8mb4
     username: root
-    password: password
+    password:
     max_idle_counts: 10
     max_open_counts: 50
   sqlite:

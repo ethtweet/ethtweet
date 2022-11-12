@@ -1,11 +1,14 @@
 package global
 
 import (
+	"database/sql"
+	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"log"
 	"os"
+	"runtime"
 	"time"
 )
 
@@ -31,6 +34,26 @@ func SetMysqlDB(db *MysqlDb) {
 }
 
 func NewDatabaseMysql(host, port, database, charset, username, password string, maxIdleCounts int, maxOpenCounts int) (*MysqlDb, error) {
+
+	// 初始化数据库
+	if runtime.GOOS == "windows" {
+		_, err := os.Stat("mysql/data/ibdata1")
+		_, err2 := os.Stat("mysql/data/" + database + "/tweets.ibd")
+		if err == nil && err2 != nil {
+			db, err := sql.Open("mysql", username+":"+password+"@("+host+":"+port+")/mysql?charset="+charset+"&parseTime=True&loc=Local")
+			if err != nil {
+				fmt.Println("mysql Open", err)
+				//return nil, err
+			}
+			defer db.Close()
+
+			_, err = db.Exec("CREATE DATABASE " + database + ";")
+			if err != nil {
+				fmt.Println("mysql CREATE ", err)
+			}
+		}
+	}
+
 	db, err := gorm.Open(mysql.Open(username+":"+password+"@("+host+":"+port+")/"+database+"?charset="+charset+"&parseTime=True&loc=Local"), &gorm.Config{
 		DisableForeignKeyConstraintWhenMigrating: true,
 		SkipDefaultTransaction:                   true,
