@@ -58,7 +58,10 @@ func deleteOldFiles() {
 	_, err := os.Stat(filename)
 	if err == nil {
 		tmpFile := os.TempDir() + "EthTweet" + strconv.FormatInt(time.Now().UnixNano(), 10)
-		os.Rename(filename, tmpFile)
+		err = os.Rename(filename, tmpFile)
+		if err != nil {
+			log.Println("delete old file err:", err)
+		}
 	}
 }
 
