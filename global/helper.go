@@ -26,6 +26,7 @@ import (
 
 var ipfsGateway []string
 var ipfsUploadMutex sync.Mutex
+var IpfsApi string
 
 func FormatEthSignMsg(msg string) string {
 	return fmt.Sprintf("\x19Ethereum Signed Message:\n%d%s", len([]byte(msg)), msg)
@@ -85,14 +86,14 @@ func UploadIpfs(data interface{}) (string, error) {
 	}
 	ipfsUploadMutex.Lock()
 	defer ipfsUploadMutex.Unlock()
-	sh := shell.NewShell("https://cdn.ipfsscan.io")
+	sh := shell.NewShell(IpfsApi)
 	return sh.Add(bytes.NewReader(b))
 }
 
 func UploadIpfsReader(r *bytes.Reader) (string, error) {
 	ipfsUploadMutex.Lock()
 	defer ipfsUploadMutex.Unlock()
-	sh := shell.NewShell("https://cdn.ipfsscan.io")
+	sh := shell.NewShell(IpfsApi)
 	return sh.Add(r)
 }
 

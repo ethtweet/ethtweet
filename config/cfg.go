@@ -3,10 +3,10 @@ package config
 import (
 	"encoding/json"
 	"flag"
-	"github.com/spf13/viper"
-	"github.com/tidwall/gjson"
 	"github.com/ethtweet/ethtweet/global"
 	"github.com/ethtweet/ethtweet/logs"
+	"github.com/spf13/viper"
+	"github.com/tidwall/gjson"
 	"log"
 	"os"
 	"path/filepath"
@@ -18,6 +18,7 @@ import (
 var webPort = flag.Int("web_port", 8080, "web listen port")
 var p2pPort = flag.Int("port", 20000, "libp2p listen port")
 var userKey = flag.String("user_key", "userKey77", "user keystore")
+var ipfsApi = flag.String("ipfs_api", "https://cdn.ipfsscan.io", "ipfs api")
 var keyStore = flag.String("key_store", "./keyStore", "keystore dir")
 var userData = flag.String("user_data", global.SqliteDatabaseDefaultDir, "data dir")
 var debug = flag.Bool("debug", false, "is print logs")
@@ -37,6 +38,7 @@ type Conf struct {
 	KeyStore      string
 	WebPort       int
 	P2pPort       int
+	IpfsApi       string
 }
 
 type LogsCfg struct {
@@ -72,6 +74,7 @@ func LoadConfigByPath(p string) error {
 			Debug:         *debug,
 			CheckApiLocal: *isCheckApiLocal,
 			UserKey:       *userKey,
+			IpfsApi:       *ipfsApi,
 			KeyStore:      *keyStore,
 			WebPort:       *webPort,
 			P2pPort:       *p2pPort,
@@ -159,6 +162,7 @@ func LoadConfigByPath(p string) error {
 	Cfg.CheckApiLocal = viper.GetBool("check_api_local")
 	Cfg.IsDaemon = viper.GetBool("daemon")
 	Cfg.UserKey = viper.GetString("key.user_key")
+	Cfg.IpfsApi = viper.GetString("ipfs_api")
 	Cfg.KeyStore = viper.GetString("key.key_store")
 	Cfg.P2pPort = viper.GetInt("port.p2p_port")
 	Cfg.WebPort = viper.GetInt("port.web_port")

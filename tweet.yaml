@@ -1,6 +1,7 @@
 daemon: false
 debug: true
 check_api_local: true
+ipfs_api: https://cdn.ipfsscan.io
 
 db:
   drive: mysql
