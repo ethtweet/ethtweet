@@ -6,7 +6,10 @@ import (
 	"github.com/ethtweet/ethtweet/appWeb"
 	"github.com/ethtweet/ethtweet/broadcastMsg"
 	"github.com/ethtweet/ethtweet/global"
+	"github.com/ethtweet/ethtweet/keys"
+	"github.com/ethtweet/ethtweet/logs"
 	"github.com/ethtweet/ethtweet/models"
+	"strconv"
 
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
@@ -34,6 +37,35 @@ func (twc *TweetsController) GetExplore(ctx iris.Context) *appWeb.ResponseFormat
 	tws := make([]*models.Tweets, 0, pager.Limit)
 	global.GetDB().Limit(pager.Limit).Offset(pager.Offset).Preload("UserInfo").Order("created_at desc").Find(&tws)
 	return appWeb.NewResponse(appWeb.ResponseSuccessCode, "success", tws)
+}
+
+// 广播签名后的推文
+func (twc *TweetsController) PostReleaseBySign(ctx iris.Context) *appWeb.ResponseFormat {
+	tw := &models.Tweets{}
+	tw.UserId = ctx.PostValueTrim("address")
+	nonce, _ := ctx.PostValueInt64("nonce")
+	tw.Nonce = uint64(nonce)
+	tw.Content = ctx.PostValueTrim("content")
+	tw.Attachment = ctx.PostValueTrim("attachment")
+	tw.Sign = ctx.PostValueTrim("sign")
+	tw.OriginTwId = ctx.PostValueTrim("origin_tw_id")
+	tw.OriginUserId = ctx.PostValueTrim("origin_user_address")
+	tw.TopicTag = ctx.PostValueTrim("topic_tag")
+	tw.GenerateId()
+	t, err := strconv.ParseInt(ctx.PostValueTrim("created_at"), 10, 64)
+	if err != nil {
+		logs.PrintErr("need time ", err)
+		return appWeb.NewResponse(appWeb.ResponseFailCode, err.Error(), nil)
+	}
+	tw.CreatedAt = t
+	if !keys.VerifySignatureByAddress(tw.UserId, tw.Sign, tw.GetSignMsg()) {
+		logs.PrintErr("tw sign err %s %s %s", tw.UserId, tw.Sign, tw.GetSignMsg())
+		return appWeb.NewResponse(appWeb.ResponseFailCode, err.Error(), nil)
+	}
+	err = broadcastMsg.CenterUserRelease(tw)
+	go broadcastMsg.BroadcastTweetSync(tw)
+
+	return appWeb.NewResponse(appWeb.ResponseSuccessCode, "success", tw)
 }
 
 func (twc *TweetsController) PostRelease(ctx iris.Context) *appWeb.ResponseFormat {
@@ -73,7 +105,7 @@ func (twc *TweetsController) GetUserTimelineBy(id string, ctx iris.Context) *app
 	return appWeb.NewResponse(appWeb.ResponseSuccessCode, "success", tws)
 }
 
-//我的转发
+// 我的转发
 func (twc *TweetsController) GetUserForward(ctx iris.Context) *appWeb.ResponseFormat {
 	pager := global.NewPager(ctx)
 	tws := make([]*models.Tweets, 0, pager.Limit)

@@ -4,12 +4,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"gorm.io/gorm"
 	"github.com/ethtweet/ethtweet/global"
 	"github.com/ethtweet/ethtweet/keys"
 	"github.com/ethtweet/ethtweet/logs"
 	"github.com/ethtweet/ethtweet/models"
 	"github.com/ethtweet/ethtweet/p2pNet"
+	"gorm.io/gorm"
 	"math/rand"
 	"sync"
 	"time"
@@ -33,7 +33,7 @@ func CenterUserRelease(tw *models.Tweets) error {
 		if global.LockForUpdate(tx.Model(userLock).Where("id = ?", tw.UserId)).Find(userLock).RowsAffected == 0 {
 			return fmt.Errorf("not found user")
 		}
-		if !keys.VerifySignature(userLock.PubKey, tw.Sign, tw.GetSignMsg()) {
+		if !keys.VerifySignatureByAddress(tw.UserId, tw.Sign, tw.GetSignMsg()) {
 			return fmt.Errorf("tw sign err %s %s %s", userLock.Id, tw.Sign, tw.GetSignMsg())
 		}
 		if !userLock.SyncStatusComplete() {

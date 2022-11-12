@@ -3,9 +3,6 @@ package controller
 import (
 	"errors"
 	"fmt"
-	"github.com/kataras/iris/v12"
-	"github.com/kataras/iris/v12/context"
-	"github.com/kataras/iris/v12/mvc"
 	"github.com/ethtweet/ethtweet/appWeb"
 	"github.com/ethtweet/ethtweet/broadcastMsg"
 	"github.com/ethtweet/ethtweet/global"
@@ -13,6 +10,9 @@ import (
 	"github.com/ethtweet/ethtweet/logs"
 	"github.com/ethtweet/ethtweet/models"
 	"github.com/ethtweet/ethtweet/p2pNet"
+	"github.com/kataras/iris/v12"
+	"github.com/kataras/iris/v12/context"
+	"github.com/kataras/iris/v12/mvc"
 	"strconv"
 )
 
@@ -123,6 +123,10 @@ func (uc *CenterUserController) ReleaseTw(ctx iris.Context) *appWeb.ResponseForm
 		return appWeb.NewResponse(appWeb.ResponseFailCode, err.Error(), nil)
 	}
 	tw.CreatedAt = t
+	if !keys.VerifySignatureByAddress(tw.UserId, tw.Sign, tw.GetSignMsg()) {
+		logs.PrintErr("tw sign err %s %s %s", tw.UserId, tw.Sign, tw.GetSignMsg())
+		return appWeb.NewResponse(appWeb.ResponseFailCode, err.Error(), nil)
+	}
 	logs.PrintlnInfo("center release tweets request start....", tw.Id)
 	err = broadcastMsg.CenterUserRelease(tw)
 	logs.PrintlnInfo("center release tweets request end....", tw.Id)
