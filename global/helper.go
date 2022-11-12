@@ -47,7 +47,36 @@ func ReloadIpfsGateway() error {
 	if err != nil {
 		return err
 	}
-	return json.Unmarshal(b, &ipfsGateway)
+	var ipfsGatewayCheck []string
+	err = json.Unmarshal(b, &ipfsGatewayCheck)
+	if err != nil {
+		return err
+	}
+	hc := &http.Client{
+		Timeout: 2 * time.Second,
+	}
+	for _, gateway := range ipfsGatewayCheck {
+		r, err2 := hc.Get(strings.ReplaceAll(gateway, ":hash", "QmVKvxgjYPZbcKZJdNBN6Qak8toJ29QuhkEFqP2ZPswPxY"))
+		if err2 != nil {
+			err = err2
+			continue
+		}
+		b, err2 := io.ReadAll(r.Body)
+		_ = r.Body.Close()
+		if err2 != nil {
+			err = err2
+			continue
+		}
+		text := string(b)
+		if text == "EthTweet" {
+			ipfsGateway = append(ipfsGateway, gateway)
+		}
+	}
+	for _, gateway := range ipfsGateway {
+		log.Println(gateway)
+	}
+
+	return nil
 }
 
 func GetIpfsInfo(h string) ([]byte, error) {
