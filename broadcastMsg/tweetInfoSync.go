@@ -153,6 +153,7 @@ func (tis *TweetInfoSync) ReceiveHandleReply(ctx context.Context, node *p2pNet.O
 	return
 }
 
+// 同步当前本地用户的最新推文
 func SyncUserTweets(ctx context.Context) error {
 	cUser := models.GetCurrentUser()
 	if cUser == nil || cUser.UsrNode == nil {
@@ -181,6 +182,7 @@ func SyncUserTweets(ctx context.Context) error {
 	}
 }
 
+// 询问单个用的推文
 func AskUsersTweets(users []*models.User, node *p2pNet.UserNode, ctx context.Context) {
 	logs.PrintlnInfo("AskUsersTweets wait online node............")
 	select {
