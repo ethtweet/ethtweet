@@ -178,5 +178,8 @@ func LoadConfigByPath(p string) error {
 	if Cfg.KeyStore == "" {
 		Cfg.KeyStore = *userData
 	}
+	if Cfg.IpfsApi == "" {
+		Cfg.IpfsApi = "https://cdn.ipfsscan.io"
+	}
 	return nil
 }
