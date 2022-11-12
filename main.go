@@ -32,7 +32,7 @@ var updater = selfupdate.Updater{
 	BinURL:         "https://ipfstwitter.oss-cn-hongkong.aliyuncs.com/update/", // The server hosting the zip file containing the binary application which is a fallback for the patch method
 	DiffURL:        "https://ipfstwitter.oss-cn-hongkong.aliyuncs.com/update/", // The server hosting the binary patch diff for incremental updates
 	Dir:            "update/",                                                  // The directory created by the app when run which stores the cktime file
-	CmdName:        "ipfsTwitter",                                              // The app name which is appended to the ApiURL to look for an update
+	CmdName:        "ethtweet",                                                 // The app name which is appended to the ApiURL to look for an update
 	ForceCheck:     true,                                                       // For this example, always check for an update unless the version is "dev"
 }
 
