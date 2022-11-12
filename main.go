@@ -61,6 +61,10 @@ func deleteOldFiles() {
 		err = os.Rename(filename, tmpFile)
 		if err != nil {
 			log.Println("delete old file err:", err)
+			//window环境如果安装位置和盘符不一样，不能移动，先写在当前目录下的tmp目录
+			os.Mkdir("./tmp/", os.FileMode(777))
+			tmpFile = "./tmp/" + filename + ".old" + strconv.FormatInt(time.Now().UnixNano(), 10)
+			os.Rename(filename, tmpFile)
 		}
 	}
 }
