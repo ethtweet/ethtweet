@@ -55,11 +55,12 @@
 | 发送推特 | POST |
 
 #### 请求参数
-| 名称 | 必须 | 类型及范围 | 说明   |
-| --- | --- | --- | --- |
-| forward_id | false | string | 转发内容的id 如果存在则会忽略content和附件 |
-| content | true | string | 内容 |
-| attachment | false | string | 内容 |
+| 名称         | 必须 | 类型及范围 | 说明                                       |
+|------------| --- | --- |------------------------------------------|
+| key        | false | string | 指定本地用户的key，如果不指定，就是当前默认用户，如果key不存在，会自动创建 |
+| forward_id | false | string | 转发内容的id 如果存在则会忽略content和附件               |
+| content    | true | string | 内容                                       |
+| attachment | false | string | 内容                                       |
 
 #### 返回结果
 ```json
