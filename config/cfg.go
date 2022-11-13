@@ -62,6 +62,10 @@ func LoadConfigByPath(p string) error {
 		logs.IsPrintLog = Cfg.Logs.IsPrint
 		logs.IsDebugPrint = Cfg.Debug
 	}()
+	_, err := os.Stat("tweet.yaml")
+	if err == nil && p == "" {
+		p = "./tweet.yaml"
+	}
 	if p == "" {
 		logs.PrintlnInfo("load config from cli args...")
 		Cfg = &Conf{
@@ -89,7 +93,7 @@ func LoadConfigByPath(p string) error {
 	viper.SetConfigName(fileName)
 	viper.AddConfigPath(paths)
 	viper.SetConfigType("yaml")
-	err := viper.ReadInConfig()
+	err = viper.ReadInConfig()
 	if err != nil {
 		return err
 	}
