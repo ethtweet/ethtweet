@@ -90,7 +90,7 @@ func (twc *TweetsController) PostRelease(ctx iris.Context) *appWeb.ResponseForma
 	if err != nil {
 		if errors.Is(err, global.ErrWaitUserSync) {
 			go func() {
-				_ = broadcastMsg.SyncUserInfo(twc.User, true)
+				_ = broadcastMsg.SyncUserInfo(user, true)
 			}()
 		}
 		return appWeb.NewResponse(appWeb.ResponseFailCode, fmt.Sprintf("release tweet err %s", err.Error()), err)
