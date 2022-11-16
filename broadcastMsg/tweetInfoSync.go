@@ -176,7 +176,7 @@ func SyncUserTweets(ctx context.Context) error {
 		logs.PrintlnInfo("Start sync tweets.................")
 		users := make([]*models.User, 0, 20)
 		if global.GetDB().Limit(20).
-			Where("last_check_tweet_time < ?", time.Now().Add(-(time.Minute*60)).Unix()).
+			Where("last_check_tweet_time < ?", time.Now().Add(-(time.Minute*60)).Unix()). //更新频率控制
 			Where("local_nonce < nonce or (local_nonce = 0 and latest_cid != '')").Order("last_check_tweet_time asc").
 			Find(&users).RowsAffected > 0 {
 			c, cc := context.WithTimeout(ctx, 10*time.Second)
@@ -218,7 +218,8 @@ func AskUsersTweets(users []*models.User, node *p2pNet.UserNode, ctx context.Con
 			}
 			return true
 		})
-		tx.Model(user).Update("LastCheckTweetTime", time.Now().Unix())
+		user.LastCheckTweetTime = time.Now().Unix()
+		tx.Save(user)
 		logs.PrintlnSuccess(fmt.Sprintf("Success sync user's %s tweet.....", user.Id))
 	}
 }
