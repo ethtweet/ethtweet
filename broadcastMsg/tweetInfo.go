@@ -324,8 +324,11 @@ func (twInfo *TweetInfo) ReceiveHandle(ctx context.Context, node *p2pNet.OnlineN
 	isOk = true
 	//延迟广播
 	go func() {
-		a := rand.Intn(10) * 60
-		time.Sleep(time.Second * time.Duration(a))
+		a := rand.Intn(100)
+		if a <= 20 {
+			return
+		}
+		time.Sleep(time.Second * 60)
 		logs.PrintlnInfo("Start broadcast....", twInfo.Tw.Id)
 		BroadcastTweet(twInfo.Tw)
 		logs.PrintlnSuccess("Broadcast ok....", twInfo.Tw.Id)
