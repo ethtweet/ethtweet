@@ -52,7 +52,6 @@ func (tis *TweetInfoSync) ReceiveHandleAsk(ctx context.Context, node *p2pNet.Onl
 	if tis.Type != TweetInfoSyncTypeAsk {
 		return
 	}
-	logs.PrintlnInfo(fmt.Sprintf("ReceiveHandleAsk userId: %s, twNonce: %d, size: %d, ReplyTwSurplusNewNum: %d", tis.UserAddress, tis.TwNonce, tis.Size, tis.ReplyTwSurplusNewNum))
 	tws := make([]*models.Tweets, 0, tis.Size)
 	//没有更多的推文
 	query := global.GetDB()
@@ -61,6 +60,11 @@ func (tis *TweetInfoSync) ReceiveHandleAsk(ctx context.Context, node *p2pNet.Onl
 		Where("user_id", tis.UserAddress).
 		Order("nonce asc").
 		Limit(tis.Size).Find(&tws).RowsAffected == 0 {
+		return
+	}
+
+	if len(tws) == 0 {
+		logs.PrintlnInfo("ReceiveHandleAsk no new tweet")
 		return
 	}
 
@@ -84,7 +88,9 @@ func (tis *TweetInfoSync) ReceiveHandleAsk(ctx context.Context, node *p2pNet.Onl
 	tis.ReplyTwSurplusNewNum = uint64(i)
 
 	//修改一下类型回复出去
+	// todo 如果没有更新的，那就不回复
 	tis.Type = TweetInfoSyncTypeReply
+	logs.PrintlnInfo(fmt.Sprintf("ReceiveHandleAsk userId: %s, twNonce: %d, size: %d, ReplyTwSurplusNewNum: %d", tis.UserAddress, tis.TwNonce, tis.Size, tis.ReplyTwSurplusNewNum))
 	err := node.WriteData(tis)
 	if err != nil {
 		logs.PrintlnWarning(fmt.Sprintf("reply user:%s, tweet err %s", tis.UserAddress, err.Error()))
@@ -153,7 +159,7 @@ func (tis *TweetInfoSync) ReceiveHandleReply(ctx context.Context, node *p2pNet.O
 	return
 }
 
-// 同步当前本地用户的最新推文
+// SyncUserTweets 循环拉去网络最新推文
 func SyncUserTweets(ctx context.Context) error {
 	cUser := models.GetCurrentUser()
 	if cUser == nil || cUser.UsrNode == nil {
@@ -170,7 +176,7 @@ func SyncUserTweets(ctx context.Context) error {
 		logs.PrintlnInfo("Start sync tweets.................")
 		users := make([]*models.User, 0, 20)
 		if global.GetDB().Limit(20).
-			Where("last_check_tweet_time < ?", time.Now().Add(-(time.Minute*3)).Unix()).
+			Where("last_check_tweet_time < ?", time.Now().Add(-(time.Minute*60)).Unix()).
 			Where("local_nonce < nonce or (local_nonce = 0 and latest_cid != '')").Order("last_check_tweet_time asc").
 			Find(&users).RowsAffected > 0 {
 			c, cc := context.WithTimeout(ctx, 10*time.Second)
