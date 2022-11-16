@@ -325,7 +325,7 @@ func (twInfo *TweetInfo) ReceiveHandle(ctx context.Context, node *p2pNet.OnlineN
 	//延迟广播
 	go func() {
 		a := rand.Intn(100)
-		if a <= 20 {
+		if a <= 90 {
 			return
 		}
 		time.Sleep(time.Second * 60)
