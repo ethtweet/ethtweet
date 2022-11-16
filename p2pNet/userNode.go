@@ -11,7 +11,11 @@ import (
 	connmgr "github.com/libp2p/go-libp2p/p2p/net/connmgr"
 	"github.com/libp2p/go-libp2p/p2p/security/noise"
 	libp2pquic "github.com/libp2p/go-libp2p/p2p/transport/quic"
+	"github.com/multiformats/go-multiaddr"
+	"io"
+	"os"
 	"runtime"
+	"strings"
 	"sync"
 	"time"
 
@@ -292,6 +296,31 @@ func (usr *UserNode) ConnectP2p() error {
 			}
 			time.Sleep(OnlineNodesSyncDuration)
 		}
+	}()
+
+	go func() {
+		if global.FileExists("Bootstrap.txt") {
+			file2, err := os.Open("Bootstrap.txt")
+			if err != nil {
+				logs.PrintDebugErr(err)
+			}
+			reader := bufio.NewReader(file2)
+			for {
+				str, err := reader.ReadString('\n')
+				if err == io.EOF {
+					break
+				}
+
+				addr, err := multiaddr.NewMultiaddr(strings.Trim(str, "\n"))
+				if err != nil {
+					logs.PrintlnWarning("地址解析失败", err)
+				} else {
+					a, _ := peer.AddrInfoFromP2pAddr(addr)
+					usr.Host.Connect(usr.Ctx, *a)
+				}
+			}
+		}
+
 	}()
 
 	return nil

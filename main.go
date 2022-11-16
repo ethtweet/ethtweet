@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"encoding/gob"
 	"fmt"
 	"github.com/ethtweet/ethtweet/appWeb/routes"
@@ -193,6 +194,26 @@ func RunMysql() {
 
 }
 
+func SavePeers() {
+	filePath := "Bootstrap.txt"
+	file, err := os.OpenFile(filePath, os.O_WRONLY|os.O_APPEND|os.O_CREATE|os.O_TRUNC, 0666)
+	if err != nil {
+		fmt.Println("文件打开失败", err)
+	}
+	//及时关闭file句柄
+	defer file.Close()
+
+	conn := usr.Host.Network().Conns()
+	write := bufio.NewWriter(file)
+	for _, c := range conn {
+		//写入文件时，使用带缓存的 *Writer
+		write.WriteString(fmt.Sprintf("%s/p2p/%s\n", c.RemoteMultiaddr().String(), c.RemotePeer().String()))
+	}
+	write.Flush()
+}
+
+var usr *p2pNet.UserNode
+
 func main() {
 	if config.Cfg.IsDaemon {
 		if runtime.GOOS != "windows" {
@@ -238,6 +259,17 @@ RE:
 			}()
 		}
 
+		go func() {
+			for {
+				now := time.Now()
+				next := now.Add(time.Hour * 4)
+				timer := time.NewTimer(next.Sub(now))
+				t := <-timer.C //从定时器拿数据
+				fmt.Println("restart time:", t)
+				os.Exit(0)
+			}
+		}()
+
 		checkUpdate()
 		//子进程才执行更新检测
 		go checkUpdateTimer()
@@ -261,7 +293,7 @@ RE:
 		logs.Fatal(err)
 	}
 
-	usr := p2pNet.NewUserNode(config.Cfg.P2pPort, config.Cfg.UserKey, config.Cfg.KeyStore)
+	usr = p2pNet.NewUserNode(config.Cfg.P2pPort, config.Cfg.UserKey, config.Cfg.KeyStore)
 	err = usr.ConnectP2p()
 	if err != nil {
 		logs.Fatal("connect p2p err ", err)
@@ -286,6 +318,18 @@ RE:
 			logs.PrintlnSuccess("do ask is ok ")
 		}
 	}()
+
+	//每
+	ticker1 := time.NewTicker(300 * time.Second)
+	// 一定要调用Stop()，回收资源
+	defer ticker1.Stop()
+	go func(t *time.Ticker) {
+		for {
+			// 每5秒中从chan t.C 中读取一次
+			<-t.C
+			SavePeers()
+		}
+	}(ticker1)
 
 	go func() {
 		tasks.RunTasks(global.GetGlobalCtx())
