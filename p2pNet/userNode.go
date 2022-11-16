@@ -298,7 +298,7 @@ func (usr *UserNode) ConnectP2p() error {
 }
 
 func (usr *UserNode) handleStream(s network.Stream) {
-	logs.PrintlnSuccess("Got a new stream!", s.Conn().RemotePeer().Pretty(), s.ID(), s.Conn().ID(), len(s.Conn().GetStreams()))
+	logs.PrintlnSuccess("Got a new stream!", s.Conn().RemotePeer().String(), s.ID(), s.Conn().ID(), len(s.Conn().GetStreams()))
 	node := NewOnlineNode(usr, s, false)
 	node.AddOnlineNodesTry()
 	node.ListenRead()

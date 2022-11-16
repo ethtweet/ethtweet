@@ -3,20 +3,20 @@ package p2pNet
 import (
 	"bufio"
 	"context"
+	"github.com/ethtweet/ethtweet/logs"
 	"github.com/libp2p/go-libp2p/core/network"
 	"github.com/libp2p/go-libp2p/core/peer"
 	"github.com/libp2p/go-libp2p/core/peerstore"
 	"github.com/multiformats/go-multiaddr"
 	"io"
-	"github.com/ethtweet/ethtweet/logs"
 )
 
 func ReadData(online *OnlineNode, ctx context.Context) {
-	logs.PrintlnInfo("listen's ", online.Pi.ID.Pretty())
+	logs.PrintlnInfo("listen's ", online.Pi.ID.String())
 	online.IsLister = true
 	defer func() {
 		online.Close()
-		logs.PrintlnInfo("closed listen's ", online.Pi.ID.Pretty())
+		logs.PrintlnInfo("closed listen's ", online.Pi.ID.String())
 	}()
 	for {
 		select {
@@ -33,7 +33,7 @@ func ReadData(online *OnlineNode, ctx context.Context) {
 			logs.PrintErr("read err ", err)
 			return
 		}
-		logs.PrintlnInfo("read new msg........... from", online.Pi.ID.Pretty(), msg)
+		logs.PrintlnInfo("read new msg........... from", online.Pi.ID.String(), msg)
 		go func() {
 			msg.ReceiveHandle(ctx, online)
 			online.AddOnlineNodesTry()

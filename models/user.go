@@ -133,7 +133,7 @@ func (usr *User) SetSyncStatusIng() error {
 	return global.GetDB().Where("sync_status", UserSyncStatusWait).Select("SyncStatus", "SyncTimeoutUnix").Save(uas).Error
 }
 
-// 设置成功同步状态
+// SetSyncStatusComplete 设置成功同步状态
 func (usr *User) SetSyncStatusComplete(tx *gorm.DB) error {
 	if usr.SyncStatusComplete() {
 		return fmt.Errorf("sync status is ing")
@@ -363,7 +363,7 @@ func GetUserByKeyName(dir, key string, autoCreate bool) (*User, error) {
 		return nil, err
 	}
 	usr := &User{}
-	if global.GetDB().Where("peer_id = ?", peerId.Pretty()).Find(usr).RowsAffected > 0 {
+	if global.GetDB().Where("peer_id = ?", peerId.String()).Find(usr).RowsAffected > 0 {
 		return usr, nil
 	}
 	if autoCreate {
