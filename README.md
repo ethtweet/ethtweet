@@ -11,9 +11,19 @@
 
 在线体验  https://app.ethtweet.io/#/home
 
+## 配置文件
+
+默认读取 `tweet.yaml` 文件，如果不存在就读取命令行参数。
+
 ## mysql配置
 
 修改```tweet.yaml```配置文件，正确配置 MySQL 连接信息。
+
+window环境下，如果在程序运行目录下的有一个MySQL 8.0 ，会自动启动 MySQL ，需要的文件及其路径
+```
+mysql\bin\mysqld.exe
+mysql\bin\libprotobuf-lite.dll
+```
 
 启动节点
 ```
@@ -40,3 +50,7 @@ set CC=D:\android\ndk\22.1.7171670\toolchains\llvm\prebuilt\windows-x86_64\bin\a
 set CXX=D:\android\ndk\22.1.7171670\toolchains\llvm\prebuilt\windows-x86_64\bin\aarch64-linux-android21-clang++.cmd
 go build --tags "android"  -ldflags="-s -w"  -o ipfs
 ```
+
+## todo 
+
+增加节点统计，记录最长在线时间，每次启动的时候连接
