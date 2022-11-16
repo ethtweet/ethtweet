@@ -215,8 +215,8 @@ func (usr *UserNode) ConnectP2p() error {
 	}
 
 	connmgr_, _ := connmgr.NewConnManager(
-		100, // Lowwater
-		400, // HighWater,
+		50,  // Lowwater
+		200, // HighWater,
 		connmgr.WithGracePeriod(time.Minute),
 	)
 	usr.Host, err = libp2p.New(
