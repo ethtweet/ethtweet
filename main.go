@@ -14,6 +14,7 @@ import (
 	"github.com/ethtweet/ethtweet/pRuntime"
 	"github.com/ethtweet/ethtweet/tasks"
 	"log"
+	"net"
 	"net/http"
 	_ "net/http/pprof"
 	"os"
@@ -163,22 +164,31 @@ func RunMysql() {
 		}
 	}
 
-	mysqlCmd := exec.Command("cmd.exe", "/c", ".\\mysql\\bin\\mysqld.exe --console")
-	err = mysqlCmd.Start()
-	if err != nil {
-		if exitErr, ok := err.(*exec.ExitError); ok {
-			status := exitErr.Sys().(syscall.WaitStatus)
-			switch {
-			case status.Exited():
-				logs.PrintDebugErr("Return exit error: exit code=%d\n", status.ExitStatus())
-			case status.Signaled():
-				logs.PrintDebugErr("Return exit error: signal code=%d\n", status.Signal())
+	is_run := false
+	conn, err := net.DialTimeout("tcp", "127.0.0.1:3306", 3*time.Second)
+	if err == nil && conn != nil {
+		is_run = true
+		conn.Close()
+	}
+
+	if !is_run {
+		mysqlCmd := exec.Command("cmd.exe", "/c", ".\\mysql\\bin\\mysqld.exe --console")
+		err = mysqlCmd.Start()
+		if err != nil {
+			if exitErr, ok := err.(*exec.ExitError); ok {
+				status := exitErr.Sys().(syscall.WaitStatus)
+				switch {
+				case status.Exited():
+					logs.PrintDebugErr("Return exit error: exit code=%d\n", status.ExitStatus())
+				case status.Signaled():
+					logs.PrintDebugErr("Return exit error: signal code=%d\n", status.Signal())
+				}
+			} else {
+				logs.PrintDebugErr("Return other error: %s\n", err)
 			}
 		} else {
-			logs.PrintDebugErr("Return other error: %s\n", err)
+			logs.PrintlnSuccess("mysql start")
 		}
-	} else {
-		logs.PrintlnSuccess("mysql start")
 	}
 
 }
@@ -191,43 +201,46 @@ func main() {
 			logs.PrintlnWarning("windows不支持守护进程模式")
 		}
 	}
-	//CPU 性能分析
-	if config.Cfg.Debug {
+
+	//不是debug模式下 自动管理进程
+RE:
+	proc, err := pRuntime.NewProc()
+	if err != nil {
+		logs.PrintlnWarning("up proc fail........")
+	}
+	//如果proc为nil表示当前进程已经是子进程了
+	//不为空表示当前进程为主进程
+	if proc != nil {
 		go func() {
-			log.Println(http.ListenAndServe("0.0.0.0:6060", nil))
+			pRuntime.HandleEndSignal(func() {
+				if err := proc.Kill(); err != nil {
+					logs.PrintErr(err)
+				}
+				logs.PrintlnSuccess("main proc exit....")
+
+				os.Exit(0)
+			})
 		}()
-	} else {
-		//不是debug模式下 自动管理进程
-	RE:
-		proc, err := pRuntime.NewProc()
+		//等待子进程退出后 重启
+		err = proc.Wait()
 		if err != nil {
-			logs.PrintlnWarning("up proc fail........")
-		}
-		//如果proc为nil表示当前进程已经是子进程了
-		//不为空表示当前进程为主进程
-		if proc != nil {
-			go func() {
-				pRuntime.HandleEndSignal(func() {
-					if err := proc.Kill(); err != nil {
-						logs.PrintErr(err)
-					}
-					logs.PrintlnSuccess("main proc exit....")
-					os.Exit(0)
-				})
-			}()
-			//等待子进程退出后 重启
-			err = proc.Wait()
-			if err != nil {
-				logs.PrintlnWarning("proc wait err........")
-			} else {
-				goto RE
-			}
-			return
+			logs.PrintlnWarning("proc wait err........")
 		} else {
-			checkUpdate()
-			//子进程才执行更新检测
-			go checkUpdateTimer()
+			goto RE
 		}
+		return
+	} else {
+
+		//CPU 性能分析
+		if config.Cfg.Debug {
+			go func() {
+				log.Println(http.ListenAndServe("0.0.0.0:6060", nil))
+			}()
+		}
+
+		checkUpdate()
+		//子进程才执行更新检测
+		go checkUpdateTimer()
 	}
 
 	go deleteOldFiles()
@@ -249,7 +262,7 @@ func main() {
 	}
 
 	usr := p2pNet.NewUserNode(config.Cfg.P2pPort, config.Cfg.UserKey, config.Cfg.KeyStore)
-	err := usr.ConnectP2p()
+	err = usr.ConnectP2p()
 	if err != nil {
 		logs.Fatal("connect p2p err ", err)
 	}
