@@ -1,11 +1,12 @@
 package logs
 
 import (
-	"github.com/gookit/color"
-	"github.com/ethtweet/ethtweet/global"
 	"log"
 	"os"
 	"time"
+
+	"github.com/ethtweet/ethtweet/global"
+	"github.com/gookit/color"
 )
 
 var IsPrintLog = true

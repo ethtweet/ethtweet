@@ -4,13 +4,13 @@ import (
 	"crypto/sha256"
 	"errors"
 	"fmt"
-	"github.com/ethtweet/ethtweet/global"
 	"strings"
 	"time"
 
-	"gorm.io/gorm"
+	"github.com/ethtweet/ethtweet/global"
 
 	"github.com/mr-tron/base58"
+	"gorm.io/gorm"
 )
 
 type TweetJson struct {

@@ -23,6 +23,8 @@ require (
 	gorm.io/gorm v1.24.1
 )
 
+require github.com/bits-and-blooms/bloom/v3 v3.3.1
+
 require (
 	github.com/BurntSushi/toml v1.2.0 // indirect
 	github.com/CloudyKit/fastprinter v0.0.0-20200109182630-33d98a066a53 // indirect
@@ -34,7 +36,6 @@ require (
 	github.com/benbjohnson/clock v1.3.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bits-and-blooms/bitset v1.3.3 // indirect
-	github.com/bits-and-blooms/bloom/v3 v3.3.1 // indirect
 	github.com/blang/semver/v4 v4.0.0 // indirect
 	github.com/btcsuite/btcd v0.20.1-beta // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect

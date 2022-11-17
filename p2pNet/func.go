@@ -3,12 +3,14 @@ package p2pNet
 import (
 	"bufio"
 	"context"
+	"io"
+
 	"github.com/ethtweet/ethtweet/logs"
+
 	"github.com/libp2p/go-libp2p/core/network"
 	"github.com/libp2p/go-libp2p/core/peer"
 	"github.com/libp2p/go-libp2p/core/peerstore"
 	"github.com/multiformats/go-multiaddr"
-	"io"
 )
 
 func ReadData(online *OnlineNode, ctx context.Context) {

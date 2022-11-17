@@ -1,9 +1,10 @@
 package migrates
 
 import (
+	"github.com/ethtweet/ethtweet/global"
+
 	"github.com/go-gormigrate/gormigrate/v2"
 	"gorm.io/gorm"
-	"github.com/ethtweet/ethtweet/global"
 )
 
 type MigrateInit struct{}
