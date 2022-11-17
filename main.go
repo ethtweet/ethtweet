@@ -204,6 +204,10 @@ func SavePeers() {
 	defer file.Close()
 
 	conn := usr.Host.Network().Conns()
+	//节点数过少，可能是网络中断等，暂停保存，避免覆盖
+	if len(conn) < 50 {
+		return
+	}
 	write := bufio.NewWriter(file)
 	for _, c := range conn {
 		//写入文件时，使用带缓存的 *Writer
