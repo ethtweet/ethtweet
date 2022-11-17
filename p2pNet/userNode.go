@@ -502,7 +502,7 @@ func (usr *UserNode) setOnlineNodes(pi peer.AddrInfo) error {
 		defer cc()
 		err := usr.Host.Connect(c, pi)
 		if err != nil {
-			logs.PrintlnWarning("node Connect fail ", peerId, err)
+			//logs.PrintlnWarning("node Connect fail ", peerId, err)
 			return err
 		}
 		s, err := usr.NewStreamCtx(c, pi)
