@@ -1,11 +1,12 @@
 package models
 
 import (
-	"github.com/google/uuid"
-	"gorm.io/gorm"
 	"github.com/ethtweet/ethtweet/global"
 	"github.com/ethtweet/ethtweet/logs"
 	"github.com/ethtweet/ethtweet/models/mField"
+
+	"github.com/google/uuid"
+	"gorm.io/gorm"
 )
 
 const (

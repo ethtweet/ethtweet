@@ -3,16 +3,17 @@ package config
 import (
 	"encoding/json"
 	"flag"
-	"github.com/ethtweet/ethtweet/global"
-	"github.com/ethtweet/ethtweet/logs"
-	"github.com/spf13/viper"
-	"github.com/tidwall/gjson"
 	"log"
 	"os"
 	"path/filepath"
 	"runtime"
 	"strconv"
 	"time"
+
+	"github.com/ethtweet/ethtweet/global"
+	"github.com/ethtweet/ethtweet/logs"
+	"github.com/spf13/viper"
+	"github.com/tidwall/gjson"
 )
 
 var webPort = flag.Int("web_port", 8080, "web listen port")

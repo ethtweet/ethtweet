@@ -2,11 +2,13 @@ package middleware
 
 import (
 	"fmt"
-	"github.com/kataras/iris/v12"
+	"time"
+
 	"github.com/ethtweet/ethtweet/config"
 	"github.com/ethtweet/ethtweet/global"
 	"github.com/ethtweet/ethtweet/models"
-	"time"
+
+	"github.com/kataras/iris/v12"
 )
 
 func ApiLocalAuth(ctx iris.Context) {

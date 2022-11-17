@@ -4,15 +4,17 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/bits-and-blooms/bloom/v3"
+	"sync"
+	"time"
+
 	"github.com/ethtweet/ethtweet/global"
 	"github.com/ethtweet/ethtweet/keys"
 	"github.com/ethtweet/ethtweet/logs"
 	"github.com/ethtweet/ethtweet/models"
 	"github.com/ethtweet/ethtweet/p2pNet"
+
+	"github.com/bits-and-blooms/bloom/v3"
 	"gorm.io/gorm"
-	"sync"
-	"time"
 )
 
 var twReceiveMu sync.Mutex

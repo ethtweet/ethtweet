@@ -7,11 +7,6 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"github.com/ethereum/go-ethereum/common"
-	cryptoEth "github.com/ethereum/go-ethereum/crypto"
-	shell "github.com/ipfs/go-ipfs-api"
-	"github.com/libp2p/go-libp2p/core/crypto"
-	"github.com/mr-tron/base58"
 	"io"
 	"log"
 	"math/rand"
@@ -22,6 +17,13 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/ethereum/go-ethereum/common"
+
+	cryptoEth "github.com/ethereum/go-ethereum/crypto"
+	shell "github.com/ipfs/go-ipfs-api"
+	"github.com/libp2p/go-libp2p/core/crypto"
+	"github.com/mr-tron/base58"
 )
 
 var ipfsGateway []string

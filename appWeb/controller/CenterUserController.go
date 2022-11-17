@@ -3,6 +3,8 @@ package controller
 import (
 	"errors"
 	"fmt"
+	"strconv"
+
 	"github.com/ethtweet/ethtweet/appWeb"
 	"github.com/ethtweet/ethtweet/broadcastMsg"
 	"github.com/ethtweet/ethtweet/global"
@@ -10,10 +12,10 @@ import (
 	"github.com/ethtweet/ethtweet/logs"
 	"github.com/ethtweet/ethtweet/models"
 	"github.com/ethtweet/ethtweet/p2pNet"
+
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/context"
 	"github.com/kataras/iris/v12/mvc"
-	"strconv"
 )
 
 type CenterUserController struct {

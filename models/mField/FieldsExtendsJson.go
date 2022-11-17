@@ -2,8 +2,10 @@ package mField
 
 import (
 	"encoding/json"
-	"github.com/tidwall/gjson"
+
 	"github.com/ethtweet/ethtweet/global"
+
+	"github.com/tidwall/gjson"
 )
 
 type FieldsExtendsJsonType struct {
