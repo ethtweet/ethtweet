@@ -40,6 +40,12 @@ func EthSignHash(msg string) []byte {
 func ReloadIpfsGateway() error {
 	r, err := http.Get("https://raw.githubusercontent.com/ipfs/public-gateway-checker/master/src/gateways.json")
 	if err != nil {
+		//如果获取失败，添加一些默认的网关
+		ipfsGateway = append(ipfsGateway, "https://ipfs.io")
+		ipfsGateway = append(ipfsGateway, "https://gateway.ipfs.io")
+		ipfsGateway = append(ipfsGateway, "https://cloudflare-ipfs.com")
+		ipfsGateway = append(ipfsGateway, "https://ipfs.eth.aragon.network")
+		ipfsGateway = append(ipfsGateway, "https://ipfs.fleek.co")
 		return err
 	}
 	defer r.Body.Close()
