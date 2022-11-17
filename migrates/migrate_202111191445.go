@@ -1,10 +1,11 @@
 package migrates
 
 import (
-	"github.com/go-gormigrate/gormigrate/v2"
-	"gorm.io/gorm"
 	"github.com/ethtweet/ethtweet/global"
 	"github.com/ethtweet/ethtweet/models"
+
+	"github.com/go-gormigrate/gormigrate/v2"
+	"gorm.io/gorm"
 )
 
 type Migrate_202111191445 struct{}

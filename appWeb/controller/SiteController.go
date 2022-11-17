@@ -2,12 +2,14 @@ package controller
 
 import (
 	"bytes"
-	"github.com/ethtweet/ethtweet/appWeb"
-	"github.com/ethtweet/ethtweet/global"
-	"github.com/kataras/iris/v12"
-	"github.com/kataras/iris/v12/mvc"
 	"io"
 	"runtime"
+
+	"github.com/ethtweet/ethtweet/appWeb"
+	"github.com/ethtweet/ethtweet/global"
+
+	"github.com/kataras/iris/v12"
+	"github.com/kataras/iris/v12/mvc"
 )
 
 type SiteController struct {

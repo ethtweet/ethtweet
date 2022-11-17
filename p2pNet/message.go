@@ -4,8 +4,9 @@ import (
 	"bufio"
 	"context"
 	"encoding/gob"
-	"github.com/ethtweet/ethtweet/logs"
 	"time"
+
+	"github.com/ethtweet/ethtweet/logs"
 )
 
 type P2pNetMessageReceiveInterface interface {

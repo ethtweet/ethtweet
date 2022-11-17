@@ -4,14 +4,6 @@ import (
 	"bufio"
 	"context"
 	"fmt"
-	"github.com/ethtweet/ethtweet/global"
-	"github.com/ethtweet/ethtweet/keys"
-	"github.com/ethtweet/ethtweet/logs"
-	"github.com/libp2p/go-libp2p/p2p/host/autorelay"
-	connmgr "github.com/libp2p/go-libp2p/p2p/net/connmgr"
-	"github.com/libp2p/go-libp2p/p2p/security/noise"
-	libp2pquic "github.com/libp2p/go-libp2p/p2p/transport/quic"
-	"github.com/multiformats/go-multiaddr"
 	"io"
 	"os"
 	"runtime"
@@ -19,7 +11,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/libp2p/go-libp2p/p2p/protocol/ping"
+	"github.com/ethtweet/ethtweet/global"
+	"github.com/ethtweet/ethtweet/keys"
+	"github.com/ethtweet/ethtweet/logs"
 
 	keystore "github.com/ipfs/go-ipfs-keystore"
 	"github.com/libp2p/go-libp2p"
@@ -30,8 +24,14 @@ import (
 	"github.com/libp2p/go-libp2p/core/protocol"
 	"github.com/libp2p/go-libp2p/core/routing"
 	routing2 "github.com/libp2p/go-libp2p/p2p/discovery/routing"
+	"github.com/libp2p/go-libp2p/p2p/host/autorelay"
+	connmgr "github.com/libp2p/go-libp2p/p2p/net/connmgr"
+	"github.com/libp2p/go-libp2p/p2p/protocol/ping"
+	"github.com/libp2p/go-libp2p/p2p/security/noise"
+	libp2pquic "github.com/libp2p/go-libp2p/p2p/transport/quic"
 	libp2ptcp "github.com/libp2p/go-libp2p/p2p/transport/tcp"
 	websocket "github.com/libp2p/go-libp2p/p2p/transport/websocket"
+	"github.com/multiformats/go-multiaddr"
 )
 
 const MaxOnlineNodesNum = 128

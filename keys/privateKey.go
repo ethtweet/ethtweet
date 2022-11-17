@@ -4,14 +4,16 @@ import (
 	"bytes"
 	"crypto/ecdsa"
 	"errors"
+
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/ethtweet/ethtweet/global"
+	"github.com/ethtweet/ethtweet/logs"
+
 	cryptoEth "github.com/ethereum/go-ethereum/crypto"
 	keystore "github.com/ipfs/go-ipfs-keystore"
 	"github.com/libp2p/go-libp2p/core/crypto"
 	"github.com/mr-tron/base58"
-	"github.com/ethtweet/ethtweet/global"
-	"github.com/ethtweet/ethtweet/logs"
 )
 
 type PrivateKey struct {

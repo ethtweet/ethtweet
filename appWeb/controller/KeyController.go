@@ -2,15 +2,17 @@ package controller
 
 import (
 	"fmt"
+
+	"github.com/ethtweet/ethtweet/appWeb"
+	"github.com/ethtweet/ethtweet/global"
+	"github.com/ethtweet/ethtweet/keys"
+	"github.com/ethtweet/ethtweet/models"
+
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/crypto"
 	keystore "github.com/ipfs/go-ipfs-keystore"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
-	"github.com/ethtweet/ethtweet/appWeb"
-	"github.com/ethtweet/ethtweet/global"
-	"github.com/ethtweet/ethtweet/keys"
-	"github.com/ethtweet/ethtweet/models"
 )
 
 type KeyController struct {

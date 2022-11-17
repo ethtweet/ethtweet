@@ -4,12 +4,14 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"gorm.io/gorm"
+	"time"
+
 	"github.com/ethtweet/ethtweet/broadcastMsg"
 	"github.com/ethtweet/ethtweet/global"
 	"github.com/ethtweet/ethtweet/logs"
 	"github.com/ethtweet/ethtweet/models"
-	"time"
+	
+	"gorm.io/gorm"
 )
 
 func RunTasks(ctx context.Context) {
@@ -67,7 +69,7 @@ func RunTasks(ctx context.Context) {
 	}
 }
 
-//在事务中使用
+// 在事务中使用
 func execUpIpfsAndBroadcastTweet(ts *models.Tasks, tx *gorm.DB) (err error) {
 	if ts.Type != models.TasksTypeUpIpfsAndBroadcastTweet {
 		return fmt.Errorf("invalid type ", ts.Type)

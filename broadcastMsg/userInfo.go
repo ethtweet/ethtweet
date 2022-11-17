@@ -4,13 +4,15 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"gorm.io/gorm"
+	"time"
+
 	"github.com/ethtweet/ethtweet/global"
 	"github.com/ethtweet/ethtweet/keys"
 	"github.com/ethtweet/ethtweet/logs"
 	"github.com/ethtweet/ethtweet/models"
 	"github.com/ethtweet/ethtweet/p2pNet"
-	"time"
+
+	"gorm.io/gorm"
 )
 
 const (
@@ -20,7 +22,7 @@ const (
 	UserInfoReceiveHandleTypeGotoAsk  = 4
 )
 
-//该结构保存用户可广播的资料
+// 该结构保存用户可广播的资料
 type UserInfo struct {
 	Id                        string
 	Name                      string
@@ -120,7 +122,7 @@ func (usrInfo *UserInfo) ReceiveHandle(ctx context.Context, node *p2pNet.OnlineN
 	return
 }
 
-//接收方法
+// 接收方法
 func (usrInfo *UserInfo) ReceiveHandleUpdate(ctx context.Context, node *p2pNet.OnlineNode) {
 	//这里只处理更新或者回复询问的数据
 	if usrInfo.ReceiveHandleType != UserInfoReceiveHandleTypeAskReply && usrInfo.ReceiveHandleType != UserInfoReceiveHandleTypeUpdate {
