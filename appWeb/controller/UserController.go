@@ -95,13 +95,13 @@ func (uc *UserController) PostProfile(ctx iris.Context) *appWeb.ResponseFormat {
 		return appWeb.NewResponse(appWeb.ResponseFailCode, err.Error(), iris.Map{})
 	}
 	go func() {
-		<-uc.User.UsrNode.WaitOnlineNode()
-		uc.User.UsrNode.EachOnlineNodes(func(node *p2pNet.OnlineNode) bool {
+		<-user.UsrNode.WaitOnlineNode()
+		user.UsrNode.EachOnlineNodes(func(node *p2pNet.OnlineNode) bool {
 			logs.PrintlnInfo("broadcast update info req to ", node.Pi.ID)
 			_ = p2pNet.WriteData(node.Rw, broadcastMsg.NewUserInfo(user))
 			return true
 		})
 	}()
 
-	return appWeb.NewResponse(appWeb.ResponseSuccessCode, "success", uc.User)
+	return appWeb.NewResponse(appWeb.ResponseSuccessCode, "success", user)
 }
