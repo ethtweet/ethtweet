@@ -63,7 +63,7 @@ func (uc *UserController) PostProfile(ctx iris.Context) *appWeb.ResponseFormat {
 		return appWeb.NewResponse(appWeb.ResponseFailCode, "nothing change", iris.Map{})
 	}
 
-	key := ctx.PostValueTrim("keyName")
+	key := ctx.PostValueTrim("key")
 	var user *models.User
 	var err error
 	if key == "" || key == uc.User.UsrNode.UserKey {
