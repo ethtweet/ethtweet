@@ -179,6 +179,7 @@ RE:
 	//如果proc为nil表示当前进程已经是子进程了
 	//不为空表示当前进程为主进程
 	if proc != nil {
+		browser.OpenURL("http://127.0.0.1:8080/webui")
 		go func() {
 			pRuntime.HandleEndSignal(func() {
 				if err := proc.Kill(); err != nil {
@@ -196,8 +197,6 @@ RE:
 		} else {
 			goto RE
 		}
-
-		browser.OpenURL("http://127.0.0.1:8080/webui")
 		return
 	} else {
 
