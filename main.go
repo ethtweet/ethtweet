@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"encoding/gob"
 	"fmt"
+	"github.com/pkg/browser"
 	"log"
 	"net/http"
 	_ "net/http/pprof"
@@ -195,6 +196,8 @@ RE:
 		} else {
 			goto RE
 		}
+
+		browser.OpenURL("http://127.0.0.1:8080/webui")
 		return
 	} else {
 
@@ -204,17 +207,6 @@ RE:
 				log.Println(http.ListenAndServe("0.0.0.0:6060", nil))
 			}()
 		}
-
-		go func() {
-			for {
-				now := time.Now()
-				next := now.Add(time.Hour * 4)
-				timer := time.NewTimer(next.Sub(now))
-				t := <-timer.C //从定时器拿数据
-				fmt.Println("restart time:", t)
-				os.Exit(0)
-			}
-		}()
 
 		checkUpdate()
 		//子进程才执行更新检测
