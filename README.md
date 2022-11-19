@@ -11,6 +11,8 @@
 
 在线体验  https://app.ethtweet.io/#/home
 
+http api文档  [api](api.md)
+
 ## 配置文件
 
 默认读取 `tweet.yaml` 文件，如果不存在就读取命令行参数。
@@ -35,7 +37,7 @@ https://github.com/techknowlogick/xgo
 ```
 docker pull techknowlogick/xgo:latest
 #export GOPATH="当前目录"
-xgo -out EthTweet_0.1.9  -targets="darwin/amd64,windows-6.0/amd64,linux/amd64,linux/arm64" -ldflags="-w -s" .
+xgo -out EthTweet -targets="darwin/amd64,windows-6.0/amd64,linux/amd64,linux/arm64" -ldflags="-w -s" .
 ```
 
 window下编译安卓
@@ -48,9 +50,15 @@ SET GOOS=android
 SET GOARCH=arm64
 set CC=D:\android\ndk\22.1.7171670\toolchains\llvm\prebuilt\windows-x86_64\bin\aarch64-linux-android21-clang.cmd
 set CXX=D:\android\ndk\22.1.7171670\toolchains\llvm\prebuilt\windows-x86_64\bin\aarch64-linux-android21-clang++.cmd
-go build --tags "android"  -ldflags="-s -w"  -o ipfs
+go build --tags "android"  -ldflags="-s -w"  -o ethtweet
 ```
 
 ## todo 
 
 增加节点统计，记录最长在线时间，每次启动的时候连接
+
+加密私信功能，可以进行发生加密私信，地址持有人才可以解密阅读。
+
+app端
+
+pc版web
