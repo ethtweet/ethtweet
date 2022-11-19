@@ -8,7 +8,7 @@ db:
   mysql:
     host: 127.0.0.1
     port: 3306
-    database: eth-tweet
+    database: eth_tweet # mysql80无法创建eth-tweet
     charset: utf8mb4
     username: root
     password:
