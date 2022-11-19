@@ -47,7 +47,9 @@ func RunWindowsMysqld() error {
 		}
 	}
 
-	logs.PrintDebugErr("exec cmd.exe with mysql_native_password err:%v", err)
+	if err != nil {
+		logs.PrintDebugErr("exec cmd.exe with mysql_native_password err:%v", err)
+	}
 
 	// here we know mysql isn't running, so we try to start it again.
 	// todo:与上面的cmd.exe有啥区别?
@@ -60,7 +62,7 @@ func RunWindowsMysqld() error {
 
 func PingMysql() error {
 	// add mysql ping, avoid other proc occupy the port 3306
-	conn, err := net.DialTimeout("tcp", "127.0.0.1:3306", 3*time.Second)
+	conn, err := net.DialTimeout("tcp", "127.0.0.1:3306", 1*time.Second)
 	if err == nil && conn != nil {
 		conn.Close()
 		return nil
@@ -71,8 +73,7 @@ func PingMysql() error {
 func ExecCmd(name string, args ...string) error {
 	cmd := exec.Command(name, args...)
 	logs.PrintlnSuccess("init mysqld")
-	buf, err := cmd.Output()
-	fmt.Println(string(buf))
+	err := cmd.Start()
 	if err != nil {
 		if exitErr, ok := err.(*exec.ExitError); ok {
 			status := exitErr.Sys().(syscall.WaitStatus)

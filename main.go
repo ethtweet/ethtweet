@@ -39,11 +39,12 @@ var updater = selfupdate.Updater{
 }
 
 func init() {
+	//需要在加载配置
+	RunMysql()
 	err := config.LoadConfig()
 	if err != nil {
 		logs.Fatal("reload config", err)
 	}
-	RunMysql()
 
 	//注册需要编码传输的接口类型
 	gob.Register(&broadcastMsg.TweetInfo{})
