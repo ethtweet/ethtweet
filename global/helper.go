@@ -26,9 +26,11 @@ import (
 	"github.com/mr-tron/base58"
 )
 
-var ipfsGateway []string
-var ipfsUploadMutex sync.Mutex
-var IpfsApi string
+var (
+	ipfsGateway     []string
+	ipfsUploadMutex sync.Mutex
+	IpfsApi         string
+)
 
 func FormatEthSignMsg(msg string) string {
 	return fmt.Sprintf("\x19Ethereum Signed Message:\n%d%s", len([]byte(msg)), msg)

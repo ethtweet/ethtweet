@@ -26,3 +26,4 @@ it-databases/*
 public
 chain_tweet
 *.yml
+Bootstrap.txt

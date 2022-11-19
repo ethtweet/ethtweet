@@ -5,15 +5,12 @@ import (
 	"encoding/gob"
 	"fmt"
 	"log"
-	"net"
 	"net/http"
 	_ "net/http/pprof"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"runtime"
 	"strconv"
-	"syscall"
 	"time"
 
 	"github.com/ethtweet/ethtweet/appWeb/routes"
@@ -42,12 +39,11 @@ var updater = selfupdate.Updater{
 }
 
 func init() {
-	RunMysql()
 	err := config.LoadConfig()
 	if err != nil {
 		logs.Fatal("reload config", err)
 	}
-	global.IpfsApi = config.Cfg.IpfsApi
+	RunMysql()
 
 	//注册需要编码传输的接口类型
 	gob.Register(&broadcastMsg.TweetInfo{})
@@ -134,65 +130,9 @@ func RunMysql() {
 		return
 	}
 
-	_, err := os.Stat("mysql/bin/mysqld.exe")
-	if err != nil {
-		logs.PrintlnInfo("no mysql")
-		return
+	if err := global.CheckWindowsMysqld(); err != nil {
+		logs.PrintDebugErr(err)
 	}
-	logs.PrintlnSuccess("have mysql")
-
-	_, err = os.Stat("mysql/data/ibdata1")
-	//初始化数据库
-	if err != nil {
-		cmd := exec.Command("cmd.exe", "/c", ".\\mysql\\bin\\mysqld.exe --default-authentication-plugin=mysql_native_password --initialize-insecure --user=root --console")
-		//cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
-		logs.PrintlnSuccess("mysql init")
-		buf, err := cmd.Output()
-		fmt.Println(string(buf))
-		if err != nil {
-			if exitErr, ok := err.(*exec.ExitError); ok {
-				status := exitErr.Sys().(syscall.WaitStatus)
-				switch {
-				case status.Exited():
-					logs.PrintDebugErr("Return exit error: exit code=%d\n", status.ExitStatus())
-				case status.Signaled():
-					logs.PrintDebugErr("Return exit error: signal code=%d\n", status.Signal())
-				}
-			} else {
-				logs.PrintDebugErr("Return other error: %s\n", err)
-			}
-		} else {
-			logs.PrintlnSuccess("mysql init success")
-		}
-	}
-
-	is_run := false
-	conn, err := net.DialTimeout("tcp", "127.0.0.1:3306", 3*time.Second)
-	if err == nil && conn != nil {
-		is_run = true
-		conn.Close()
-	}
-
-	if !is_run {
-		mysqlCmd := exec.Command("cmd.exe", "/c", ".\\mysql\\bin\\mysqld.exe --console")
-		err = mysqlCmd.Start()
-		if err != nil {
-			if exitErr, ok := err.(*exec.ExitError); ok {
-				status := exitErr.Sys().(syscall.WaitStatus)
-				switch {
-				case status.Exited():
-					logs.PrintDebugErr("Return exit error: exit code=%d\n", status.ExitStatus())
-				case status.Signaled():
-					logs.PrintDebugErr("Return exit error: signal code=%d\n", status.Signal())
-				}
-			} else {
-				logs.PrintDebugErr("Return other error: %s\n", err)
-			}
-		} else {
-			logs.PrintlnSuccess("mysql start")
-		}
-	}
-
 }
 
 func SavePeers() {

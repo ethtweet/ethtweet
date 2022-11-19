@@ -186,5 +186,8 @@ func LoadConfigByPath(p string) error {
 	if Cfg.IpfsApi == "" {
 		Cfg.IpfsApi = "https://cdn.ipfsscan.io"
 	}
+
+	global.IpfsApi = Cfg.IpfsApi
+
 	return nil
 }
