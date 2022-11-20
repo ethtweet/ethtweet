@@ -28,9 +28,8 @@ import (
 	connmgr "github.com/libp2p/go-libp2p/p2p/net/connmgr"
 	"github.com/libp2p/go-libp2p/p2p/protocol/ping"
 	"github.com/libp2p/go-libp2p/p2p/security/noise"
-	libp2pquic "github.com/libp2p/go-libp2p/p2p/transport/quic"
-	libp2ptcp "github.com/libp2p/go-libp2p/p2p/transport/tcp"
-	websocket "github.com/libp2p/go-libp2p/p2p/transport/websocket"
+	webtransport "github.com/libp2p/go-libp2p/p2p/transport/webtransport"
+
 	"github.com/multiformats/go-multiaddr"
 )
 
@@ -236,9 +235,8 @@ func (usr *UserNode) ConnectP2p() error {
 			return usr.dht, err
 		}),
 		libp2p.Security(noise.ID, noise.New),
-		libp2p.Transport(libp2pquic.NewTransport),
-		libp2p.Transport(libp2ptcp.NewTCPTransport),
-		libp2p.Transport(websocket.New),
+		libp2p.DefaultTransports,
+		libp2p.Transport(webtransport.New),
 
 		libp2p.EnableRelay(),
 		libp2p.EnableNATService(),
