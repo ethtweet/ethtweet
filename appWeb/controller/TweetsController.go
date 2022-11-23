@@ -61,7 +61,13 @@ func (twc *TweetsController) PostReleaseBySign(ctx iris.Context) *appWeb.Respons
 	tw.CreatedAt = t
 	if !keys.VerifySignatureByAddress(tw.UserId, tw.Sign, tw.GetSignMsg()) {
 		logs.PrintErr("tw sign err %s %s %s", tw.UserId, tw.Sign, tw.GetSignMsg())
-		return appWeb.NewResponse(appWeb.ResponseFailCode, err.Error(), nil)
+		recoveredPub, err := keys.FetchPubKeyBySignMsg(tw.Sign, tw.GetSignMsg())
+		if err != nil {
+			logs.PrintErr(err)
+			return appWeb.NewResponse(appWeb.ResponseFailCode, "sign err"+err.Error(), nil)
+		}
+		pAddress := keys.PubKeyToAddress(recoveredPub)
+		return appWeb.NewResponse(appWeb.ResponseFailCode, "sign err", pAddress.String())
 	}
 	err = broadcastMsg.CenterUserRelease(tw)
 	go broadcastMsg.BroadcastTweetSync(tw)

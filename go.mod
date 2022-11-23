@@ -20,12 +20,13 @@ require (
 	github.com/tidwall/gjson v1.7.4
 	gorm.io/driver/mysql v1.4.4
 	gorm.io/driver/sqlite v1.4.3
-	gorm.io/gorm v1.24.1
+	gorm.io/gorm v1.24.2
 )
 
 require (
 	github.com/bits-and-blooms/bloom/v3 v3.3.1
 	github.com/pkg/browser v0.0.0-20210911075715-681adbf594b8
+	github.com/polydawn/refmt v0.0.0-20190807091052-3d65705ee9f1
 )
 
 require (
@@ -157,7 +158,6 @@ require (
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.5 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	github.com/polydawn/refmt v0.0.0-20190807091052-3d65705ee9f1 // indirect
 	github.com/prometheus/client_golang v1.13.0 // indirect
 	github.com/prometheus/client_model v0.2.0 // indirect
 	github.com/prometheus/common v0.37.0 // indirect
