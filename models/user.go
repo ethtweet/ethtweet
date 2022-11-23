@@ -11,7 +11,7 @@ import (
 	"github.com/ethtweet/ethtweet/logs"
 	"github.com/ethtweet/ethtweet/models/mField"
 	"github.com/ethtweet/ethtweet/p2pNet"
-	
+
 	cryptoEth "github.com/ethereum/go-ethereum/crypto"
 	"github.com/google/uuid"
 	keystore "github.com/ipfs/go-ipfs-keystore"
@@ -40,7 +40,7 @@ type User struct {
 	Nonce                      uint64 `gorm:"default:0;comment:最新nonce"`
 	LocalNonce                 uint64 `gorm:"default:0;comment:本地nonce"`
 	LocalUser                  uint64 `gorm:"default:0;comment:是否是本地用户"`
-	Sign                       string `gorm:"type:varchar(200);NOT NULL;comment:用户签名;"`
+	Sign                       string `gorm:"type:varchar(200);NOT NULL;comment:用户签名;default:''"`
 	PubKey                     string `gorm:"type:text;comment:用户公钥"`
 	IpfsHash                   string `gorm:"type:varchar(200);comment:ipfs的hash地址;default:''"`
 	HasPeerId                  uint8  `gorm:"default:0;index:idx_has_peer;comment:节点id是否是有效的id 通过中心化接口创建的用户 因为没有运行节点 所以不会存在peerId 程序将为其生成一个唯一的但不是有效的节点id作为替代"`
@@ -313,7 +313,7 @@ func GetOrCreateUserByPri(pri *keys.PrivateKey) (*User, error) {
 	return usr, nil
 }
 
-// 通过公钥创建一个用户 生成一个零食的peerId
+// 通过公钥创建一个用户 生成一个临时的peerId
 func GetOrCreateUserByPub(pub *ecdsa.PublicKey) (*User, error) {
 	address := cryptoEth.PubkeyToAddress(*pub)
 	usr := &User{}
