@@ -47,15 +47,15 @@ xgo -out EthTweet -targets="darwin/amd64,windows-6.0/amd64,linux/amd64,linux/arm
 ```
 
 window下编译安卓
-下载https://dl.google.com/android/repository/android-ndk-r22b-linux-x86_64.zip
+下载https://dl.google.com/android/repository/android-ndk-r25b-windows.zip
 
 使用cmd执行
 ```
 SET CGO_ENABLED=1
 SET GOOS=android
 SET GOARCH=arm64
-set CC=D:\android\ndk\22.1.7171670\toolchains\llvm\prebuilt\windows-x86_64\bin\aarch64-linux-android21-clang.cmd
-set CXX=D:\android\ndk\22.1.7171670\toolchains\llvm\prebuilt\windows-x86_64\bin\aarch64-linux-android21-clang++.cmd
+set CC=D:\sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\aarch64-linux-android21-clang.cmd
+set CXX=D:\sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\aarch64-linux-android21-clang++.cmd
 go build --tags "android"  -ldflags="-s -w"  -o ethtweet
 ```
 
