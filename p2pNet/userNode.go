@@ -223,7 +223,6 @@ func (usr *UserNode) ConnectP2p() error {
 		connmgr.WithGracePeriod(time.Minute),
 	)
 	usr.Host, err = libp2p.New(
-		libp2p.Identity(usr.priKey.LibP2pPrivate),
 		//尝试开启upnp协议
 		libp2p.NATPortMap(),
 		libp2p.EnableNATService(),
