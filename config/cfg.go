@@ -6,7 +6,6 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"runtime"
 	"strconv"
 	"time"
 
@@ -85,6 +84,7 @@ func LoadConfigByPath(p string) error {
 			P2pPort:       *p2pPort,
 		}
 		global.DbDrive = global.DBDriveSqlite
+
 		return global.InitSqliteDatabase(*userData, global.SqliteDatabaseName)
 	} else {
 		logs.PrintlnInfo("load config from config file...", *configPath)
@@ -123,9 +123,6 @@ func LoadConfigByPath(p string) error {
 		dir := viper.GetString("db.sqlite.dir")
 		if dir == "" {
 			dir = *userData
-		}
-		if runtime.GOOS == "android" {
-			dir = dir + dir
 		}
 		dbName := viper.GetString("db.sqlite.dbName")
 		err = global.InitSqliteDatabase(dir, dbName)
