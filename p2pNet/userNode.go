@@ -158,6 +158,8 @@ func NewUserNode(port int, userKey, userData string) *UserNode {
 	if usr.UserData == "" {
 		usr.UserData = "./"
 	}
+
+	usr.priKey, _ = usr.GetPriKey(usr.UserKey)
 	return usr
 }
 
@@ -212,7 +214,7 @@ func (usr *UserNode) NewStreamCtx(ctx context.Context, pi peer.AddrInfo) (networ
 }
 func (usr *UserNode) ConnectP2p() error {
 	var err error
-	priKey, err := usr.GetPriKey("_libp2p")
+	priKey, err := usr.GetPriKey("libp2p")
 	if err != nil {
 		return err
 	}
@@ -340,6 +342,7 @@ func (usr *UserNode) GetPriKey(key string) (*keys.PrivateKey, error) {
 	if err != nil {
 		return nil, err
 	}
+	logs.PrintlnInfo("key:", key)
 	ok, err := ks.Has(key)
 	if err != nil {
 		logs.PrintErr(err)
