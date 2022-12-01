@@ -212,7 +212,7 @@ func (usr *UserNode) NewStreamCtx(ctx context.Context, pi peer.AddrInfo) (networ
 }
 func (usr *UserNode) ConnectP2p() error {
 	var err error
-	usr.priKey, err = usr.GetPriKey(usr.UserKey)
+	priKey, err := usr.GetPriKey("_libp2p")
 	if err != nil {
 		return err
 	}
@@ -223,6 +223,7 @@ func (usr *UserNode) ConnectP2p() error {
 		connmgr.WithGracePeriod(time.Minute),
 	)
 	usr.Host, err = libp2p.New(
+		libp2p.Identity(priKey.LibP2pPrivate),
 		//尝试开启upnp协议
 		libp2p.NATPortMap(),
 		libp2p.EnableNATService(),
