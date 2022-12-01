@@ -342,7 +342,6 @@ func (usr *UserNode) GetPriKey(key string) (*keys.PrivateKey, error) {
 	if err != nil {
 		return nil, err
 	}
-	logs.PrintlnInfo("key:", key)
 	ok, err := ks.Has(key)
 	if err != nil {
 		logs.PrintErr(err)
