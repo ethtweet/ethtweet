@@ -244,7 +244,7 @@ func (usr *UserNode) ConnectP2p() error {
 		libp2p.EnableNATService(),
 		libp2p.EnableRelayService(),
 		libp2p.ForceReachabilityPublic(),
-		libp2p.EnableAutoRelay(autorelay.WithDefaultStaticRelays(), autorelay.WithCircuitV1Support(), autorelay.WithNumRelays(20)),
+		libp2p.EnableAutoRelay(autorelay.WithCircuitV1Support(), autorelay.WithNumRelays(20)),
 
 		libp2p.ListenAddrStrings(
 			fmt.Sprintf("/ip4/0.0.0.0/tcp/%d", usr.Port),

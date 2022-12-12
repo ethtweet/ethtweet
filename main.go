@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"encoding/gob"
 	"fmt"
+	"github.com/ethtweet/ethtweet/update"
 	"log"
 	"net/http"
 	_ "net/http/pprof"
@@ -92,6 +93,7 @@ func checkUpdateTimer() {
 		time.Sleep(time.Second * 600)
 		logs.Println("checkUpdateTimer")
 		checkUpdate()
+		update.ChcckGithubVersion()
 	}
 }
 
@@ -206,6 +208,7 @@ RE:
 		}
 
 		checkUpdate()
+		update.ChcckGithubVersion()
 		//子进程才执行更新检测
 		go checkUpdateTimer()
 	}
