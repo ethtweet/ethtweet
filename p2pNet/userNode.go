@@ -24,7 +24,6 @@ import (
 	"github.com/libp2p/go-libp2p/core/protocol"
 	"github.com/libp2p/go-libp2p/core/routing"
 	routing2 "github.com/libp2p/go-libp2p/p2p/discovery/routing"
-	"github.com/libp2p/go-libp2p/p2p/host/autorelay"
 	connmgr "github.com/libp2p/go-libp2p/p2p/net/connmgr"
 	"github.com/libp2p/go-libp2p/p2p/protocol/ping"
 	"github.com/libp2p/go-libp2p/p2p/security/noise"
@@ -240,11 +239,11 @@ func (usr *UserNode) ConnectP2p() error {
 		libp2p.DefaultTransports,
 		libp2p.Transport(webtransport.New),
 
-		libp2p.EnableRelay(),
 		libp2p.EnableNATService(),
 		libp2p.EnableRelayService(),
 		libp2p.ForceReachabilityPublic(),
-		libp2p.EnableAutoRelay(autorelay.WithCircuitV1Support(), autorelay.WithNumRelays(20)),
+		libp2p.EnableRelay(),
+		//libp2p.EnableAutoRelay(), 添加一些静态的中继
 
 		libp2p.ListenAddrStrings(
 			fmt.Sprintf("/ip4/0.0.0.0/tcp/%d", usr.Port),
