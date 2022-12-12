@@ -32,6 +32,7 @@ func ChcckGithubVersion() {
 		logs.PrintlnSuccess("GitHub版本更高")
 	} else {
 		logs.PrintlnSuccess("不需要升级")
+		return
 	}
 	updateFileUrl := fmt.Sprintf("https://github.com/ethtweet/ethtweet/releases/download/v%s/EthTweet-%s-%s-%s.zip", githubVerion, githubVerion, runtime.GOOS, runtime.GOARCH)
 	// todo 升级逻辑，移动文件，下载新文件，验证hash，重启
