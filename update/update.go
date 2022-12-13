@@ -24,8 +24,14 @@ func ChcckGithubVersion() {
 	}
 	b, err := io.ReadAll(r.Body)
 	var v interface{}
-	json.Unmarshal(b, &v)
+	err = json.Unmarshal(b, &v)
+	if err != nil {
+		logs.PrintErr(err)
+		return
+	}
+
 	data := v.(map[string]interface{})
+
 	githubVerion := fmt.Sprintf("%s", data["tag_name"])
 	githubVerion = strings.Replace(githubVerion, "v", "", 1)
 	if compareVersion(githubVerion, global.Version) > 0 {
@@ -34,8 +40,13 @@ func ChcckGithubVersion() {
 		logs.PrintlnSuccess("不需要升级")
 		return
 	}
+
+	githubPublishedTime, _ := time.ParseInLocation("2006-01-02T15:04:05Z", fmt.Sprintf("%s", data["published_at"]), time.Local)
+	if time.Now().Sub(githubPublishedTime) < (time.Second * 3600) {
+		logs.PrintlnSuccess("更新时间不足1个小时，延迟更新")
+		return
+	}
 	updateFileUrl := fmt.Sprintf("https://github.com/ethtweet/ethtweet/releases/download/v%s/EthTweet-%s-%s-%s.zip", githubVerion, githubVerion, runtime.GOOS, runtime.GOARCH)
-	// todo 升级逻辑，移动文件，下载新文件，验证hash，重启
 	// Get the data
 	resp, err := http.Get(updateFileUrl)
 	if err != nil {
@@ -64,11 +75,24 @@ func ChcckGithubVersion() {
 
 	//删除老文件
 	if global.FileExists(path.Base(exeFilename) + ".old") {
-		os.Remove(path.Base(exeFilename) + ".old")
+		err = os.Remove(path.Base(exeFilename) + ".old")
+		if err != nil {
+			logs.PrintErr(err)
+			return
+		}
 	}
 
-	os.Rename(path.Base(exeFilename), path.Base(exeFilename)+".old")
-	Unzip("update.zip", ".")
+	err = os.Rename(path.Base(exeFilename), path.Base(exeFilename)+".old")
+	if err != nil {
+		logs.PrintErr(err)
+		return
+	}
+
+	err = Unzip("update.zip", ".")
+	if err != nil {
+		logs.PrintErr(err)
+		return
+	}
 
 	logs.Println("current version: ", global.Version)
 	logs.Println("Update to version: ", githubVerion)
