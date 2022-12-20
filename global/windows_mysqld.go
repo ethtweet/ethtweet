@@ -57,6 +57,8 @@ func RunWindowsMysqld() error {
 		return fmt.Errorf("exec cmd.exe --console err:%w", err)
 	}
 
+	// 休眠2秒给mysql启动
+	time.Sleep(2 * time.Second)
 	return nil
 }
 
