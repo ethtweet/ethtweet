@@ -255,8 +255,8 @@ func (usr *UserNode) ConnectP2p() error {
 			fmt.Sprintf("/ip4/0.0.0.0/tcp/%d/ws", usr.Port),
 			fmt.Sprintf("/ip6/::/tcp/%d/ws", usr.Port),
 
-			fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic/webtransport", usr.Port),
-			fmt.Sprintf("/ip6/::/udp/%d/quic/webtransport", usr.Port),
+			fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic/webtransport", usr.Port+1),
+			fmt.Sprintf("/ip6/::/udp/%d/quic/webtransport", usr.Port+1),
 		),
 		libp2p.ConnectionManager(connmgr_),
 	)
@@ -315,7 +315,13 @@ func (usr *UserNode) ConnectP2p() error {
 					logs.PrintlnWarning("地址解析失败", err)
 				} else {
 					a, _ := peer.AddrInfoFromP2pAddr(addr)
-					usr.Host.Connect(usr.Ctx, *a)
+					err = usr.Host.Connect(usr.Ctx, *a)
+					if err == nil {
+						logs.PrintlnSuccess(addr)
+					} else {
+						logs.PrintErr(err)
+					}
+
 				}
 			}
 		}
@@ -501,7 +507,7 @@ func (usr *UserNode) setOnlineNodes(pi peer.AddrInfo) error {
 		defer cc()
 		err := usr.Host.Connect(c, pi)
 		if err != nil {
-			//logs.PrintlnWarning("node Connect fail ", peerId, err)
+			logs.PrintlnWarning("node Connect fail ", peerId, err)
 			return err
 		}
 		s, err := usr.NewStreamCtx(c, pi)
