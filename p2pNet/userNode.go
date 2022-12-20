@@ -28,7 +28,6 @@ import (
 	"github.com/libp2p/go-libp2p/p2p/protocol/ping"
 	"github.com/libp2p/go-libp2p/p2p/security/noise"
 	libp2ptls "github.com/libp2p/go-libp2p/p2p/security/tls"
-	webtransport "github.com/libp2p/go-libp2p/p2p/transport/webtransport"
 
 	"github.com/multiformats/go-multiaddr"
 )
@@ -224,6 +223,7 @@ func (usr *UserNode) ConnectP2p() error {
 		400, // HighWater,
 		connmgr.WithGracePeriod(time.Minute),
 	)
+
 	usr.Host, err = libp2p.New(
 		libp2p.Identity(priKey.LibP2pPrivate),
 		//尝试开启upnp协议
@@ -233,14 +233,14 @@ func (usr *UserNode) ConnectP2p() error {
 		libp2p.DefaultPeerstore,
 		//注册使用路由
 		libp2p.Routing(func(h host.Host) (routing.PeerRouting, error) {
-			usr.dht, err = dht.New(usr.Ctx, h)
+			usr.dht, err = dht.New(usr.Ctx, h, dht.BootstrapPeers(dht.GetDefaultBootstrapPeerAddrInfos()...))
 			return usr.dht, err
 		}),
 		// support TLS connections
 		libp2p.Security(libp2ptls.ID, libp2ptls.New),
 		libp2p.Security(noise.ID, noise.New),
 		libp2p.DefaultTransports,
-		libp2p.Transport(webtransport.New),
+		// libp2p.Transport(webtransport.New),
 
 		libp2p.EnableNATService(),
 		libp2p.EnableRelayService(),
@@ -261,8 +261,8 @@ func (usr *UserNode) ConnectP2p() error {
 			fmt.Sprintf("/ip4/0.0.0.0/tcp/%d/ws", usr.Port),
 			fmt.Sprintf("/ip6/::/tcp/%d/ws", usr.Port),
 
-			fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic/webtransport", usr.Port),
-			fmt.Sprintf("/ip6/::/udp/%d/quic/webtransport", usr.Port),
+			// fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic/webtransport", usr.Port),
+			// fmt.Sprintf("/ip6/::/udp/%d/quic/webtransport", usr.Port),
 		),
 		libp2p.ConnectionManager(connmgr_),
 	)
@@ -321,12 +321,15 @@ func (usr *UserNode) ConnectP2p() error {
 				if err != nil {
 					logs.PrintlnWarning("地址解析失败", err)
 				} else {
-					a, _ := peer.AddrInfoFromP2pAddr(addr)
+					a, err := peer.AddrInfoFromP2pAddr(addr)
+					if err != nil {
+						logs.PrintlnWarning("Bootstrap", err)
+					}
 					err = usr.Host.Connect(usr.Ctx, *a)
 					if err == nil {
-						logs.PrintlnSuccess(addr)
+						logs.PrintlnSuccess("Bootstrap:", addr)
 					} else {
-						logs.PrintErr(err)
+						logs.PrintErr("Bootstrap:", addr, err)
 					}
 
 				}
