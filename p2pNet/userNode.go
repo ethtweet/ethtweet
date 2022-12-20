@@ -252,11 +252,14 @@ func (usr *UserNode) ConnectP2p() error {
 			fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic", usr.Port),
 			fmt.Sprintf("/ip6/::/udp/%d/quic", usr.Port),
 
+			fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic-v1", usr.Port),
+			fmt.Sprintf("/ip6/::/udp/%d/quic-v1", usr.Port),
+
 			fmt.Sprintf("/ip4/0.0.0.0/tcp/%d/ws", usr.Port),
 			fmt.Sprintf("/ip6/::/tcp/%d/ws", usr.Port),
 
-			fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic/webtransport", usr.Port+1),
-			fmt.Sprintf("/ip6/::/udp/%d/quic/webtransport", usr.Port+1),
+			fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic/webtransport", usr.Port),
+			fmt.Sprintf("/ip6/::/udp/%d/quic/webtransport", usr.Port),
 		),
 		libp2p.ConnectionManager(connmgr_),
 	)
@@ -278,6 +281,7 @@ func (usr *UserNode) ConnectP2p() error {
 	}()
 	//广播自己的位置
 	usr.routingDiscovery = routing2.NewRoutingDiscovery(usr.dht)
+	discovery.newMs
 	usr.onlineNodes = make(map[string]*OnlineNode, MaxOnlineNodesNum)
 	usr.ps = ping.NewPingService(usr.Host)
 
