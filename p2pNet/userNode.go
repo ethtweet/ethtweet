@@ -27,6 +27,7 @@ import (
 	connmgr "github.com/libp2p/go-libp2p/p2p/net/connmgr"
 	"github.com/libp2p/go-libp2p/p2p/protocol/ping"
 	"github.com/libp2p/go-libp2p/p2p/security/noise"
+	libp2ptls "github.com/libp2p/go-libp2p/p2p/security/tls"
 	webtransport "github.com/libp2p/go-libp2p/p2p/transport/webtransport"
 
 	"github.com/multiformats/go-multiaddr"
@@ -220,7 +221,7 @@ func (usr *UserNode) ConnectP2p() error {
 
 	connmgr_, _ := connmgr.NewConnManager(
 		50,  // Lowwater
-		200, // HighWater,
+		400, // HighWater,
 		connmgr.WithGracePeriod(time.Minute),
 	)
 	usr.Host, err = libp2p.New(
@@ -232,9 +233,11 @@ func (usr *UserNode) ConnectP2p() error {
 		libp2p.DefaultPeerstore,
 		//注册使用路由
 		libp2p.Routing(func(h host.Host) (routing.PeerRouting, error) {
-			usr.dht, err = dht.New(usr.Ctx, h, dht.BootstrapPeers(dht.GetDefaultBootstrapPeerAddrInfos()...))
+			usr.dht, err = dht.New(usr.Ctx, h)
 			return usr.dht, err
 		}),
+		// support TLS connections
+		libp2p.Security(libp2ptls.ID, libp2ptls.New),
 		libp2p.Security(noise.ID, noise.New),
 		libp2p.DefaultTransports,
 		libp2p.Transport(webtransport.New),
