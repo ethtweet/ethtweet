@@ -91,7 +91,7 @@ func checkUpdate() {
 
 func checkUpdateTimer() {
 	for {
-		time.Sleep(time.Second * 600)
+		time.Sleep(time.Second * 3600)
 		logs.Println("checkUpdateTimer")
 		checkUpdate()
 		update.ChcckGithubVersion()
