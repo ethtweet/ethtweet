@@ -284,6 +284,7 @@ func (usr *UserNode) ConnectP2p() error {
 	}()
 	//广播自己的位置
 	usr.routingDiscovery = routing2.NewRoutingDiscovery(usr.dht)
+	go usr.routingDiscovery.Advertise(usr.Ctx, usr.Protocol)
 	usr.onlineNodes = make(map[string]*OnlineNode, MaxOnlineNodesNum)
 	usr.ps = ping.NewPingService(usr.Host)
 
