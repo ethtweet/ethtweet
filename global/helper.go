@@ -117,8 +117,6 @@ func GetIpfsInfo(h string) ([]byte, error) {
 }
 
 func UploadIpfs(data interface{}) (string, error) {
-	log.Println("upload ipfs start .....")
-	defer log.Println("upload ipfs ok .....")
 	b, err := json.Marshal(data)
 	if err != nil {
 		return "", err

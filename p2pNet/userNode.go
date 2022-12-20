@@ -33,9 +33,9 @@ import (
 )
 
 const MaxOnlineNodesNum = 128
-const OnlineNodesSyncDuration = time.Second * 15
-const OnlineNodesChkDuration = time.Minute * 3
-const NodePingTimeoutDuration = time.Second * 6
+const OnlineNodesSyncDuration = time.Second * 30
+const OnlineNodesChkDuration = time.Minute * 5
+const NodePingTimeoutDuration = time.Second * 15
 
 type OnlineNode struct {
 	Pi              peer.AddrInfo
@@ -326,9 +326,7 @@ func (usr *UserNode) ConnectP2p() error {
 						logs.PrintlnWarning("Bootstrap", err)
 					}
 					err = usr.Host.Connect(usr.Ctx, *a)
-					if err == nil {
-						logs.PrintlnSuccess("Bootstrap:", addr)
-					} else {
+					if err != nil {
 						logs.PrintErr("Bootstrap:", addr, err)
 					}
 

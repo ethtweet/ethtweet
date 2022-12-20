@@ -81,7 +81,6 @@ func (tw *Tweets) UpIpfs(usr *User) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("tweet upload ipfs err %s", err.Error())
 	}
-	fmt.Printf("publish to https://ipfs.io/ipfs/%s\n", cid)
 	usr.LatestCid = cid
 	return cid, nil
 }
@@ -92,7 +91,7 @@ func (tw *Tweets) GenerateId() {
 	tw.Id = base58.Encode([]byte(tw.Id))
 }
 
-//生成twId sign参数
+// 生成twId sign参数
 func (tw *Tweets) GenerateSysParams() {
 	tw.GenerateId()
 }
