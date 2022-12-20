@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"encoding/gob"
 	"fmt"
-	"github.com/ethtweet/ethtweet/update"
 	"log"
 	"net/http"
 	_ "net/http/pprof"
@@ -13,6 +12,8 @@ import (
 	"runtime"
 	"strconv"
 	"time"
+
+	"github.com/ethtweet/ethtweet/update"
 
 	"github.com/ethtweet/ethtweet/appWeb/routes"
 	"github.com/ethtweet/ethtweet/broadcastMsg"
@@ -139,6 +140,13 @@ func RunMysql() {
 }
 
 func SavePeers() {
+
+	conn := usr.Host.Network().Conns()
+	//节点数过少，可能是网络中断等，暂停保存，避免覆盖
+	if len(conn) < 50 {
+		return
+	}
+
 	filePath := "Bootstrap.txt"
 	file, err := os.OpenFile(filePath, os.O_WRONLY|os.O_APPEND|os.O_CREATE|os.O_TRUNC, 0666)
 	if err != nil {
@@ -146,12 +154,6 @@ func SavePeers() {
 	}
 	//及时关闭file句柄
 	defer file.Close()
-
-	conn := usr.Host.Network().Conns()
-	//节点数过少，可能是网络中断等，暂停保存，避免覆盖
-	if len(conn) < 50 {
-		return
-	}
 	write := bufio.NewWriter(file)
 	for _, c := range conn {
 		//写入文件时，使用带缓存的 *Writer
