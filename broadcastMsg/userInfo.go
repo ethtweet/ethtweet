@@ -112,10 +112,6 @@ func (usrInfo *UserInfo) ReceiveHandle(ctx context.Context, node *p2pNet.OnlineN
 		return
 	} else if usrInfo.ReceiveHandleType == UserInfoReceiveHandleTypeGotoAsk { //需要用户去询问
 		usrInfo.ReceiveHandleType = UserInfoReceiveHandleTypeAsk
-		err := usrInfo.DoAsk()
-		if err != nil {
-			logs.PrintErr("UserInfoReceiveHandleTypeGotoAsk err ", err)
-		}
 		return
 	}
 	usrInfo.ReceiveHandleUpdate(ctx, node)
