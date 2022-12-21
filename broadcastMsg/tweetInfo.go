@@ -109,6 +109,7 @@ func ReleaseTweet(user *models.User, keyName, content, attachment, forwardId, to
 			tx.Where("user_id = ? and nonce = ?", user.Id, 0).Count(&n)
 			if n > 0 {
 				user.Nonce = 1
+				tx.Model(user).Save(user)
 			}
 		}
 	}
@@ -173,7 +174,6 @@ func ReleaseTweet(user *models.User, keyName, content, attachment, forwardId, to
 		}
 		return nil, fmt.Errorf("create tweet err %s", err.Error())
 	}
-	user.Nonce++
 	if err = tx.Model(user).Save(user).Error; err != nil {
 		return nil, fmt.Errorf("update user info err %s", err.Error())
 	}
