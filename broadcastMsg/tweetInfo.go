@@ -159,6 +159,8 @@ func ReleaseTweet(user *models.User, keyName, content, attachment, forwardId, to
 		//nonce已存在
 		if tx.Where("user_id = ? and nonce = ?", tw.UserId, tw.Nonce).Count(&i); i > 0 && tw.Nonce > user.Nonce {
 			logs.PrintlnWarning("tw nonce already exists ", tw.Nonce, " update user nonce")
+			user.Nonce++
+			tx.Model(user).Save(user)
 			uNonce = int64(tw.Nonce)
 		}
 		return nil, fmt.Errorf("create tweet err %s", err.Error())
