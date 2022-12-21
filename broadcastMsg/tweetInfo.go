@@ -104,7 +104,7 @@ func ReleaseTweet(user *models.User, keyName, content, attachment, forwardId, to
 			user.Nonce = 1
 		}
 		//如果没有更新nonce 自动更新
-		if user.Nonce == 0 && tx.Where("user_id = ? and nonce = ?", user.Id, 0).Count(&i); i > 0  {
+		if user.Nonce == 0 && tx.Where("user_id = ? and nonce = ?", user.Id, 0).Count(&i); i > 0 {
 			user.Nonce = 1
 		}
 	}
@@ -161,7 +161,7 @@ func ReleaseTweet(user *models.User, keyName, content, attachment, forwardId, to
 	if err = tw.Create(tx); err != nil {
 		var i int64
 		//nonce已存在
-		if v tw.Nonce > user.Nonce {
+		if tx.Where("user_id = ? and nonce = ?", tw.UserId, tw.Nonce).Count(&i); i > 0 && tw.Nonce > user.Nonce {
 			logs.PrintlnWarning("tw nonce already exists ", tw.Nonce, " update user nonce")
 			user.Nonce++
 			tx.Model(user).Save(user)
