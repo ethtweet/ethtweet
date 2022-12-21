@@ -108,7 +108,7 @@ func (tw *Tweets) Create(tx *gorm.DB) error {
 	}
 	tw.GenerateSysParams()
 	if err := tx.Create(tw).Error; err != nil {
-		return nil
+		return err
 	}
 	return nil
 }
