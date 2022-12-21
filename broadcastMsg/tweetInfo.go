@@ -104,10 +104,8 @@ func ReleaseTweet(user *models.User, keyName, content, attachment, forwardId, to
 			user.Nonce = 1
 		}
 		//如果没有更新nonce 自动更新
-		var n int64
 		if user.Nonce == 0 {
-			tx.Where("user_id = ? and nonce = ?", user.Id, 0).Count(&n)
-			if n > 0 {
+			if tx.Where("user_id = ? and nonce = ?", user.Id, 0).Find(&models.Tweets{}).RowsAffected == 0 {
 				user.Nonce = 1
 				tx.Model(user).Save(user)
 			}
