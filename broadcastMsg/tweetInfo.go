@@ -165,6 +165,7 @@ func ReleaseTweet(user *models.User, keyName, content, attachment, forwardId, to
 		}
 		return nil, fmt.Errorf("create tweet err %s", err.Error())
 	}
+	user.Nonce++
 	if err = tx.Model(user).Save(user).Error; err != nil {
 		return nil, fmt.Errorf("update user info err %s", err.Error())
 	}
