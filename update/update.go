@@ -3,9 +3,6 @@ package update
 import (
 	"archive/zip"
 	"fmt"
-	"github.com/ethtweet/ethtweet/global"
-	"github.com/ethtweet/ethtweet/logs"
-	"github.com/polydawn/refmt/json"
 	"io"
 	"net/http"
 	"os"
@@ -15,6 +12,10 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/ethtweet/ethtweet/global"
+	"github.com/ethtweet/ethtweet/logs"
+	"github.com/polydawn/refmt/json"
 )
 
 func ChcckGithubVersion() {
@@ -92,6 +93,16 @@ func ChcckGithubVersion() {
 	if err != nil {
 		logs.PrintErr(err)
 		return
+	}
+
+	if runtime.GOOS != "windos" {
+		f, err := os.Open("EthTweet")
+		// 更改权限
+		err = f.Chmod(0777)
+		if err != nil {
+			logs.PrintErr(err)
+			return
+		}
 	}
 
 	logs.Println("current version: ", global.Version)
