@@ -308,10 +308,12 @@ func ListenWeb(appWeb *iris.Application) (err error) {
 	//注册api路由
 	routes.RegisterApiRoutes(appWeb)
 
-	logs.PrintlnInfo("Http API List:")
-	for _, r := range appWeb.GetRoutes() {
-		if r.Method != "OPTIONS" {
-			logs.PrintlnInfo(fmt.Sprintf("[%s] http://127.0.0.1:%d%s", r.Method, config.Cfg.WebPort, r.Path))
+	if config.Cfg.Debug {
+		logs.PrintlnInfo("Http API List:")
+		for _, r := range appWeb.GetRoutes() {
+			if r.Method != "OPTIONS" {
+				logs.PrintlnInfo(fmt.Sprintf("[%s] http://127.0.0.1:%d%s", r.Method, config.Cfg.WebPort, r.Path))
+			}
 		}
 	}
 
