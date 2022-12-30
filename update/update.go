@@ -95,16 +95,6 @@ func ChcckGithubVersion() {
 		return
 	}
 
-	if runtime.GOOS != "windos" {
-		f, err := os.Open("EthTweet")
-		// 更改权限
-		err = f.Chmod(0777)
-		if err != nil {
-			logs.PrintErr(err)
-			return
-		}
-	}
-
 	logs.Println("current version: ", global.Version)
 	logs.Println("Update to version: ", githubVerion)
 	logs.Println("Ready to restart")
@@ -153,6 +143,8 @@ func unzipFile(file *zip.File, dstDir string) error {
 		return err
 	}
 	defer w.Close()
+
+	w.Chmod(0777)
 
 	// save the decompressed file content
 	_, err = io.Copy(w, rc)
