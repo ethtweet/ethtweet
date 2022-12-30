@@ -13,7 +13,6 @@ import (
 	"github.com/ethtweet/ethtweet/models"
 	"github.com/ethtweet/ethtweet/p2pNet"
 
-	"github.com/bits-and-blooms/bloom/v3"
 	"gorm.io/gorm"
 )
 
@@ -223,8 +222,6 @@ func BroadcastTweet(tw *models.Tweets) {
 	}
 }
 
-var Filter = bloom.NewWithEstimates(1000000, 0.01)
-
 func (twInfo *TweetInfo) ReceiveHandle(ctx context.Context, node *p2pNet.OnlineNode) {
 	twReceiveMu.Lock()
 	defer twReceiveMu.Unlock()
@@ -340,11 +337,7 @@ func (twInfo *TweetInfo) ReceiveHandle(ctx context.Context, node *p2pNet.OnlineN
 	isOk = true
 	//延迟广播
 	go func() {
-		//一条推文只广播一次
-		if Filter.TestAndAddString(twInfo.Tw.Id) {
-			return
-		}
-		time.Sleep(time.Second * 60)
+		time.Sleep(time.Second * 5)
 		logs.PrintlnInfo("Start broadcast....", twInfo.Tw.Id)
 		BroadcastTweet(twInfo.Tw)
 		logs.PrintlnSuccess("Broadcast ok....", twInfo.Tw.Id)
