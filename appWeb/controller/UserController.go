@@ -38,6 +38,15 @@ func (uc *UserController) GetNonceBy(id string, ctx iris.Context) *appWeb.Respon
 	if user.Nonce > 0 || user.LatestCid != "" {
 		nonce = user.Nonce + 1
 	}
+
+	var latestTw models.Tweets
+	global.GetDB().Where(models.Tweets{UserId: id}).Order("nonce desc").First(&latestTw)
+	if user.Nonce < latestTw.Nonce {
+		// fix user latest nonce
+		global.GetDB().Model(models.User{}).Where(models.User{Id: id}).Update("nonce", latestTw.Nonce)
+		nonce = latestTw.Nonce + 1
+	}
+
 	return appWeb.NewResponse(appWeb.ResponseSuccessCode, "success", map[string]interface{}{
 		"id":    id,
 		"nonce": nonce,
