@@ -66,7 +66,7 @@ func CenterUserRelease(tw *models.Tweets) error {
 	if err != nil {
 		if uNonce >= 0 {
 			logs.PrintlnWarning("Tw nonce already exists ", tw.Nonce, " update user nonce")
-			global.GetDB().Where("id", tw.UserId).Update("nonce", uNonce)
+			global.GetDB().Model(models.User{}).Where("id", tw.UserId).Update("nonce", uNonce)
 		}
 		return err
 	}
@@ -89,7 +89,7 @@ func ReleaseTweet(user *models.User, keyName, content, attachment, forwardId, to
 			tx.Commit()
 		}
 		if uNonce >= 0 {
-			global.GetDB().Where("user_id", user.Id).Update("nonce", uNonce)
+			global.GetDB().Model(models.Tweets{}).Where("user_id", user.Id).Update("nonce", uNonce)
 		}
 	}()
 	if global.LockForUpdate(tx.Where("id", user.Id)).Find(user).RowsAffected == 0 {
