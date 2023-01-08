@@ -294,3 +294,39 @@
 }
 ```
 
+
+### /api/v0/user/profile
+
+| 接口说明 | HTTP请求方式 |
+| :--- |----------|
+| 指定用户信息 | POST     |
+
+#### 请求参数
+| 名称     | 必须   | 类型及范围  | 说明   |
+|--------|------|--------|------|
+| name   | true | string | 昵称   |
+| desc   | true | string | 简介   |
+| avatar | true | string | 头像   |
+| key    | true | string | 指定用户 |
+
+#### 返回结果
+```json
+{
+  "code": 0,
+  "msg": "获取成功",
+  "data": {
+    "Id": "12D3KooWSj3G2XTFscfaVEwkf5C6UDmY9MGLJyk8PskfhA211Mph",
+    "Name": "OeFSzp",
+    "Desc": "",
+    "LatestCid": "QmX16PFRRvTDLgkVXjbUhRGzm16RfmD2F3pStivW7hYNo5",
+    "Avatar": "",
+    "Nonce": 0,
+    "LocalNonce": 0,
+    "Sign": "3NEtNSHGDPM1AihLyL3nfzJzDaWXeGWZVuVfDJSQaLZ8LKv1kkH7gbweptbbe6wU8B66psbUpZqmcMbsokr9tiHJMLbRZ7sUVGHApg9FMfNFgZu",
+    "PubKey": "4XTTMJ3iusfvLUyoEWuQAn75vcpRCd2FnSCMN86ARjPdXy8bo",
+    "CreatedAt": "0001-01-01T00:00:00Z",
+    "UpdatedAt": "0001-01-01T00:00:00Z"
+  }
+}
+```
+
