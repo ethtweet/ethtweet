@@ -85,6 +85,11 @@ func LoadConfigByPath(p string) error {
 		}
 		global.DbDrive = global.DBDriveSqlite
 
+		if Cfg.IpfsApi == "" {
+			Cfg.IpfsApi = "https://cdn.ipfsscan.io"
+		}
+
+		global.IpfsApi = Cfg.IpfsApi
 		return global.InitSqliteDatabase(*userData, global.SqliteDatabaseName)
 	} else {
 		logs.PrintlnInfo("load config from config file...", *configPath)
