@@ -4,7 +4,10 @@ import (
 	"bufio"
 	"context"
 	"fmt"
+	webtransport "github.com/libp2p/go-libp2p/p2p/transport/webtransport"
+	"github.com/polydawn/refmt/json"
 	"io"
+	"net/http"
 	"os"
 	"runtime"
 	"strings"
@@ -28,8 +31,6 @@ import (
 	"github.com/libp2p/go-libp2p/p2p/protocol/ping"
 	"github.com/libp2p/go-libp2p/p2p/security/noise"
 	libp2ptls "github.com/libp2p/go-libp2p/p2p/security/tls"
-	webtransport "github.com/libp2p/go-libp2p/p2p/transport/webtransport"
-
 	"github.com/multiformats/go-multiaddr"
 )
 
@@ -247,7 +248,7 @@ func (usr *UserNode) ConnectP2p() error {
 		libp2p.EnableRelayService(),
 		libp2p.ForceReachabilityPublic(),
 		libp2p.EnableRelay(),
-		//libp2p.EnableAutoRelay(), 添加一些静态的中继
+		//libp2p.EnableAutoRelay(), //添加一些静态的中继
 
 		libp2p.ListenAddrStrings(
 			fmt.Sprintf("/ip4/0.0.0.0/tcp/%d", usr.Port),
@@ -262,8 +263,8 @@ func (usr *UserNode) ConnectP2p() error {
 			fmt.Sprintf("/ip4/0.0.0.0/tcp/%d/ws", usr.Port),
 			fmt.Sprintf("/ip6/::/tcp/%d/ws", usr.Port),
 
-			fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic-v1/webtransport", usr.Port),
-			fmt.Sprintf("/ip6/::/udp/%d/quic-v1/webtransport", usr.Port),
+			fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic-v1/webtransport", usr.Port+1),
+			fmt.Sprintf("/ip6/::/udp/%d/quic-v1/webtransport", usr.Port+1),
 		),
 		libp2p.ConnectionManager(connmgr_),
 	)
@@ -280,8 +281,8 @@ func (usr *UserNode) ConnectP2p() error {
 	//每分钟广播一次
 	go func() {
 		time.Sleep(time.Minute * 1)
-		usr.routingDiscovery.Advertise(usr.Ctx, usr.Protocol)
-
+		_, err := usr.routingDiscovery.Advertise(usr.Ctx, usr.Protocol)
+		logs.PrintErr(err)
 	}()
 	//广播自己的位置
 	usr.routingDiscovery = routing2.NewRoutingDiscovery(usr.dht)
@@ -335,6 +336,41 @@ func (usr *UserNode) ConnectP2p() error {
 			}
 		}
 
+	}()
+
+	go func() {
+		r, err := http.Get("https://api.ethtweet.io/api/v0/bootstrap")
+		if err != nil {
+			return
+		}
+		b, err := io.ReadAll(r.Body)
+		var v interface{}
+		err = json.Unmarshal(b, &v)
+		if err != nil {
+			logs.PrintErr(err)
+			return
+		}
+
+		data := v.(map[string]interface{})
+		apiData := data["data"].(map[string]interface{})
+		bootstraps := apiData["bootstraps"].([]string)
+		for i, bootstrap := range bootstraps {
+			fmt.Println("    ", i, bootstrap)
+			addr, err := multiaddr.NewMultiaddr(bootstrap)
+			if err != nil {
+				logs.PrintlnWarning("地址解析失败", err)
+			} else {
+				a, err := peer.AddrInfoFromP2pAddr(addr)
+				if err != nil {
+					logs.PrintlnWarning("Bootstrap", err)
+				}
+				err = usr.Host.Connect(usr.Ctx, *a)
+				if err != nil {
+					logs.PrintErr("Bootstrap:", addr, err)
+				}
+
+			}
+		}
 	}()
 
 	return nil
