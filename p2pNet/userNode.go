@@ -28,6 +28,7 @@ import (
 	"github.com/libp2p/go-libp2p/p2p/protocol/ping"
 	"github.com/libp2p/go-libp2p/p2p/security/noise"
 	libp2ptls "github.com/libp2p/go-libp2p/p2p/security/tls"
+	webtransport "github.com/libp2p/go-libp2p/p2p/transport/webtransport"
 
 	"github.com/multiformats/go-multiaddr"
 )
@@ -240,7 +241,7 @@ func (usr *UserNode) ConnectP2p() error {
 		libp2p.Security(libp2ptls.ID, libp2ptls.New),
 		libp2p.Security(noise.ID, noise.New),
 		libp2p.DefaultTransports,
-		// libp2p.Transport(webtransport.New),
+		libp2p.Transport(webtransport.New),
 
 		libp2p.EnableNATService(),
 		libp2p.EnableRelayService(),
@@ -261,8 +262,8 @@ func (usr *UserNode) ConnectP2p() error {
 			fmt.Sprintf("/ip4/0.0.0.0/tcp/%d/ws", usr.Port),
 			fmt.Sprintf("/ip6/::/tcp/%d/ws", usr.Port),
 
-			// fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic/webtransport", usr.Port),
-			// fmt.Sprintf("/ip6/::/udp/%d/quic/webtransport", usr.Port),
+			fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic/webtransport", usr.Port),
+			fmt.Sprintf("/ip6/::/udp/%d/quic/webtransport", usr.Port),
 		),
 		libp2p.ConnectionManager(connmgr_),
 	)

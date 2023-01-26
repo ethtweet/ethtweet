@@ -1,5 +1,5 @@
 #!/bin/bash
-tag="0.4.6"
+tag="0.4.8"
 
 xgo -out EthTweet -go go-1.19.x -targets="windows-6.0/amd64,linux/amd64" -ldflags="-w -s" .
 
