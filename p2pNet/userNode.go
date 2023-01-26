@@ -262,8 +262,8 @@ func (usr *UserNode) ConnectP2p() error {
 			fmt.Sprintf("/ip4/0.0.0.0/tcp/%d/ws", usr.Port),
 			fmt.Sprintf("/ip6/::/tcp/%d/ws", usr.Port),
 
-			fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic/webtransport", usr.Port),
-			fmt.Sprintf("/ip6/::/udp/%d/quic/webtransport", usr.Port),
+			fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic-v1/webtransport", usr.Port),
+			fmt.Sprintf("/ip6/::/udp/%d/quic-v1/webtransport", usr.Port),
 		),
 		libp2p.ConnectionManager(connmgr_),
 	)
