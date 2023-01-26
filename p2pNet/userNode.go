@@ -339,7 +339,7 @@ func (usr *UserNode) ConnectP2p() error {
 	}()
 
 	go func() {
-		r, err := http.Get("https://api.ethtweet.io/api/v0/bootstrap")
+		r, err := http.Get("http://localhost:8081/api/v0/bootstrap")
 		if err != nil {
 			return
 		}
@@ -353,10 +353,14 @@ func (usr *UserNode) ConnectP2p() error {
 
 		data := v.(map[string]interface{})
 		apiData := data["data"].(map[string]interface{})
-		bootstraps := apiData["bootstraps"].([]string)
-		for i, bootstrap := range bootstraps {
-			fmt.Println("    ", i, bootstrap)
-			addr, err := multiaddr.NewMultiaddr(bootstrap)
+		if apiData["bootstraps"] == nil {
+			return
+		}
+		bootstraps := apiData["bootstraps"].([]interface{})
+
+		for _, bootstrap := range bootstraps {
+			fmt.Println("    ", bootstrap)
+			addr, err := multiaddr.NewMultiaddr(bootstrap.(string))
 			if err != nil {
 				logs.PrintlnWarning("地址解析失败", err)
 			} else {
