@@ -234,7 +234,7 @@ func (usr *UserNode) ConnectP2p() error {
 		libp2p.DefaultPeerstore,
 		//注册使用路由
 		libp2p.Routing(func(h host.Host) (routing.PeerRouting, error) {
-			usr.dht, err = dht.New(usr.Ctx, h, dht.BootstrapPeers(dht.GetDefaultBootstrapPeerAddrInfos()...))
+			usr.dht, err = dht.New(usr.Ctx, h)
 			return usr.dht, err
 		}),
 		// support TLS connections
@@ -244,6 +244,7 @@ func (usr *UserNode) ConnectP2p() error {
 		//libp2p.Transport(webtransport.New),
 
 		libp2p.EnableNATService(),
+
 		libp2p.EnableRelayService(),
 		libp2p.ForceReachabilityPublic(),
 		libp2p.EnableRelay(),
@@ -253,11 +254,11 @@ func (usr *UserNode) ConnectP2p() error {
 			fmt.Sprintf("/ip4/0.0.0.0/tcp/%d", usr.Port),
 			fmt.Sprintf("/ip6/::/tcp/%d", usr.Port),
 
+			fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic", usr.Port),
+			fmt.Sprintf("/ip6/::/udp/%d/quic", usr.Port),
+
 			fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic-v1", usr.Port),
 			fmt.Sprintf("/ip6/::/udp/%d/quic-v1", usr.Port),
-
-			fmt.Sprintf("/ip4/0.0.0.0/tcp/%d/ws", usr.Port),
-			fmt.Sprintf("/ip6/::/tcp/%d/ws", usr.Port),
 
 			//fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic-v1/webtransport", usr.Port+1),
 			//fmt.Sprintf("/ip6/::/udp/%d/quic-v1/webtransport", usr.Port+1),
