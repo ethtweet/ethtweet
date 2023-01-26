@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"context"
 	"fmt"
-	webtransport "github.com/libp2p/go-libp2p/p2p/transport/webtransport"
 	"github.com/polydawn/refmt/json"
 	"io"
 	"net/http"
@@ -242,7 +241,7 @@ func (usr *UserNode) ConnectP2p() error {
 		libp2p.Security(libp2ptls.ID, libp2ptls.New),
 		libp2p.Security(noise.ID, noise.New),
 		libp2p.DefaultTransports,
-		libp2p.Transport(webtransport.New),
+		//libp2p.Transport(webtransport.New),
 
 		libp2p.EnableNATService(),
 		libp2p.EnableRelayService(),
@@ -260,8 +259,8 @@ func (usr *UserNode) ConnectP2p() error {
 			fmt.Sprintf("/ip4/0.0.0.0/tcp/%d/ws", usr.Port),
 			fmt.Sprintf("/ip6/::/tcp/%d/ws", usr.Port),
 
-			fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic-v1/webtransport", usr.Port+1),
-			fmt.Sprintf("/ip6/::/udp/%d/quic-v1/webtransport", usr.Port+1),
+			//fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic-v1/webtransport", usr.Port+1),
+			//fmt.Sprintf("/ip6/::/udp/%d/quic-v1/webtransport", usr.Port+1),
 		),
 		libp2p.ConnectionManager(connmgr_),
 	)
