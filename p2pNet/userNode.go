@@ -254,9 +254,6 @@ func (usr *UserNode) ConnectP2p() error {
 			fmt.Sprintf("/ip4/0.0.0.0/tcp/%d", usr.Port),
 			fmt.Sprintf("/ip6/::/tcp/%d", usr.Port),
 
-			fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic", usr.Port),
-			fmt.Sprintf("/ip6/::/udp/%d/quic", usr.Port),
-
 			fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic-v1", usr.Port),
 			fmt.Sprintf("/ip6/::/udp/%d/quic-v1", usr.Port),
 
