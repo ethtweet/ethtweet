@@ -11,6 +11,7 @@ import (
 	"path/filepath"
 	"runtime"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/ethtweet/ethtweet/update"
@@ -156,8 +157,11 @@ func SavePeers() {
 	defer file.Close()
 	write := bufio.NewWriter(file)
 	for _, c := range conn {
-		//写入文件时，使用带缓存的 *Writer
-		write.WriteString(fmt.Sprintf("%s/p2p/%s\n", c.RemoteMultiaddr().String(), c.RemotePeer().String()))
+		// 端口是4001的，大概率是有公网ip的
+		if strings.Contains(c.RemoteMultiaddr().String(), "/4001/") {
+			//写入文件时，使用带缓存的 *Writer
+			write.WriteString(fmt.Sprintf("%s/p2p/%s\n", c.RemoteMultiaddr().String(), c.RemotePeer().String()))
+		}
 	}
 	write.Flush()
 }
