@@ -336,7 +336,7 @@ func (usr *UserNode) ConnectP2p() error {
 	}()
 
 	go func() {
-		r, err := http.Get("http://localhost:8081/api/v0/bootstrap")
+		r, err := http.Get("https://api.ethtweet.io/api/v0/bootstrap")
 		if err != nil {
 			return
 		}
