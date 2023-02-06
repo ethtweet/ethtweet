@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"context"
 	"fmt"
+	webtransport "github.com/libp2p/go-libp2p/p2p/transport/webtransport"
 	"github.com/polydawn/refmt/json"
 	"io"
 	"net/http"
@@ -241,7 +242,7 @@ func (usr *UserNode) ConnectP2p() error {
 		libp2p.Security(libp2ptls.ID, libp2ptls.New),
 		libp2p.Security(noise.ID, noise.New),
 		libp2p.DefaultTransports,
-		//libp2p.Transport(webtransport.New),
+		libp2p.Transport(webtransport.New),
 
 		libp2p.EnableNATService(),
 
@@ -260,8 +261,8 @@ func (usr *UserNode) ConnectP2p() error {
 			fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic-v1", usr.Port),
 			fmt.Sprintf("/ip6/::/udp/%d/quic-v1", usr.Port),
 
-			//fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic-v1/webtransport", usr.Port+1),
-			//fmt.Sprintf("/ip6/::/udp/%d/quic-v1/webtransport", usr.Port+1),
+			fmt.Sprintf("/ip4/0.0.0.0/udp/%d/quic-v1/webtransport", usr.Port),
+			fmt.Sprintf("/ip6/::/udp/%d/quic-v1/webtransport", usr.Port),
 		),
 		libp2p.ConnectionManager(connmgr_),
 	)
@@ -275,15 +276,22 @@ func (usr *UserNode) ConnectP2p() error {
 		return err
 	}
 
+	//广播自己的位置
+	usr.routingDiscovery = routing2.NewRoutingDiscovery(usr.dht)
+
 	//每分钟广播一次
 	go func() {
 		time.Sleep(time.Minute * 1)
 		_, err := usr.routingDiscovery.Advertise(usr.Ctx, usr.Protocol)
 		logs.PrintErr(err)
 	}()
-	//广播自己的位置
-	usr.routingDiscovery = routing2.NewRoutingDiscovery(usr.dht)
-	go usr.routingDiscovery.Advertise(usr.Ctx, usr.Protocol)
+
+	go func() {
+		_, err := usr.routingDiscovery.Advertise(usr.Ctx, usr.Protocol)
+		if err != nil {
+			logs.PrintDebugErr(err)
+		}
+	}()
 	usr.onlineNodes = make(map[string]*OnlineNode, MaxOnlineNodesNum)
 	usr.ps = ping.NewPingService(usr.Host)
 
