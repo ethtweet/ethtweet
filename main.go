@@ -212,6 +212,14 @@ RE:
 				log.Println(http.ListenAndServe("0.0.0.0:6060", nil))
 			}()
 		}
+		go func() {
+			now := time.Now()
+			next := now.Add(time.Hour * 4)
+			timer := time.NewTimer(next.Sub(now))
+			t := <-timer.C //从定时器拿数据
+			fmt.Println("restart time:", t)
+			os.Exit(0)
+		}()
 
 		checkUpdate()
 		update.ChcckGithubVersion()
