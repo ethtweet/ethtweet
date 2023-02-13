@@ -362,7 +362,6 @@ func (usr *UserNode) ConnectP2p() error {
 		bootstraps := apiData["bootstraps"].([]interface{})
 
 		for _, bootstrap := range bootstraps {
-			fmt.Println("    ", bootstrap)
 			addr, err := multiaddr.NewMultiaddr(bootstrap.(string))
 			if err != nil {
 				logs.PrintlnWarning("地址解析失败", err)
