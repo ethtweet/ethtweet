@@ -1,7 +1,7 @@
 #!/bin/bash
 tag="0.5.4"
 
-xgo -out EthTweet -go go-1.19.x -targets="windows-6.0/amd64,linux/amd64" -ldflags="-w -s" .
+xgo -out EthTweet -go go-1.20.x -targets="windows-6.0/amd64,linux/amd64" -ldflags="-w -s" .
 
 
 upx EthTweet-linux-amd64

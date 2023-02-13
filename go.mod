@@ -1,6 +1,6 @@
 module github.com/ethtweet/ethtweet
 
-go 1.19
+go 1.20
 
 require (
 	github.com/ethereum/go-ethereum v1.10.16 // 高于这个版本会有包冲突
