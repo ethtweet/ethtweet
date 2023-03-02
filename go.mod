@@ -11,7 +11,7 @@ require (
 	github.com/ipfs/go-ipfs-keystore v0.1.0
 	github.com/iris-contrib/middleware/cors v0.0.0-20210110101738-6d0a4d799b5d
 	github.com/kataras/iris/v12 v12.2.0-beta7
-	github.com/libp2p/go-libp2p v0.26.0
+	github.com/libp2p/go-libp2p v0.26.2
 	github.com/libp2p/go-libp2p-kad-dht v0.21.1
 	github.com/mr-tron/base58 v1.2.0
 	github.com/multiformats/go-multiaddr v0.8.0
@@ -153,7 +153,7 @@ require (
 	github.com/quic-go/qtls-go1-19 v0.2.1 // indirect
 	github.com/quic-go/qtls-go1-20 v0.1.1 // indirect
 	github.com/quic-go/quic-go v0.33.0 // indirect
-	github.com/quic-go/webtransport-go v0.5.1 // indirect
+	github.com/quic-go/webtransport-go v0.5.2 // indirect
 	github.com/raulk/go-watchdog v1.3.0 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/schollz/closestmatch v2.1.0+incompatible // indirect

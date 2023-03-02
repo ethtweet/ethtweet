@@ -53,7 +53,7 @@ func RunWindowsMysqld() error {
 
 	// here we know mysql isn't running, so we try to start it again.
 	// todo:与上面的cmd.exe有啥区别?
-	if err = ExecCmd("cmd.exe", "/c", ".\\mysql\\bin\\mysqld.exe --console"); err != nil {
+	if err = ExecCmd("cmd.exe", "/c", ".\\mysql\\bin\\mysqld.exe --console  --log-bin=OFF"); err != nil {
 		return fmt.Errorf("exec cmd.exe --console err:%w", err)
 	}
 
