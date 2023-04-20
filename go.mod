@@ -6,7 +6,7 @@ require (
 	github.com/ethereum/go-ethereum v1.11.5 // 高于这个版本会有包冲突
 	github.com/go-gormigrate/gormigrate/v2 v2.0.2
 	github.com/google/uuid v1.3.0
-	github.com/gookit/color v1.5.2
+	github.com/gookit/color v1.5.3
 	github.com/ipfs/go-ipfs-api v0.6.0
 	github.com/ipfs/go-ipfs-keystore v0.1.0
 	github.com/iris-contrib/middleware/cors v0.0.0-20210110101738-6d0a4d799b5d
