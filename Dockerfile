@@ -4,9 +4,11 @@ RUN apk add --no-cache gcc musl-dev linux-headers git
 
 WORKDIR /build
 
-COPY . ./
+COPY go.mod go.mod
+COPY go.sum go.sum
 RUN go mod download
-COPY *.go ./
+
+COPY . ./
 
 RUN  go build  -ldflags="-w -s" -o /build/EthTweet .
 
@@ -15,7 +17,7 @@ FROM alpine:3.17
 WORKDIR /
 RUN apk update --no-cache && apk add --no-cache ca-certificates
 
-COPY tweet.yaml ./tweet.yaml
+COPY Bootstrap.txt ./Bootstrap.txt
 COPY --from=builder /build/EthTweet /EthTweet
 
 EXPOSE 4001
