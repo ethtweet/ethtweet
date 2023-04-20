@@ -9,7 +9,7 @@ require (
 	github.com/gookit/color v1.5.3
 	github.com/ipfs/go-ipfs-api v0.6.0
 	github.com/ipfs/go-ipfs-keystore v0.1.0
-	github.com/iris-contrib/middleware/cors v0.0.0-20210110101738-6d0a4d799b5d
+	github.com/iris-contrib/middleware/cors v0.0.0-20230311205048-b568fe9b470f
 	github.com/kataras/iris/v12 v12.2.0
 	github.com/libp2p/go-libp2p v0.27.1
 	github.com/libp2p/go-libp2p-kad-dht v0.23.0
