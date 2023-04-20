@@ -4,7 +4,7 @@ check_api_local: true
 ipfs_api: https://cdn.ipfsscan.io
 
 db:
-  drive: mysql
+  drive: sqlite
   mysql:
     host: 127.0.0.1
     port: 3306
