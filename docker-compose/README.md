@@ -5,3 +5,9 @@
 ```
 docker-compose up
 ```
+
+### 目录说明
+
+mysql-data:MySQL数据库文件，保存推文信息
+
+keyStore:私钥目录
