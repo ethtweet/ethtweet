@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    container_name: 'mysql'
+    environment:
+      MYSQL_DATABASE: 'eth_tweet'
+      MYSQL_ROOT_PASSWORD: '123456'
+    ports:
+      - '3306:3306'
+
+    volumes:
+        - ./mysql-data/:/var/lib/mysql
+
+
+  ethtweet:
+    image: ethtweet
+    restart: always
+    container_name: 'ethtweet'
+    depends_on:
+      - db
+
+    volumes:
+      - ./keyStore:/keyStore
+      - ./tweet.yaml:/tweet.yaml
+
+    ports:
+      - '4001:4001'
+      - '8080:8080'
+

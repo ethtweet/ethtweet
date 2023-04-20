@@ -1,0 +1,31 @@
+daemon: false
+debug: true
+check_api_local: true
+ipfs_api: https://cdn.ipfsscan.io
+
+db:
+  drive: mysql
+  mysql:
+    host: mysql
+    port: 3306
+    database: eth_tweet # mysql80无法创建eth-tweet
+    charset: utf8mb4
+    username: root
+    password: 123456
+    max_idle_counts: 10
+    max_open_counts: 50
+  sqlite:
+    dir: ./databases
+    dbName: ethtweet.0.2.db
+
+log:
+  isPrint: true #是否打印日志文件
+  logFilePath: #日志文件路径 空位标准输出
+
+key:
+  user_key: userKey
+  key_store: ./keyStore
+
+port:
+  web_port: 8080
+  p2p_port: 4001

@@ -27,3 +27,5 @@ public
 chain_tweet
 *.yml
 Bootstrap.txt
+docker-compose/mysql-data
+docker-compose/keyStore
