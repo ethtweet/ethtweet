@@ -16,7 +16,7 @@ services:
 
 
   ethtweet:
-    image: ethtweet
+    image: chenjia404/ethtweet:latest
     restart: always
     container_name: 'ethtweet'
     depends_on:
