@@ -18,9 +18,9 @@ require (
 	github.com/sanbornm/go-selfupdate v0.0.0-20210106163404-c9b625feac49
 	github.com/spf13/viper v1.15.0
 	github.com/tidwall/gjson v1.14.4
-	gorm.io/driver/mysql v1.4.7
-	gorm.io/driver/sqlite v1.4.4
-	gorm.io/gorm v1.24.5
+	gorm.io/driver/mysql v1.5.0
+	gorm.io/driver/sqlite v1.5.0
+	gorm.io/gorm v1.25.0
 )
 
 require github.com/polydawn/refmt v0.89.0
