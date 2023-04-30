@@ -12,10 +12,10 @@ COPY . ./
 
 RUN  go build  -ldflags="-w -s" -o /build/EthTweet .
 
-FROM alpine:3.17
+FROM alpine:3
 
 WORKDIR /
-RUN apk update --no-cache && apk add --no-cache ca-certificates
+RUN apk update --no-cache && apk upgrade && apk add --no-cache ca-certificates
 
 COPY Bootstrap.txt ./Bootstrap.txt
 COPY --from=builder /build/EthTweet /EthTweet
