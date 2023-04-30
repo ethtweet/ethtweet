@@ -59,7 +59,9 @@ func LoadConfig() error {
 func LoadConfigByPath(p string) error {
 	defer func() {
 		logs.PrintlnSuccess("load config success!")
-		logs.IsPrintLog = Cfg.Logs.IsPrint
+		if Cfg.Logs != nil {
+			logs.IsPrintLog = Cfg.Logs.IsPrint
+		}
 		logs.IsDebugPrint = Cfg.Debug
 	}()
 	_, err := os.Stat("tweet.yaml")
