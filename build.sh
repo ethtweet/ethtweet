@@ -12,3 +12,7 @@ zip -m EthTweet-${tag}-linux-amd64.zip EthTweet
 upx EthTweet-windows-6.0-amd64.exe
 mv EthTweet-windows-6.0-amd64.exe EthTweet.exe
 zip -m EthTweet-${tag}-windows-amd64.zip EthTweet.exe
+
+docker build -t ethtweet .
+docker image tag ethtweet chenjia404/ethtweet
+docker image push  chenjia404/ethtweet
