@@ -90,6 +90,7 @@ func ChcckGithubVersion() {
 	checksumsFileURL := fmt.Sprintf("https://github.com/ethtweet/ethtweet/releases/download/v%s/EthTweet-%s-%s-%s.zip.sha512", githubVerion, githubVerion, runtime.GOOS, runtime.GOARCH)
 	r, err = http.Get(checksumsFileURL)
 	if err != nil {
+		logs.PrintErr(err)
 		return
 	}
 	b, err = io.ReadAll(r.Body)
