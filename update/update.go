@@ -2,6 +2,8 @@ package update
 
 import (
 	"archive/zip"
+	"crypto/sha512"
+	"encoding/hex"
 	"fmt"
 	"io"
 	"net/http"
@@ -50,6 +52,11 @@ func ChcckGithubVersion() {
 	updateFileUrl := fmt.Sprintf("https://github.com/ethtweet/ethtweet/releases/download/v%s/EthTweet-%s-%s-%s.zip", githubVerion, githubVerion, runtime.GOOS, runtime.GOARCH)
 	// Get the data
 	resp, err := http.Get(updateFileUrl)
+
+	if resp.StatusCode != 404 {
+		logs.PrintErr("文件不存在，404错误")
+		return
+	}
 	if err != nil {
 		logs.PrintErr(err)
 		return
@@ -69,6 +76,27 @@ func ChcckGithubVersion() {
 	_, err = io.Copy(out, resp.Body)
 	if err != nil {
 		logs.PrintErr(err)
+		return
+	}
+
+	h := sha512.New()
+	if _, err := io.Copy(h, out); err != nil {
+		logs.PrintErr(err)
+		return
+	}
+
+	fileSha512 := hex.EncodeToString(h.Sum(nil))
+
+	checksumsFileURL := fmt.Sprintf("https://github.com/ethtweet/ethtweet/releases/download/v%s/EthTweet-%s-%s-%s.zip.sha512", githubVerion, githubVerion, runtime.GOOS, runtime.GOARCH)
+	r, err = http.Get(checksumsFileURL)
+	if err != nil {
+		return
+	}
+	b, err = io.ReadAll(r.Body)
+	checksums := string(b)
+	if strings.Index(checksums, fileSha512) < 0 {
+
+		logs.PrintErr("文件sha512错误")
 		return
 	}
 
