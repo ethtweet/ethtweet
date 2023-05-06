@@ -2,6 +2,7 @@ package update
 
 import (
 	"archive/zip"
+	"bytes"
 	"crypto/sha512"
 	"encoding/hex"
 	"fmt"
@@ -18,6 +19,7 @@ import (
 	"github.com/ethtweet/ethtweet/global"
 	"github.com/ethtweet/ethtweet/logs"
 	"github.com/polydawn/refmt/json"
+	"golang.org/x/crypto/openpgp"
 )
 
 func ChcckGithubVersion() {
@@ -98,6 +100,23 @@ func ChcckGithubVersion() {
 	if strings.Index(checksums, fileSha512) < 0 {
 
 		logs.PrintErr("文件sha512错误")
+		return
+	}
+
+	ascFileURL := fmt.Sprintf("https://github.com/ethtweet/ethtweet/releases/download/v%s/EthTweet-%s-%s-%s.zip.asc", githubVerion, githubVerion, runtime.GOOS, runtime.GOARCH)
+	err = DownloadFile(ascFileURL, "update.zip.asc")
+	if err != nil {
+		logs.PrintErr(err)
+		return
+	}
+
+	Verify, err := VerifySignature("update.zip")
+	if err != nil {
+		logs.PrintErr(err)
+		return
+	}
+	if !Verify {
+		logs.PrintErr("gpg签名不通过")
 		return
 	}
 
@@ -208,4 +227,88 @@ func compareVersion(version1 string, version2 string) int {
 		}
 	}
 	return res
+}
+
+func DownloadFile(url string, dest string) error {
+	// Get the data
+	resp, err := http.Get(url)
+
+	if resp.StatusCode != 404 {
+		logs.PrintErr("文件不存在，404错误")
+		return http.ErrMissingFile
+	}
+	if err != nil {
+		logs.PrintErr(err)
+		return err
+	}
+	defer resp.Body.Close()
+
+	// 创建一个文件用于保存
+	out, err := os.Create(dest)
+	if err != nil {
+		logs.PrintErr(err)
+	}
+	defer out.Close()
+	return nil
+}
+
+var publicKey = `-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBGRVILgBEACxqkRKodS2Mfxn6GTYvUDaBSgQCjT/GMqmto38buSing9PCXv6
+QMWko8Ax7cKVkxEKGD+4T+AD2mLfhpjLBlMOcxqBwuJ4YVsWkHH2TLHc/gU3DL9Y
+ajH9Lt8TF+Xin/pBfGdOBXGeKK2Az8RshK5D3w3E89//plL15kaR0BWbVIp6Ne0P
+c5D7BNboRuqJGAY+aYEipWAHLZW5M2dD1wgVjUpZRwWv+qIKuQ+hri+fxehFjz3S
+8ElwqZu8JQHxcO3b3m3j11x1qfekqRvNf/dxMpuS+ymenAjOmDDlarmSTj9RTzrA
+97uYi2meIr5e85yMNk5n8Ks7HOQyQ1K6J7YBodjItO7bp1EE5xSecNsaIT2kBQX3
+0+uga0IsZkA6MIC8caWfkMIXrdyLse4XFywCdOGI3BhrA6QV/7ZAXRBs5HtO6SQO
+eVfDptZ0VCvmWG8v6d5mBJ6081FylHEoDYXfJVwgRo71UR334WBpRJZQNV76p383
+muUSq05IcwjbAdyol26enqO2s5LRNs7OeISAhQ+u2LV6LJK+G23JKbmIuWD7Rhol
+gLDXYukoIlOcY7x++qnqoLT8V1aNFE/4XDAd+/Xq7VdgvKbPZxxEkXj9LMrPBIaS
+9/1Nmiq/ni779pnGCFDS7UUFLJvWjEDgWKnZb8MYBdyvq9T9biecJ2oR6wARAQAB
+tCJjaGVuamlhNDA0IDxjaGVuamlhYmxvZ0BnbWFpbC5jb20+iQJXBBMBCABBFiEE
+4TRiUu1mI2TKN/cWGJvnloM2naMFAmRVILgCGw8FCQPDFwgFCwkIBwICIgIGFQoJ
+CAsCBBYCAwECHgcCF4AACgkQGJvnloM2naMQJA/+OxZGpywGLf+C1Wi9iVsSb0UA
+Xit9yOujEpgttgJBdZcfP/1W5G7Vlt9pEH1ByJ28RHlSrEdMkycYhmvnDPdCTg+c
+x3NtjWP8xWXsWN9upPPnn3ZdtsSDZ2YQOMjunP7mucRW8NofDFytPFgSVb6+NcqM
+9Obcd6gmOY3qoQcv4XofdlP6ObFZxvr/mGKdSBgWgOQivGK8QtimNeC/V5ChJKyl
+rueQJ1RRnGtlTXW3tNPNmYkXeVR/TVZgVHyIBHjlNHRV7V8Wgm+vsNIo7xPD/PHL
+3Kq2pmuz8EpcJpNK1+IYsQJTEx9+Y4E4Vjjp/U6WBjGDWXF5KrdTKMsRsHvhxOW7
+C/u6e9gG/eHPLo5Pw3Dg5MWZh/+dRZ/1kWoKhabp719CCPOh9SBgUdSc8RAoVTwp
+b/UHSPokJPPlpBWU7mdBJ+fCapswHU8Gg4WnwBrm2C+p7GEXZiJ6f5n2Ic9rVu6x
+mkmOANLziPe7kC8T6830d0l2nlyCR/oKoGrQ8+bQNChHHhGWtr4O/uCrES5NK/Xr
+kT6OojW8UeV5ngFa0fFurYcMahHHaoy/S3bduGMk3yiFI8Wh7LkZQO6ugkoesvqv
+YSCJJrSTjHnBCkddmOHpDpvgOe+COOrVCe42PNSovTJ+14rhMTsYOWShLLOdC02L
+/xTrrn8LrU9TVEUWf4I=
+=l1Ub
+-----END PGP PUBLIC KEY BLOCK-----`
+
+func VerifySignature(filename string) (bool, error) {
+	keyring, err := openpgp.ReadArmoredKeyRing(bytes.NewReader([]byte(publicKey)))
+	if err != nil {
+		fmt.Println("Read Armored Key Ring: " + err.Error())
+		return false, err
+	}
+
+	signature, err := os.Open(filename + ".asc")
+	if err != nil {
+		fmt.Println(err)
+		return false, err
+	}
+
+	verification_target, err := os.Open(filename)
+	if err != nil {
+		fmt.Println(err)
+		return false, err
+	}
+	entity, err := openpgp.CheckArmoredDetachedSignature(keyring, verification_target, signature)
+	if err != nil {
+		fmt.Println("Check Detached Signature: " + err.Error())
+		return false, err
+	}
+	if entity.PrimaryKey.KeyIdString() == "189BE79683369DA3" {
+		return true, nil
+	} else {
+		return false, nil
+	}
+
 }

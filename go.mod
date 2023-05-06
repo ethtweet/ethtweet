@@ -11,7 +11,7 @@ require (
 	github.com/ipfs/go-ipfs-keystore v0.1.0
 	github.com/iris-contrib/middleware/cors v0.0.0-20230311205048-b568fe9b470f
 	github.com/kataras/iris/v12 v12.2.0
-	github.com/libp2p/go-libp2p v0.27.1
+	github.com/libp2p/go-libp2p v0.27.2
 	github.com/libp2p/go-libp2p-kad-dht v0.23.0
 	github.com/mr-tron/base58 v1.2.0
 	github.com/multiformats/go-multiaddr v0.9.0
@@ -23,7 +23,10 @@ require (
 	gorm.io/gorm v1.25.0
 )
 
-require github.com/polydawn/refmt v0.89.0
+require (
+	github.com/polydawn/refmt v0.89.0
+	golang.org/x/crypto v0.7.0
+)
 
 require (
 	github.com/BurntSushi/toml v1.2.1 // indirect
@@ -181,7 +184,6 @@ require (
 	go.uber.org/fx v1.19.2 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.24.0 // indirect
-	golang.org/x/crypto v0.7.0 // indirect
 	golang.org/x/exp v0.0.0-20230321023759-10a507213a29 // indirect
 	golang.org/x/mod v0.10.0 // indirect
 	golang.org/x/net v0.8.0 // indirect
