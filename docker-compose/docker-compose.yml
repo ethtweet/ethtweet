@@ -28,6 +28,7 @@ services:
       - ./tweet.yaml:/tweet.yaml
 
     ports:
-      - '4001:4001'
+      - '4001:4001/tcp'
+      - '4001:4001/udp'
       - '8080:8080'
 
