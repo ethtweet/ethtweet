@@ -14,6 +14,9 @@ RUN  go build  -ldflags="-w -s" -o /build/EthTweet .
 
 FROM alpine:3
 
+ARG VERSION
+ENV VERSION=$VERSION
+
 WORKDIR /
 RUN apk update --no-cache && apk upgrade && apk add --no-cache ca-certificates
 
