@@ -55,7 +55,7 @@ func ChcckGithubVersion() {
 	// Get the data
 	resp, err := http.Get(updateFileUrl)
 
-	if resp.StatusCode != 404 {
+	if resp.StatusCode == 404 {
 		logs.PrintErr("文件不存在，404错误" + updateFileUrl)
 		return
 	}
