@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"context"
 	"fmt"
-	"github.com/polydawn/refmt/json"
 	"io"
 	"net/http"
 	"os"
@@ -12,6 +11,8 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/polydawn/refmt/json"
 
 	"github.com/ethtweet/ethtweet/global"
 	"github.com/ethtweet/ethtweet/keys"
@@ -343,7 +344,15 @@ func (usr *UserNode) ConnectP2p() error {
 		if err != nil {
 			return
 		}
+		if r.StatusCode != 200 {
+			logs.PrintErr("http错误")
+			return
+		}
 		b, err := io.ReadAll(r.Body)
+		if err != nil {
+			logs.PrintErr(err)
+			return
+		}
 		var v interface{}
 		err = json.Unmarshal(b, &v)
 		if err != nil {
