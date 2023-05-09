@@ -18,7 +18,7 @@ import (
 	"github.com/ethtweet/ethtweet/keys"
 	"github.com/ethtweet/ethtweet/logs"
 
-	keystore "github.com/ipfs/go-ipfs-keystore"
+	keystore "github.com/ipfs/boxo/keystore"
 	"github.com/libp2p/go-libp2p"
 	dht "github.com/libp2p/go-libp2p-kad-dht"
 	"github.com/libp2p/go-libp2p/core/host"

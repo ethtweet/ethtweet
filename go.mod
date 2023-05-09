@@ -8,7 +8,6 @@ require (
 	github.com/google/uuid v1.3.0
 	github.com/gookit/color v1.5.3
 	github.com/ipfs/go-ipfs-api v0.6.0
-	github.com/ipfs/go-ipfs-keystore v0.1.0
 	github.com/iris-contrib/middleware/cors v0.0.0-20230311205048-b568fe9b470f
 	github.com/kataras/iris/v12 v12.2.0
 	github.com/libp2p/go-libp2p v0.27.3
@@ -24,6 +23,7 @@ require (
 )
 
 require (
+	github.com/ipfs/boxo v0.8.0
 	github.com/polydawn/refmt v0.89.0
 	golang.org/x/crypto v0.9.0
 )
@@ -76,7 +76,6 @@ require (
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/holiman/uint256 v1.2.2-0.20230321075855-87b91420868c // indirect
 	github.com/huin/goupnp v1.1.0 // indirect
-	github.com/ipfs/boxo v0.8.0 // indirect
 	github.com/ipfs/go-cid v0.4.1 // indirect
 	github.com/ipfs/go-datastore v0.6.0 // indirect
 	github.com/ipfs/go-ipfs-util v0.0.2 // indirect

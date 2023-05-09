@@ -11,7 +11,7 @@ import (
 	"github.com/ethtweet/ethtweet/logs"
 
 	cryptoEth "github.com/ethereum/go-ethereum/crypto"
-	keystore "github.com/ipfs/go-ipfs-keystore"
+	keystore "github.com/ipfs/boxo/keystore"
 	"github.com/libp2p/go-libp2p/core/crypto"
 	"github.com/mr-tron/base58"
 )

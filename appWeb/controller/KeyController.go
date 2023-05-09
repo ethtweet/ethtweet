@@ -10,7 +10,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/crypto"
-	keystore "github.com/ipfs/go-ipfs-keystore"
+	keystore "github.com/ipfs/boxo/keystore"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
 )
@@ -21,7 +21,7 @@ type KeyController struct {
 
 func (k *KeyController) BeforeActivation(b mvc.BeforeActivation) {}
 
-//导出私钥
+// 导出私钥
 func (k *KeyController) PostExport(ctx iris.Context) *appWeb.ResponseFormat {
 	ks, err := keystore.NewFSKeystore(k.User.UsrNode.UserData)
 	if err != nil {
@@ -38,7 +38,7 @@ func (k *KeyController) PostExport(ctx iris.Context) *appWeb.ResponseFormat {
 	return appWeb.NewResponse(appWeb.ResponseSuccessCode, "success", hexutil.Encode(crypto.FromECDSA(pri0)))
 }
 
-//列出key
+// 列出key
 func (k *KeyController) PostList() *appWeb.ResponseFormat {
 	ks, err := keystore.NewFSKeystore(k.User.UsrNode.UserData)
 	if err != nil {
@@ -51,7 +51,7 @@ func (k *KeyController) PostList() *appWeb.ResponseFormat {
 	return appWeb.NewResponse(appWeb.ResponseSuccessCode, "success", list)
 }
 
-//创建key
+// 创建key
 func (k *KeyController) PostGen(ctx iris.Context) *appWeb.ResponseFormat {
 	ks, err := keystore.NewFSKeystore(k.User.UsrNode.UserData)
 	if err != nil {
@@ -75,7 +75,7 @@ func (k *KeyController) PostGen(ctx iris.Context) *appWeb.ResponseFormat {
 	})
 }
 
-//导入私钥
+// 导入私钥
 func (k *KeyController) PostImport(ctx iris.Context) *appWeb.ResponseFormat {
 	var keyBase, keyName string
 	if keyBase = ctx.PostValueTrim("keyBase"); keyBase == "" {
