@@ -9,8 +9,6 @@ services:
     environment:
       MYSQL_DATABASE: 'eth_tweet'
       MYSQL_ROOT_PASSWORD: '123456'
-    ports:
-      - '3306:3306'
 
     volumes:
         - ./mysql-data/:/var/lib/mysql
