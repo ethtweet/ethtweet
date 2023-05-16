@@ -23,6 +23,7 @@ RUN apk update --no-cache && apk upgrade && apk add --no-cache ca-certificates
 COPY Bootstrap.txt ./Bootstrap.txt
 COPY --from=builder /build/EthTweet /EthTweet
 
-EXPOSE 4001
+EXPOSE 4001/tcp
+EXPOSE 4001/udp
 EXPOSE 8080
 ENTRYPOINT   ["/EthTweet"]
