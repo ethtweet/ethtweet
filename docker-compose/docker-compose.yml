@@ -9,7 +9,6 @@ services:
     environment:
       MYSQL_DATABASE: 'eth_tweet'
       MYSQL_ROOT_PASSWORD: '123456'
-
     volumes:
         - ./mysql-data/:/var/lib/mysql
 
@@ -26,7 +25,9 @@ services:
       - ./tweet.yaml:/tweet.yaml
 
     ports:
-      - '4001:4001/tcp'
       - '4001:4001/udp'
+      - '4001:4001/tcp'
       - '8080:8080'
-
+    sysctls:
+      - net.core.somaxconn=10240
+      - net.ipv4.tcp_syncookies=0
