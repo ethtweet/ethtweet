@@ -60,6 +60,21 @@ set CC=D:\sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\aarch
 set CXX=D:\sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\aarch64-linux-android21-clang++.cmd
 go build --tags "android"  -ldflags="-s -w"  -o ethtweet
 ```
+## docker 运行
+
+运行看效果，关闭容器数据自动清空
+
+```shell
+docekr run  --rm -it -p 8080:8080 -p 4001:4001/udp -p 4001:4001/tcp chenjia404/ethtweet
+```
+
+保存数据运行
+
+```shell
+docekr run -it -v ./databases:/databases -v ./keyStore:/keyStore -p 8080:8080 -p 4001:4001/udp -p 4001:4001/tcp chenjia404/ethtweet
+```
+
+
 ## docker-compose 运行
 
 docker-compose目录下，集成一个带MySQL的环境，可一键启动。
