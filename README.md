@@ -60,6 +60,9 @@ set CC=D:\sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\aarch
 set CXX=D:\sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\aarch64-linux-android21-clang++.cmd
 go build --tags "android"  -ldflags="-s -w"  -o ethtweet
 ```
+## docker-compose 运行
+
+docker-compose目录下，集成一个带MySQL的环境，可一键启动。
 
 ## todo 
 
