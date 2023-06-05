@@ -10,7 +10,7 @@ require (
 	github.com/ipfs/go-ipfs-api v0.6.0
 	github.com/iris-contrib/middleware/cors v0.0.0-20230429193704-33473bd2dc16
 	github.com/kataras/iris/v12 v12.2.0
-	github.com/libp2p/go-libp2p v0.27.3
+	github.com/libp2p/go-libp2p v0.27.5
 	github.com/libp2p/go-libp2p-kad-dht v0.23.0
 	github.com/mr-tron/base58 v1.2.0
 	github.com/multiformats/go-multiaddr v0.9.0
