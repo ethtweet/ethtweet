@@ -23,7 +23,7 @@ require (
 )
 
 require (
-	github.com/ipfs/boxo v0.9.0
+	github.com/ipfs/boxo v0.10.0
 	github.com/polydawn/refmt v0.89.0
 	golang.org/x/crypto v0.9.0
 )
