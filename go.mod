@@ -11,7 +11,7 @@ require (
 	github.com/iris-contrib/middleware/cors v0.0.0-20230429193704-33473bd2dc16
 	github.com/kataras/iris/v12 v12.2.0
 	github.com/libp2p/go-libp2p v0.28.0
-	github.com/libp2p/go-libp2p-kad-dht v0.24.0
+	github.com/libp2p/go-libp2p-kad-dht v0.24.1
 	github.com/mr-tron/base58 v1.2.0
 	github.com/multiformats/go-multiaddr v0.9.0
 	github.com/sanbornm/go-selfupdate v0.0.0-20210106163404-c9b625feac49
@@ -104,7 +104,7 @@ require (
 	github.com/libp2p/go-cidranger v1.1.0 // indirect
 	github.com/libp2p/go-flow-metrics v0.1.0 // indirect
 	github.com/libp2p/go-libp2p-asn-util v0.3.0 // indirect
-	github.com/libp2p/go-libp2p-kbucket v0.6.1 // indirect
+	github.com/libp2p/go-libp2p-kbucket v0.6.3 // indirect
 	github.com/libp2p/go-libp2p-record v0.2.0 // indirect
 	github.com/libp2p/go-msgio v0.3.0 // indirect
 	github.com/libp2p/go-nat v0.2.0 // indirect
