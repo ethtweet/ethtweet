@@ -99,7 +99,7 @@ func ChcckGithubVersion() {
 	checksums := string(b)
 	if strings.Index(checksums, fileSha512) < 0 {
 
-		logs.PrintErr("文件sha512错误")
+		logs.PrintErr("文件sha512错误，下载的文件sha512:" + fileSha512)
 		return
 	}
 
