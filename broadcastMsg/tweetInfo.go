@@ -324,6 +324,14 @@ func (twInfo *TweetInfo) ReceiveHandle(ctx context.Context, node *p2pNet.OnlineN
 		logs.PrintErr("tweets save err ", twInfo.Tw.Content)
 		twLocal := &models.Tweets{}
 		if sdb.Where("user_id = ? and nonce = ?", twInfo.Tw.UserId, twInfo.Tw.Nonce).Limit(1).Find(twLocal).RowsAffected > 0 && twLocal.Id != twInfo.Tw.Id {
+			if errors.Is(err, gorm.ErrDuplicatedKey) && twLocal.CreatedAt > twInfo.Tw.CreatedAt {
+				twLocal.CreatedAt = twInfo.Tw.CreatedAt
+				twLocal.Content = twInfo.Tw.Content
+				twLocal.Attachment = twInfo.Tw.Attachment
+				twLocal.Nonce = twInfo.Tw.Nonce
+				twLocal.Sign = twInfo.Tw.Sign
+				sdb.Save(twLocal)
+			}
 			go func() {
 				//通知用户询问并且重置本地nonce和tweet数据
 				uak := NewUserInfoGotoAsk(usr, true)
