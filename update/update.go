@@ -81,6 +81,10 @@ func ChcckGithubVersion() {
 		return
 	}
 
+	out, err = os.Open("update.zip")
+	if err != nil {
+		fmt.Println(err)
+	}
 	h := sha512.New()
 	if _, err := io.Copy(h, out); err != nil {
 		logs.PrintErr(err)
