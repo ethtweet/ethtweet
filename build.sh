@@ -16,4 +16,4 @@ sha512sum EthTweet-${tag}-windows-amd64.zip -t > EthTweet-${tag}-windows-amd64.z
 docker build -t ethtweet --build-arg VERSION="${tag}"  .
 docker image tag ethtweet chenjia404/ethtweet
 docker image push  chenjia404/ethtweet
-./sige.bat
+
