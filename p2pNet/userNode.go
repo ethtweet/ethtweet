@@ -275,13 +275,6 @@ func (usr *UserNode) ConnectP2p() error {
 	//广播自己的位置
 	usr.routingDiscovery = routing2.NewRoutingDiscovery(usr.dht)
 
-	//每分钟广播一次
-	go func() {
-		time.Sleep(time.Minute * 1)
-		_, err := usr.routingDiscovery.Advertise(usr.Ctx, usr.Protocol)
-		logs.PrintErr(err)
-	}()
-
 	go func() {
 		_, err := usr.routingDiscovery.Advertise(usr.Ctx, usr.Protocol)
 		if err != nil {
