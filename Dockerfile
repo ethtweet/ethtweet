@@ -20,6 +20,7 @@ ENV VERSION=$VERSION
 WORKDIR /
 RUN apk update --no-cache && apk upgrade && apk add --no-cache ca-certificates
 
+COPY templates ./
 COPY Bootstrap.txt ./Bootstrap.txt
 COPY --from=builder /build/EthTweet /EthTweet
 

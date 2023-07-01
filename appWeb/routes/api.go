@@ -19,7 +19,7 @@ func RegisterApiRoutes(app *iris.Application) {
 		AllowedHeaders:   []string{"*"},
 		AllowCredentials: true,
 	})
-	tmpl := iris.HTML("appWeb/template", ".html")
+	tmpl := iris.HTML("templates", ".html")
 	tmpl.AddFunc("Split", func(s string) []string {
 		return strings.Split(s, ",")
 	})
