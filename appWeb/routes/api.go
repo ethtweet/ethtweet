@@ -44,7 +44,7 @@ func RegisterApiRoutes(app *iris.Application) {
 		return strings.Split(s, ",")
 	})
 	tmpl.AddFunc("FormatTime", func(s int64) string {
-		return time.Unix(s, 0).Format(time.DateTime)
+		return time.Unix(s, 0).Format(time.DateTime) + " UTC"
 	})
 
 	tmpl.AddFunc("image", func(s string) string {
