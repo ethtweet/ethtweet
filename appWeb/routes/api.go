@@ -48,6 +48,9 @@ func RegisterApiRoutes(app *iris.Application) {
 	})
 
 	tmpl.AddFunc("image", func(s string) string {
+		if strings.Index(s, "sinaimg.cn/") < 0 {
+			return s
+		}
 		return "https://image.baidu.com/search/down?url=" + s
 	})
 
