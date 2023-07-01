@@ -237,7 +237,7 @@ func DownloadFile(url string, dest string) error {
 	// Get the data
 	resp, err := http.Get(url)
 
-	if resp.StatusCode != 404 {
+	if resp.StatusCode == 404 {
 		logs.PrintErr("文件不存在，404错误")
 		return http.ErrMissingFile
 	}
