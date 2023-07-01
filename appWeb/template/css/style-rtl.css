@@ -1,0 +1,187 @@
+body {
+	text-align: right;
+}
+.text-left {
+	text-align: right !important;
+}
+.text-right {
+	text-align: left !important;	
+}
+.float-left {
+	float: right !important;
+}
+
+.float-right {
+	float: left !important;
+}
+.right-addon i,
+.right-addon img {
+    left: 0;
+    right:auto;
+}
+
+.left-addon i,
+.left-addon img {
+    right: 0;
+    left:auto;
+}
+
+.panel .panel-heading .panel-title .accordion-toggle:after {
+	right:auto;
+	left:-60px;
+}
+.panel .panel-heading .panel-title {
+	padding-left: 50px;
+	padding-right: 0; 
+}
+
+.ad-box.fixed-box {
+	left:auto;
+	margin-left: auto;
+	right:50%;
+	margin-right: -150px; 
+}
+
+.modal.bottom .modal-content .close {
+	right:auto;
+	left:10px; 
+}
+
+.timeline {
+	padding-left: 0;
+	padding-right: 40px;
+}
+.timeline li:before{
+	left:auto;
+	right: -38px; 
+	top:2px;
+	z-index: 401;
+}
+.timeline li:after {
+	left:auto;
+	right:-32px;
+}
+
+.list-group .list-group-item .badge {
+	right:auto;
+	left:0;
+}
+
+.modal.left .modal-content .close,
+.modal.right .modal-content .close {
+	right:auto;
+	left:10px;
+}
+
+.app-header.right-div:after {
+	right:auto;
+	left:-30px;
+}
+.app-header.right-div:before {
+	right:auto;
+	left:-17px;
+}
+
+.app-header .menu-icon .cart-count {
+	right:auto;
+	left:4px;
+}
+
+.product-tag {left:auto; right:10px;} 
+.live-tag,
+.filter-modal .fliter-brand .list-group-item.active:before {right:auto; left:12px; }
+.filter-modal .fliter-brand .list-group-item {padding-right: 0; }
+
+.add-bookmark.travel-bookmark {left:10px; right:auto; }
+#myModal.modal.left.fade .modal-content ul.nav-item li {text-align: right;}
+#myModal.modal.left.fade .modal-content ul.nav-item li a i {margin-right: 0; margin-left:10px; }
+#myModal.modal.left.fade .modal-content ul.nav-item li a:after {right:auto; left:0; content: "\e64a";}
+.emoji-bttn .emoji-wrap li {margin-right: 4px !important; }
+.bg-image-food {right:auto; left: -30px; }
+.alert .close {float: left  !important;}
+.alert-box-div .alert-box .close {right:auto; left:10px;}
+
+.left-addon input {padding-left: 10px; padding-right: 40px !important; }
+
+
+.header-wrapper .nav-menu {
+	margin-left: 0;
+	margin-right: 30px; 
+}
+
+.form-check-label {
+	padding-right: 18px; 
+}
+
+.owl-theme.right-nav .owl-nav {
+	right:auto;
+	left:0;
+}
+
+.navigation .nav-content ul li:not(.logo) a span {margin-right: 0;}
+.navigation .nav-content ul li:not(.logo) a .circle-count {right: auto; left:15px;}
+.navigation .nav-caption {padding-left: 0; padding-right: 35px;}
+.dropdown-menu-settings {right:auto; left:0;}
+
+.main-content.menu-active {
+    padding-left: 00px;
+    padding-right: 90px;
+}
+.navigation .nav-content ul li:not(.logo) a .circle-icon {right:auto; left:13px; }
+
+.main-content .middle-sidebar-header {left:0; right:280px; }
+.main-content.menu-active .middle-sidebar-header.sticky-header {left:0; right:90px; }
+.dropdown-menu-settings:after {right:auto; left: 10px; }
+
+.custom-switch .custom-control-label::before {right:-3.7375rem; left:auto;}
+.custom-control-label::after {    right: -2.35rem; left:auto;}
+
+.right-chat.active-sidebar {right:auto; left:0;}
+.notification-box li a {padding-left: 15px !important; padding-right: 70px !important;}
+.notification-box li a img, .notification-box li a .btn-round-md {left:auto; right:15px; }
+.notification-box li a .notification-react {left:auto; right:45px;}
+.chat-body .messages-content .message-item.outgoing-message {margin-right: auto; margin-left: 5px; }
+.chat-body .messages-content .message-item .message-user .avatar img {margin-right: 0; margin-left: 10px; }
+.recent-post {padding-left: 0; padding-right: 20px; }
+.timer {float: right !important;}
+.right-chat {right:auto; left:-290px;}
+
+@media (min-width: 992px){
+	/*.main-content {padding-left: 0; padding-right: 280px;}*/
+	.main-content:not(.right-chat-active) {
+	    padding-left: 0;
+	    padding-right: 280px;
+	}
+	.main-content {padding-right: 	290px;}
+}
+
+
+
+
+@media (min-width: 1400px) {
+	.middle-sidebar-left {padding-right: 0px; padding-left: 20px; }
+}
+
+@media (max-width: 1600px){
+	.main-content {
+	    padding-left: 0;
+	    
+	}
+}
+
+
+@media (max-width: 992px){
+	.navigation	 {left: auto; right:-320px;}
+}
+@media (max-width: 990px){
+	.main-content .middle-sidebar-header {right: 0;}
+	.main-content .middle-sidebar-header .ml-auto.menu-search-icon {margin-right: auto !important; margin-left: 0 !important; }
+	.main-content .middle-sidebar-header .header-menu {margin-right: 0;}
+}
+
+@media (max-width: 768px){
+	.navigation {right:-320px; left:auto;}	
+}
+
+
+

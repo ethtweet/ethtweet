@@ -1,0 +1,38 @@
+/*-----------------------------------------------------------
+    Theme Name: Sociala
+    Theme URI: http://uitheme.net/sociala/
+    Author: Uttam D
+    Author URI: http://uitheme.net/
+    Description: Online Course and LMS HTML Template
+    Version: 1.0.0
+-------------------------------------------------------------*/
+
+/*-----------------------------------------------------------
+    Table of Content: 
+
+    
+    2. Bootstrap CSS
+    1. Abstract
+    3. Base
+    4. Component
+    5. Pages
+    7. Header
+    8. Footer
+    
+    
+    
+*/
+
+
+@import "./abstract/abstract";
+@import "./../vendor/bootstrap/scss/bootstrap.scss";
+@import "./../vendor/owl-carousel/css/owl.carousel.min.css";
+@import "./../vendor/owl-carousel/css/owl.theme.default.css";
+
+@import "./base/base";
+@import "./components/components";
+
+
+
+
+

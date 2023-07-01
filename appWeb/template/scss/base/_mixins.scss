@@ -1,0 +1,131 @@
+//MEDIA QUERY MANAGER
+// 0 - 500: Phone 
+// 500 - 900: Tablet portrait
+// 900 - 1200: Tablet landscape
+// 1200 - 1800: Normal styles
+// 1800+ : Big Desktop
+// 1em = 16px
+// The smaller device rules always should write below the bigger device rules
+// Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Component
+@mixin respond($breakpoint) {
+    @if($breakpoint=="sm") {
+        @media only screen and (max-width: 576px) {
+            @content;
+        }
+    }
+    @if($breakpoint=="md") {
+        @media only screen and (max-width: 768px) {
+            @content;
+        }
+    }
+    @if($breakpoint=="lg") {
+        @media only screen and (max-width: 992px) {
+            @content;
+        }
+    }
+    
+    @if ($breakpoint=="xl") {
+        @media only screen and (max-width: 1200px) {
+            @content;
+        }
+    }
+    @if($breakpoint=="xxl") {
+        @media only screen and (max-width: 1400px) {
+            @content;
+        }
+    }
+
+
+    // @if($breakpoint=="tab-port-up") {
+    //     @media only screen and (min-width: 991px) {
+    //         @content;
+    //     }
+    // }
+}
+
+//don't use it untill you need this too much
+@mixin custommq($min: null, $max: null) {
+    @if ($min !=null and $max !=null) {
+        @media only screen and (min-width: $min) and (max-width: $max) {
+            @content;
+        }
+    }
+    @if ($min==null and $max !=null) {
+        @media only screen and (max-width: $max) {
+            @content;
+        }
+    }
+    @if ($min !=null and $max==null) {
+        @media only screen and (min-width: $min) {
+            @content;
+        }
+    }
+}
+
+@each $gray, $value in $grays {
+    .text-grey-#{$gray} {color:#{$value} !important;}
+}
+
+@each $fw, $value in $fws {
+    .fw-#{$fw} {font-weight:#{$value} !important;}
+}
+@each $color, $value in $theme-colors {
+  .swatch-#{$color} {
+    background-color: color-yiq($value);
+  }
+}
+.pt150 {
+    padding-top: 150px;
+}
+ 
+@mixin webkit-box() {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+@mixin box-flex() {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -moz-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+@mixin box-orient() {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -moz-box-orient: vertical;
+    -moz-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    border-radius: $radius;
+}
+
+%avater {
+    display: inline-block;
+    margin-bottom: 0;
+    height: 45px;
+    width: 45px;
+    overflow: hidden;
+    @include border-radius(50%);
+    margin-right: 1em;
+    img {width: 100%;}
+}
+
+@mixin avater($radius) {
+    display: inline-block;
+    margin-bottom: 0;
+    height: $radius;
+    width: $radius;
+    overflow: hidden;
+    @include border-radius(50%);
+    margin-right: 1em;
+    img {width: 100%;}
+}

@@ -1,0 +1,110 @@
+.modal-backdrop.show {opacity: 0.9;}
+
+
+.modal-dialog {
+
+}.modal-backdrop-none {
+    .modal-backdrop.show {opacity: 0 !important; }
+}
+
+.modal .modal-content {
+    .close {
+        border:0;
+        position: absolute;
+        right: 10px;
+        top:10px;
+        opacity: 1;
+        z-index: 2;
+        width: 24px;
+        height: 24px;
+        border-radius:20px;
+        display: inline-block;
+        line-height: 10px; 
+        i {
+            color: #fff;
+            font-size: 16px; 
+        }
+    }
+}
+
+.modal-dialog {
+    .modal.in & {
+        transform: $modal-show-transform;
+    }
+    
+}
+.modal.in {
+    opacity: 1 !important;
+}
+
+.modal-backdrop {
+    &.in { opacity: $modal-backdrop-opacity; }
+}
+
+/*Left*/
+.modal.left.fade .modal-dialog{
+    left: -280px;
+    -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+       -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+         -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+            transition: opacity 0.3s linear, left 0.3s ease-out;
+}
+/*Right*/
+.modal.right.fade .modal-dialog{
+    right: -280px;
+    -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+       -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+         -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+            transition: opacity 0.3s linear, right 0.3s ease-out;
+}
+// bottom
+.modal.bottom.fade .modal-dialog{
+    bottom: -50%;
+    -webkit-transition: opacity 0.3s linear, bottom 0.3s ease-out;
+       -moz-transition: opacity 0.3s linear, bottom 0.3s ease-out;
+         -o-transition: opacity 0.3s linear, bottom 0.3s ease-out;
+            transition: opacity 0.3s linear, bottom 0.3s ease-out;
+}
+
+.modal.left.fade.in .modal-dialog,
+.modal.left.fade.show .modal-dialog{
+    left: 0;
+}
+.modal.bottom.fade.in .modal-dialog,
+.modal.bottom.fade.show .modal-dialog{
+    bottom: 0px;
+}
+.modal.right.fade.in .modal-dialog,
+.modal.right.fade.show .modal-dialog{
+    right: 0px;
+}
+
+.modal-open .modal {overflow-y: hidden;}
+
+
+
+
+@media (min-width: 576px) {
+    .modal.wide.fade .modal-dialog {
+        max-width: 800px;
+    }
+    .modal.wide-xl.fade .modal-dialog {
+        max-width: 1000px;
+    }    
+
+    .modal.side.fade .modal-dialog {
+        max-width: 380px;
+    }
+    .modal-dialog {
+        &.video-wrap {
+            max-width: 900px;
+            .close {
+                right:-20px; 
+                top:-20px;  
+            }
+        }
+    }
+
+}
+
+

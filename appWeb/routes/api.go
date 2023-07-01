@@ -3,7 +3,10 @@ package routes
 import (
 	"github.com/ethtweet/ethtweet/appWeb/controller"
 	"github.com/ethtweet/ethtweet/appWeb/middleware"
+	"github.com/ethtweet/ethtweet/global"
 	"github.com/ethtweet/ethtweet/models"
+	"strings"
+	"time"
 
 	"github.com/iris-contrib/middleware/cors"
 	"github.com/kataras/iris/v12"
@@ -16,9 +19,55 @@ func RegisterApiRoutes(app *iris.Application) {
 		AllowedHeaders:   []string{"*"},
 		AllowCredentials: true,
 	})
+	tmpl := iris.HTML("appWeb/template", ".html")
+	tmpl.AddFunc("Split", func(s string) []string {
+		return strings.Split(s, ",")
+	})
+	tmpl.AddFunc("FormatTime", func(s int64) string {
+		return time.Unix(s, 0).Format(time.DateTime)
+	})
+
+	tmpl.AddFunc("image", func(s string) string {
+		return "https://image.baidu.com/search/down?url=" + s
+	})
+
+	app.RegisterView(tmpl)
 
 	app.Get("/webui", func(ctx iris.Context) {
 		ctx.Redirect("https://ipfs.io/ipns/share.ethtweet.io")
+	})
+
+	app.HandleDir("static", "./appWeb/template")
+
+	app.Get("/", func(ctx iris.Context) {
+		//ctx.Writef("Hello from method: %s and path: %s id:%s", ctx.Method(), ctx.Path(), ctx.Params().Get("id"))
+		// 绑定： {{.message}}　为　"Hello world!"
+		// 渲染模板文件： ./views/hello.html
+		pager := global.NewPager(ctx)
+		tws := make([]*models.Tweets, 0, pager.Limit)
+		global.GetDB().Limit(pager.Limit).Offset(pager.Offset).Preload("UserInfo").Order("created_at desc").Find(&tws)
+		ctx.ViewData("tweets", tws)
+		ctx.View("index.html")
+	})
+
+	app.Get("/user/{id:string}", func(ctx iris.Context) {
+		//ctx.Writef("Hello from method: %s and path: %s id:%s", ctx.Method(), ctx.Path(), ctx.Params().Get("id"))
+		// 绑定： {{.message}}　为　"Hello world!"
+		// 渲染模板文件： ./views/hello.html
+		id := ctx.Params().Get("id")
+		user := &models.User{}
+		global.GetDB().Model(user).Where("id = ?", id).Find(&user)
+		pager := global.NewPager(ctx)
+		tws := make([]*models.Tweets, 0, pager.Limit)
+		global.GetDB().Where("user_id", id).Limit(pager.Limit).
+			Preload("OriginTw").
+			Preload("UserInfo").
+			Order("nonce desc").
+			Offset(pager.Offset).Find(&tws)
+		ctx.ViewData("user", user)
+		ctx.ViewData("tweets", tws)
+		ctx.ViewData("id", id)
+		ctx.View("user-page.html")
 	})
 
 	v0 := app.Party("/api/v0", crs).AllowMethods(iris.MethodOptions)

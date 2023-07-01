@@ -1,0 +1,142 @@
+.owl-carousel.overflow-visible .owl-stage-outer {overflow: visible;}
+.owl-carousel.overflow-visible .owl-item { opacity: 0.2; transition: all 0.4s ease; }
+.owl-carousel.overflow-visible.opacity-5 .owl-item { opacity: 0.5; transition: all 0.4s ease; }
+.owl-carousel.overflow-visible .owl-item.active { opacity: 1; }
+.owl-carousel.owl-theme .owl-dots {position: absolute; bottom:-70px; width: 100%; }
+.owl-carousel.owl-theme .owl-dots .owl-dot span {width: 8px; height: 8px; margin:4px; transition: all 0.4s ease; }
+.owl-carousel.owl-theme .owl-dots .owl-dot.active span {  background-color: var(--theme-color); }
+.owl-carousel.owl-theme.dot-none .owl-dots {display: none;}
+
+.owl-theme.owl-nav-link .owl-nav {position: absolute; top:50%; width: auto; left:50%; margin-top: 0 ;}
+.owl-theme.owl-nav-link .owl-nav .owl-prev {left:-675px;  top:0; margin-top: -25px; position: absolute;}
+.owl-theme.owl-nav-link .owl-nav .owl-next {right:-675px; top:0; margin-top: -25px; position: absolute;}
+.owl-theme.owl-nav-link .owl-nav [class*='owl-']:focus,
+.owl-theme.owl-nav-link .owl-nav [class*='owl-']:hover {background-color: transparent !important; outline: none !important; }
+.owl-theme.owl-nav-link .owl-nav .icon-nav {font-size: 18px; width: 50px; height: 50px; background-color: #fff; border-radius: 50px; display: inline-block; text-align: center; line-height: 50px;  color: #000; box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.03) !important;}
+.owl-theme.owl-nav-link .owl-nav .icon-nav:hover {color: #000;}
+
+
+.owl-theme.owl-nav-link.edge-link .owl-nav .icon-nav {font-size: 18px; width: 40px; height: 40px; background-color: #fff; border-radius: 5px; display: inline-block; text-align: center; line-height: 40px;  color: #000; box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.03) !important;}
+.owl-theme.owl-nav-link.edge-link .owl-nav {width: 100%; left: 0;}
+.owl-theme.owl-nav-link.edge-link .owl-nav .owl-next {right: 0px; }
+.owl-theme.owl-nav-link.edge-link .owl-nav .owl-prev {left:0px; }
+.owl-theme.owl-nav-link.edge-link .owl-nav .icon-nav {box-shadow: none !important;  margin-top: -10px; }
+
+.owl-theme.nav-none .owl-nav {display: none;}
+
+.owl-theme.dot-style2 {
+    .owl-dots {
+        bottom:20px !important;
+        .active span {
+            background-color: transparent !important;
+            border:2px #333 solid;
+        }
+        span {
+            
+            width: 25px !important;
+            height: 25px !important;
+            padding: 10px;
+            background-color: transparent; 
+            position: relative;
+            border:2px transparent solid;
+            &:after {
+                width: 5px;
+                height: 5px; 
+                border-radius: 5px; 
+                content: '';
+                position: absolute;
+                display:inline-block;
+                background-color: #555;
+                top:8px;
+                left:8px;
+            }
+        }
+    }
+}
+
+.owl-theme.dot-style3 {
+    .owl-dots {
+        top:-5px !important;
+        text-align: left;
+        width: 100%;
+        bottom: auto;
+        .active span {
+            background: rgba(255, 255, 255, 0.5) !important;
+            &:after {
+            width: 100%;
+            background-color: #fff;
+            }
+        }
+        .owl-dot {width: 23.5%; margin: 0.5%; border-radius: 10px;}
+        // .owl-dot:hover span {background-color: #fff !important;}
+        span {
+            transition: all 0.4s ease;
+            width: 100% !important;
+            height: 4px !important;
+            border-radius: 10px;
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            background-color: rgba(255, 255, 255, 0.5);
+            position: relative;
+            &:after {
+                content: '';
+                position: absolute;
+                top:0;
+                height: 4px; 
+                background-color: transparent;
+                width: 0%;
+                left:0;
+                transition: width 0.2s;
+                transition-duration: 4s;
+
+            }
+        }
+    }
+}
+
+
+.owl-theme.right-nav {
+    .owl-nav {
+        position: absolute;
+        right:0;
+        top:-90px;
+        margin-top: 0;
+        button {
+            width: 40px; 
+            height: 40px;
+            border-radius: 50px; 
+            border:2px solid var(--theme-color); 
+            i {color: var(--theme-color); font-size: 18px; line-height: 38px; }
+            &:hover,&:focus {
+                background-color: transparent !important;
+                outline: none  !important;
+                i {color: var(--theme-color);}
+            }
+        } 
+    }
+}
+
+
+.product-slider-3 {
+    .owl-thumbs {text-align: center;display: table; width: 80px; left:-90px; top:0; margin-top: 0px; position: absolute;}
+    .owl-thumb-item {width: 100%;height: auto;border: none;background: none;padding: 0;opacity: .5;overflow: hidden; background-color: #fff;}
+    .owl-thumb-item img {width: 100%;height: auto;vertical-align: middle;}
+    .owl-thumb-item.active {opacity: 1; img {position: relative;}}
+    .owl-thumb-item:active,.owl-thumb-item:focus {outline: none !important; }
+}
+
+.product-slider-8 {
+    .owl-thumbs {text-align: center;display: table;width: 100%;margin-top: 10px; }
+    .owl-thumb-item {width: 20%;height: auto;border: none;background: none;padding: 0;opacity: .5;overflow: hidden; background-color: #fff; margin-bottom: 10px; border:2px #fff solid; border-radius: 5px; }
+    .owl-thumb-item img {width: 50%;height: auto;vertical-align: middle;}
+    .owl-thumb-item.active {opacity: 1; img {position: relative;}}
+    .owl-thumb-item:active,.owl-thumb-item:focus {outline: none !important; }
+}
+
+.owl-theme.owl-nav-link .owl-nav {position: absolute; top:50%; width: 100%; left:0%; margin-top: 0 ;}
+.owl-theme.owl-nav-link .owl-nav .owl-prev {left:0;  top:0; margin-top: -25px; position: absolute;}
+.owl-theme.owl-nav-link .owl-nav .owl-next {right:0; top:0; margin-top: -25px; position: absolute;}
+.owl-theme.owl-nav-link .owl-nav [class*='owl-']:focus,
+.owl-theme.owl-nav-link .owl-nav [class*='owl-']:hover {background-color: transparent !important; outline: none !important; }
+.owl-theme.owl-nav-link .owl-nav .icon-nav {font-size: 18px; width: 50px; height: 50px; background-color: #fff; border-radius: 50px; display: inline-block; text-align: center; line-height: 50px;  color: #000; box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.03) !important;}
+.owl-theme.owl-nav-link .owl-nav .icon-nav:hover {color: #000;}

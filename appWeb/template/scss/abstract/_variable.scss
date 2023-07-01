@@ -1,0 +1,202 @@
+////////////////////////////////////////////////////
+//---------------- C O L O R ----------------------
+///////////////////////////////////////////////////
+
+
+//to ignore cli warning about deprecated mixin
+// $enable-deprecation-messages: false;
+// $ignore-warning             : true;
+
+
+// stylelint-disable-next-line scss/dollar-variable-default
+$primary   : #1E74FD !default;
+$secondary : #673BB7 !default;
+$success   : #10d876 !default;
+$info      : #2754e6 !default;
+$warning   : #FE9431 !default;
+$danger    : #E50202 !default;
+$light     : #f7f7f7 !default;
+$dark      : #343a40;
+
+// Body
+$body-bg   : #fff;
+$body-color: #515184;
+
+
+////////////////////////////////////////////////////
+//---------------- FONT WEIGHT ----------------------
+///////////////////////////////////////////////////
+
+$fw-100: 100 !default;
+$fw-200: 200 !default;
+$fw-300: 300 !default;
+$fw-400: 400 !default;
+$fw-500: 500 !default;
+$fw-600: 600 !default;
+$fw-700: 700 !default;
+$fw-800: 800 !default;
+$fw-900: 900 !default;
+
+$fws: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$fws: map-merge(
+  (
+    "100": $fw-100,
+    "200": $fw-200,
+    "300": $fw-300,
+    "400": $fw-400,
+    "500": $fw-500,
+    "600": $fw-600,
+    "700": $fw-700,
+    "800": $fw-800,
+    "900": $fw-900
+  ),
+  $fws
+);
+
+
+////////////////////////////////////////////////////
+//---------------- F O N T S ----------------------
+///////////////////////////////////////////////////
+
+
+
+// Google Font
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Roboto:wght@300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+
+
+$headings-font-weight   : 400;
+
+$font-size-base         : 1rem;
+$font-weight-base       : 400 !default;
+
+
+$h1-font-size         : 24px;
+$h2-font-size         : 20px;
+$h3-font-size         : 18px;
+$h4-font-size         : 16px;
+$h5-font-size         : 14px;
+$h6-font-size         : 12px;
+
+
+$display1-size  			: 36px;
+$display2-size  			: 44px;
+$display3-size  			: 50px;
+$display4-size  			: 60px;
+$display5-size        : 80px;
+
+
+$font-xsssss          : 10px;
+$font-xssss           : 12px;
+$font-xsss            : 14px;
+$font-xss             : 16px;
+$font-xs              : 18px;
+$font-sm              : 20px;
+$font-md              : 22px;
+$font-lg              : 25px;
+$font-xl              : 28px;
+$font-xxl             : 32px;
+
+$text-muted : #AEAED5;
+$colors     : () !default;
+
+$heading-primary-size: 1.8rem;
+$sub-heading-size    : 1.6rem !default;
+$grid-gutter-width   : 30px;
+$dropdown-lik-color  : $body-color;
+$border-color        : #E1E1F0;
+$headings-color      :#111 !default;
+$grid-breakpoints    : (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400);
+$container-max-widths: (sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1199px) !default;
+
+$input-btn-focus-width: 0rem !default;
+$border-radius-base   : 4px !default;
+
+$shadow-color: rgba(160, 159, 202, 0.15);
+
+
+
+////////////////////////////////////////////////////
+//---------------- NAVIGATION ----------------------
+///////////////////////////////////////////////////
+$nav-padding:20px;
+$nav-width:280px;
+$nav-logo-height:90px;
+$nav-menu-link-margin:1px 5px; 
+$nav-menu-link-size:15px;
+$nav-menu-link-color:#888;
+$nav-menu-link-icon-size:20px;
+$chat-width:290px; 
+
+$nav-footer-icon-padding:6px 20px;
+$nav-footer-icon-size:25px;
+
+
+////////////////////////////////////////////////////
+//---------------- LEFT SIDEBAR ----------------------
+///////////////////////////////////////////////////
+$left-sidebar-width:270px;
+$right-sidebar-header-height:96px;
+
+////////////////////////////////////////////////////
+//---------------- PAGE NAV ----------------------
+///////////////////////////////////////////////////
+
+
+$list-group-bg:transparent;
+
+
+////////////////////////////////////////////////////
+//---------------- HEADER ----------------------
+///////////////////////////////////////////////////
+$header-bg:transparent;
+$header-padding:20px;
+$header-menu-font-size:14px;
+$header-menu-font-color:#777;
+
+
+////////////////////////////////////////////////////
+//---------------- FOOTER ----------------------
+///////////////////////////////////////////////////
+
+$footer-bg:#f6f7fc;;
+$footer-title-font-color:#2f2d52;
+$footer-title-font-size:24px;
+$footer-search-input-height:50px;
+$footer-search-input-font-size:12px; 
+$footer-link-title-font-size:13px;
+$footer-link-title-font-color:#333;
+$footer-link-font-size:12px;
+$footer-link-font-color:#aaa;
+
+$app-footer-height:56px;
+$app-footer-bg:#fff;
+$app-footer-border-top:#fff;
+
+
+////////////////////////////////////////////////////
+//---------------- CUSTOM SWITCH ----------------------
+///////////////////////////////////////////////////
+
+$custom-control-indicator-size :1.85rem;
+$custom-control-indicator-border-width:1px;
+$custom-control-indicator-border-color:#fff;
+$custom-control-indicator-bg:#ddd;
+$custom-control-indicator-checked-disabled-bg:#fff;
+$custom-control-indicator-checked-border-color:var(--theme-color);
+$custom-control-indicator-checked-bg:var(--theme-color);
+$custom-control-radio-small-size:20px;
+ 
+
+
+// CUSTOMIZE DROPDOWN PANEL
+$dropdown-menu-width:300px;
+$setting-color-width:32px;
+$setting-toggle-width:20px; 

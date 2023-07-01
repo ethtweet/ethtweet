@@ -1,0 +1,195 @@
+
+@media (min-width: 991px) {
+    .navbar-collapse {
+        display: flex !important;
+        flex-basis: auto;
+    }
+     .main-wrapper {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-height: 100vh;
+        overflow: hidden;
+    }
+
+    .middle-wrap {
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .pr-md--2 {padding-right: 0.5rem !important;}
+    .pl-md--2 {padding-left: 0.5rem !important;}
+
+    .pt-lg--5 {padding-top: 30px !important; } 
+    .pb-lg--5 {padding-bottom: 30px !important; }
+    .pt-lg--7 {padding-top: 75px !important; } 
+    .pb-lg--7 {padding-bottom: 75px !important; }
+
+
+
+    .pt-lg--10 {padding-top: 125px !important; } 
+    .pb-lg--10 {padding-bottom: 125px !important; }
+
+    .pl-md--0 {padding-left: 0;}
+
+    .p-md--5 {padding: 3rem !important;}
+
+    .float-right-md {float: right !important;}
+    .vh-lg--100 {height: 100vh;}
+
+
+    
+}
+@media (min-width: 768px) {
+    .p-md--5 {padding: 3rem !important;}
+
+    .vh-md-100 {height: 100vh;}
+    .position-absolute-md {position: absolute;}
+}
+@media (min-width: 1800px) {
+    .col-xxl-9 {
+        flex: 0 0 70%;
+        max-width: 70%;
+    }
+    .col-xxl-3 {
+        flex: 0 0 30%;
+        max-width: 30%;
+    }
+    .col-xxxl-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+}
+@media (min-width: 1600px) {
+     .container-half-fluid {
+        width: 1400px;
+     }
+     .p-xxl-5 {padding: 3rem !important;}
+
+    
+}
+@media (min-width: 1400px) {
+    .middle-sidebar-left {padding-right:0; margin-right: auto; margin-left: auto; max-width: 960px;}
+}
+
+@media (min-width: 1200px) {
+    .middle-sidebar-left {padding-right:0; margin-right: auto; margin-left: auto; max-width: 960px;}
+    .vh-lg-100 {height: 100vh;}
+
+    .pl-lg--5 {padding-left: 3rem !important;}
+    .pr-lg--5 {padding-right: 3rem !important;}
+
+    .p-lg--5 {padding: 3rem !important;}
+    .w-lg-75 {width: 75%;}
+    
+}
+
+
+
+
+@media (max-width: 1600px) {
+    .display5-size {font-size: 60px !important; }
+    .main-content .middle-sidebar-bottom .sidebar-right {visibility: visible; opacity: 1;}
+    .main-content .middle-sidebar-bottom .middle-sidebar-left {width: 100%;}
+    .right-chat {
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        background-color: rgba(255, 255, 255, 0.3);
+        // right:0 !important;
+    }
+    .main-content {
+        padding-right: 0;
+    }
+}
+@media (max-width: 1400px) {
+    
+    .overflow-visible-xl,
+    .overflow-visible-xl .owl-stage-outer {overflow: visible !important;}
+    
+}
+
+@media (max-width: 1200px) {
+    .coming-soon-card,.login-card {padding-top: 100px; padding-bottom: 100px; }
+
+    
+    .display4-lg-size {font-size: 50px !important; }
+}
+@media (max-width: 991px) {
+    .display2-md-size {font-size: 30px !important; }
+    .display4-md-size {font-size: 40px !important; }
+
+    .coming-soon-card,.login-card {padding-top: 50px; padding-bottom: 50px; } 
+
+    .md-mb-2 {margin-bottom: 1rem !important;}
+}
+
+
+@media (max-width: 768px) {
+    .col-xs-6 { flex: 0 0 50%; max-width: 50%; }
+    .col-xs-12 { flex: 0 0 100%; max-width: 100%; }
+    
+    .col-xs-6 {flex: 0 0 50%;max-width: 50%; }
+    .col-xs-3 {flex: 0 0 25%;max-width: 25%; }
+    .col-xs-9 {flex: 0 0 75%;max-width: 75%; }
+    .col-xs-4 {flex: 0 0 33.3333333333%;max-width: 33.3333333333%;}
+
+    .sm-mb-4 {margin-bottom: 2rem !important;}
+    .sm-mt-7 {margin-top: 5rem !important;}
+    .sm-mb-5 {margin-bottom: 3rem !important;}
+    .font-md-xxl {font-size: 28px !important; }
+
+    .sm-text-center {text-align: center;}
+    
+
+    .coming-soon-card,
+    .login-card {min-width: 320px; }
+
+    .product-info-tab li {margin-right: 20px !important; }
+
+    .owl-carousel.category-card,.owl-carousel.category-card .owl-stage-outer {overflow: visible !important;}
+
+     
+}
+@media (max-width: 576px) {
+    .d-none-xs {display: none !important;}
+    .xs-mb-4 {margin-bottom: 2rem !important;}
+    .xs-mb-2 {margin-bottom: 1rem !important;}
+
+    .xs-p-4 {padding: 2rem;}
+
+    .xs-pt-10 {padding-top: 100px; }
+
+    .owl-theme.nav-xs-none .owl-nav {display: none !important;}
+
+    .col-xss-6 {flex: 0 0 50%;max-width: 50%; }
+
+    .display4-xs-size {font-size: 40px !important; }
+    .font-md-xs {font-size: 18px !important; }
+
+    .play-btn  {width: 25px !important  ; height: 25px !important ; }
+
+
+    .col-xss-6 { flex: 0 0 50%; max-width: 50%; }
+    .col-xss-12 { flex: 0 0 100%; max-width: 100%; }
+    
+    .col-xss-6 {flex: 0 0 50%;max-width: 50%; }
+    .col-xss-3 {flex: 0 0 25%;max-width: 25%; }
+    .col-xss-9 {flex: 0 0 75%;max-width: 75%; }
+    .col-xss-4 {flex: 0 0 33.3333333333%;max-width: 33.3333333333%;}
+
+    .clearfix-xs {width: 100%; height: 1px; display: block;}
+
+    .emoji-wrap li i {
+        font-size: 16px;
+    }
+    
+
+}
+@media (max-width: 360px) {
+    // .d-none-xss {display: none !important;}
+}
