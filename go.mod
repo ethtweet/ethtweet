@@ -19,7 +19,7 @@ require (
 	github.com/tidwall/gjson v1.14.4
 	gorm.io/driver/mysql v1.5.1
 	gorm.io/driver/sqlite v1.5.2 // indirect
-	gorm.io/gorm v1.25.2-0.20230530020048-26663ab9bf55
+	gorm.io/gorm v1.25.2
 )
 
 require (
