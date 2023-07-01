@@ -38,7 +38,6 @@ func RegisterApiRoutes(app *iris.Application) {
 			fmt.Println("templatesDir Unzip:" + err.Error())
 		}
 	}
-	fmt.Println("templatesDir44:" + templatesDir)
 
 	tmpl := iris.HTML(templatesDir, ".html")
 	tmpl.AddFunc("Split", func(s string) []string {
