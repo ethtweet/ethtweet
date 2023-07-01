@@ -1,94 +1,73 @@
 # eth tweet
-以太坊推文服务
+Ethereum Tweet Service
 
-技术原理，使用以太坊 personal_sign 对推文信息进行签名，然后提交到 ipfs 上保存，前端也可以读取 ipfs 上的信息，验证签名确保信息准确。
+The technical principle is to use Ethereum personal_sign to sign the tweet information, and then submit it to ipfs for storage. The front end can also read the information on ipfs to verify the signature to ensure the information is accurate.
 
-因为使用的 personal_sign 签名，而且是明文签名，不会被用于恶意攻击。
+Because the personal_sign signature is used, and it is a plaintext signature, it will not be used for malicious attacks.
 
-本程序提供http api 供前端程序调用，实现数据和显示分离。
+This program provides http api for the front-end program to call to realize the separation of data and display.
 
-本地数据持久化，支持sqlite 和 MySQL ，但是用户可以在不使用客户端的情况，就一个钱包就可以使用。
+Local data persistence supports sqlite and MySQL, but users can use it with a wallet without using the client.
 
-在线体验  https://app.ethtweet.io/#/home
+online experience https://app.ethtweet.io/#/home
 
-http api文档  [api](api.md)
+http api docs  [api](api.md)
 
-## 原理
+## principle
 
-使用钱包对推文信息进行签名，然后提交到ipfs，然后广播给其它节点，其它节点保存并索引，再提交到ipfs。
+Use the wallet to sign the tweet information, then submit it to ipfs, and then broadcast it to other nodes, and other nodes save and index it, and then submit it to ipfs.
 
-每个地址的推文有一个自增nonce值，0开始，用于标记推文发布顺序，节点拉数据的时候也有顺序性。
+The tweets of each address have an auto-incrementing nonce value, starting from 0, which is used to mark the order in which tweets are published, and there is also a sequence when nodes pull data.
 
-可以使用web前端，然后调用rpc接口。
+You can use the web front end, and then call the rpc interface.
 
-## 配置文件
+## config
 
-默认读取 `tweet.yaml` 文件，如果不存在就读取命令行参数。
+By default, the `tweet.yaml` file is read, and the command-line arguments are read if it does not exist.
 
-## mysql配置
+## mysql configuration
 
-修改```tweet.yaml```配置文件，正确配置 MySQL 连接信息。
+Modify the configuration file ```tweet.yaml``` to correctly configure the MySQL connection information.
 
-window环境下，如果在程序运行目录下的有一个MySQL 8.0 ，会自动启动 MySQL ，需要的文件及其路径
+In the window environment, if there is a MySQL 8.0 in the program running directory, it will automatically start MySQL, the required files and their paths
 ```
 mysql\bin\mysqld.exe
 mysql\bin\libprotobuf-lite.dll
 ```
 
-启动节点
+start node
 ```
 ./EthTweet -config "./tweet.yaml"
 ```
 
-## 交叉编译
-https://github.com/techknowlogick/xgo
-```
-docker pull techknowlogick/xgo:latest
-#export GOPATH="当前目录"
-xgo -out EthTweet -targets="darwin/amd64,windows-6.0/amd64,linux/amd64,linux/arm64" -ldflags="-w -s" .
-```
 
-window下编译安卓
-下载https://dl.google.com/android/repository/android-ndk-r25b-windows.zip
+## docker
 
-使用cmd执行
-```
-SET CGO_ENABLED=1
-SET GOOS=android
-SET GOARCH=arm64
-set CC=D:\sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\aarch64-linux-android21-clang.cmd
-set CXX=D:\sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\aarch64-linux-android21-clang++.cmd
-go build --tags "android"  -ldflags="-s -w"  -o ethtweet
-```
-## docker 运行
-
-运行看效果，关闭容器数据自动清空
+Run the test, close the container data to automatically clear
 
 ```shell
 docekr run  --rm -it -p 8080:8080 -p 4001:4001/udp -p 4001:4001/tcp chenjia404/ethtweet
 ```
 
-保存数据运行
-
+save data run
 ```shell
 docekr run -it -v ./databases:/databases -v ./keyStore:/keyStore -p 8080:8080 -p 4001:4001/udp -p 4001:4001/tcp chenjia404/ethtweet
 ```
 
 
-## docker-compose 运行
+## docker-compose
 
-docker-compose目录下，集成一个带MySQL的环境，可一键启动。
+Under the docker-compose directory, an environment with MySQL is integrated, which can be started with one click.
 
 ## todo 
+Add node statistics, record the longest online time, and connect every time you start
 
-增加节点统计，记录最长在线时间，每次启动的时候连接
+The function of encrypting private messages can generate encrypted private messages, and only the address holder can decrypt and read them.
 
-加密私信功能，可以进行发生加密私信，地址持有人才可以解密阅读。
+app side
 
-app端
+pc version web
 
-pc版web
+Add attachment support: you can upload zip-like files and download them
 
-增加附件支持：可以上传类似zip的文件，然后下载
-
-增加附件播种：节点进行再次播种
+Added attachment seeding: node reseeding
