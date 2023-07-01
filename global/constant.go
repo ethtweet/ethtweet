@@ -9,5 +9,5 @@ const (
 	DateFormatStr     = "2006-01-02"
 
 	TwitterProtocol = "/ethtweet/0.1"
-	Version         = "0.6.8"
+	Version         = "0.6.9"
 )
