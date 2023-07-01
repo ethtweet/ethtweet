@@ -1,0 +1,51 @@
+# This is an example .goreleaser.yml file with some sane defaults.
+# Make sure to check the documentation at http://goreleaser.com
+project_name: ethtweet
+before:
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    ignore:
+      - goos: windows
+        goarch: arm
+        goarm: 6
+      - goos: windows
+        goarch: arm64
+    ldflags:
+      - -s -w -X main.gitRev="{{.ShortCommit}}" -X main.buildTime="{{.CommitDate}}"
+
+archives:
+  -
+    id: ethtweet
+    format: tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    files:
+      - templates/*
+      - templates/**/*
+    format_overrides:
+      - goos: windows
+        format: zip
+      - goos: linux
+        format: zip
+checksum:
+  name_template: 'checksums.txt'
+  algorithm: sha512
+signs:
+  - artifacts: all
+    signature: "${artifact}.asc"
+    args: ["--armor","--detach-sign", "${artifact}"]
+snapshot:
+  name_template: "{{ .Tag }}"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
