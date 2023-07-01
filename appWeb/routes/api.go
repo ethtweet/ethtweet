@@ -1,16 +1,20 @@
 package routes
 
 import (
+	"fmt"
 	"github.com/ethtweet/ethtweet/appWeb/controller"
 	"github.com/ethtweet/ethtweet/appWeb/middleware"
 	"github.com/ethtweet/ethtweet/global"
 	"github.com/ethtweet/ethtweet/models"
-	"strings"
-	"time"
-
+	"github.com/ethtweet/ethtweet/update"
 	"github.com/iris-contrib/middleware/cors"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/mvc"
+	"os"
+	"path/filepath"
+	"runtime"
+	"strings"
+	"time"
 )
 
 func RegisterApiRoutes(app *iris.Application) {
@@ -19,7 +23,24 @@ func RegisterApiRoutes(app *iris.Application) {
 		AllowedHeaders:   []string{"*"},
 		AllowCredentials: true,
 	})
-	tmpl := iris.HTML("templates", ".html")
+
+	var templatesDir = "./templates"
+	if runtime.GOOS == "android" {
+		ex, err := os.Executable()
+		if err != nil {
+			fmt.Println(err)
+		}
+		exPath := filepath.Dir(ex)
+
+		templatesDir = exPath + "/templates"
+		err = update.Unzip(exPath+"/templates.zip", templatesDir)
+		if err != nil {
+			fmt.Println("templatesDir Unzip:" + err.Error())
+		}
+	}
+	fmt.Println("templatesDir44:" + templatesDir)
+
+	tmpl := iris.HTML(templatesDir, ".html")
 	tmpl.AddFunc("Split", func(s string) []string {
 		return strings.Split(s, ",")
 	})
@@ -37,7 +58,7 @@ func RegisterApiRoutes(app *iris.Application) {
 		ctx.Redirect("https://ipfs.io/ipns/share.ethtweet.io")
 	})
 
-	app.HandleDir("static", "./appWeb/template")
+	app.HandleDir("static", templatesDir)
 
 	app.Get("/", func(ctx iris.Context) {
 		//ctx.Writef("Hello from method: %s and path: %s id:%s", ctx.Method(), ctx.Path(), ctx.Params().Get("id"))
