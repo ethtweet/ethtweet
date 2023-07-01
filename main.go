@@ -95,7 +95,7 @@ func checkUpdateTimer() {
 		time.Sleep(time.Second * 3600)
 		logs.Println("checkUpdateTimer")
 		checkUpdate()
-		update.ChcckGithubVersion()
+		update.CheckGithubVersion(global.Version)
 	}
 }
 
@@ -222,7 +222,7 @@ RE:
 		}()
 
 		checkUpdate()
-		update.ChcckGithubVersion()
+		update.CheckGithubVersion(global.Version)
 		//子进程才执行更新检测
 		go checkUpdateTimer()
 	}
