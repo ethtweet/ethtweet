@@ -18,7 +18,7 @@ type SqliteDB struct {
 }
 
 func (sdb *SqliteDB) GetDsn() string {
-	return sdb.dir + "/" + sdb.dbName
+	return sdb.dir + "/" + sdb.dbName + "?_journal_mode=WAL"
 }
 
 func GetSqliteDB() *SqliteDB {
@@ -43,6 +43,9 @@ func InitSqliteDatabase(dir, name string) error {
 	sqliteDb.DB, err = gorm.Open(sqlite.Open(sqliteDb.GetDsn()), &gorm.Config{
 		DisableForeignKeyConstraintWhenMigrating: true,
 	})
+	sqliteDb.DB.Exec("PRAGMA SQLITE_THREADSAFE=2")
+	sqliteDb.DB.Exec("PRAGMA foreign_keys = ON")
+	sqliteDb.DB.Exec("PRAGMA journal_mode = WAL")
 	if err != nil {
 		return err
 	}
