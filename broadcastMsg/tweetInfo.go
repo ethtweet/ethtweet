@@ -31,7 +31,7 @@ func CenterUserRelease(tw *models.Tweets) error {
 	var uNonce int64 = -1
 	err := global.GetDB().Transaction(func(tx *gorm.DB) error {
 		userLock := &models.User{}
-		if global.LockForUpdate(tx.Model(userLock).Where("id = ?", tw.UserId)).Find(userLock).RowsAffected == 0 {
+		if tx.Model(userLock).Where("id = ?", tw.UserId).Find(userLock).RowsAffected == 0 {
 			return fmt.Errorf("not found user")
 		}
 		if !keys.VerifySignatureByAddress(tw.UserId, tw.Sign, tw.GetSignMsg()) {
@@ -259,7 +259,7 @@ func (twInfo *TweetInfo) ReceiveHandle(ctx context.Context, node *p2pNet.OnlineN
 
 	usr := &models.User{}
 	//查询对应的用户信息
-	twUsrRowsAffected := global.LockForUpdate(sdb.Model(usr).Where("id = ?", twInfo.Tw.UserId)).Find(usr).RowsAffected
+	twUsrRowsAffected := sdb.Model(usr).Where("id = ?", twInfo.Tw.UserId).Find(usr).RowsAffected
 	if twUsrRowsAffected == 0 {
 		usr = twInfo.Tw.UserInfo
 		usr.LocalUser = global.IsNo

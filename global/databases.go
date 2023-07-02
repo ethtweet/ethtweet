@@ -2,7 +2,6 @@ package global
 
 import (
 	"gorm.io/gorm"
-	"gorm.io/gorm/clause"
 )
 
 const (
@@ -23,13 +22,4 @@ func GetDB() *gorm.DB {
 		return sqliteDb.DB
 	}
 	return mysqlDb.DB
-}
-
-func LockForUpdate(db *gorm.DB) *gorm.DB {
-	//sqlite不加锁
-	/*if db.Name() == DBDriveSqlite {
-		log.Println("sqlite not lock.......")
-		return db
-	}*/
-	return db.Clauses(clause.Locking{Strength: "UPDATE"})
 }

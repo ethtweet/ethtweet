@@ -88,7 +88,7 @@ func execUpIpfsAndBroadcastTweet(ts *models.Tasks, tx *gorm.DB) (err error) {
 	userId := tw.UserId
 	//查找用户
 	user := &models.User{}
-	if global.LockForUpdate(tx.Where("id", userId)).Find(user).RowsAffected == 0 {
+	if tx.Where("id", userId).Find(user).RowsAffected == 0 {
 		ts.Status = models.TasksStatusFail
 		tx.Select("status").Save(ts)
 		err = fmt.Errorf("not found user by user id %s", userId)
