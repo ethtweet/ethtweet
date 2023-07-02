@@ -54,6 +54,13 @@ func RegisterApiRoutes(app *iris.Application) {
 		return "https://image.baidu.com/search/down?url=" + s
 	})
 
+	tmpl.AddFunc("large", func(s string) string {
+		if strings.Index(s, "sinaimg.cn/") < 0 {
+			return s
+		}
+		return strings.Replace(s, "cn/orj360/", "cn/large/", 1)
+	})
+
 	app.RegisterView(tmpl)
 
 	app.Get("/webui", func(ctx iris.Context) {

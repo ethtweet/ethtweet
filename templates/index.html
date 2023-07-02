@@ -182,7 +182,7 @@
                             <div class="card-body d-block p-0">
                                 <div class="row ps-2 pe-2">
                                     {{ range $img := Split $tweet.Attachment  }}
-                                    <div class="col-xs-4 col-sm-4 p-1"><a href="{{image $img}}" data-lightbox="roadtrip"><img src="{{image $img}}" class="rounded-3 w-100" alt="image"></a></div>
+                                    <div class="col-xs-4 col-sm-4 p-1"><a href="{{image $img|large}}" data-lightbox="roadtrip"><img src="{{image $img}}" class="rounded-3 w-100" alt="image"></a></div>
                                     {{ end }}
                                 </div>
                             </div>
@@ -201,15 +201,6 @@
         </div>
     </div>
     <!-- main content -->
-
-
-    <div class="app-footer border-0 shadow-lg bg-primary-gradiant">
-        <a href="default.html" class="nav-content-bttn nav-center"><i class="feather-home"></i></a>
-        <a href="default-video.html" class="nav-content-bttn"><i class="feather-package"></i></a>
-        <a href="default-live-stream.html" class="nav-content-bttn" data-tab="chats"><i class="feather-layout"></i></a>
-        <a href="shop-2.html" class="nav-content-bttn"><i class="feather-layers"></i></a>
-        <a href="default-settings.html" class="nav-content-bttn"><img src="https://via.placeholder.com/50x50.png" alt="user" class="w30 shadow-xss"></a>
-    </div>
 
     <div class="app-header-search">
         <form class="search-form">
