@@ -60,6 +60,11 @@ docekr run -it -v ./databases:/databases -v ./keyStore:/keyStore -p 8080:8080 -p
 
 Under the docker-compose directory, an environment with MySQL is integrated, which can be started with one click.
 
+### releases
+
+`goreleaser release --skip-publish --skip-validate --clean`
+
+
 ## todo 
 Add node statistics, record the longest online time, and connect every time you start
 

@@ -80,6 +80,11 @@ docekr run -it -v ./databases:/databases -v ./keyStore:/keyStore -p 8080:8080 -p
 
 docker-compose目录下，集成一个带MySQL的环境，可一键启动。
 
+### releases
+
+`goreleaser release --skip-publish --skip-validate --clean`
+
+
 ## todo 
 
 增加节点统计，记录最长在线时间，每次启动的时候连接
