@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"encoding/gob"
 	"fmt"
+	"github.com/ethtweet/ethtweet/tasks"
 	"log"
 	"net/http"
 	_ "net/http/pprof"
@@ -25,8 +26,6 @@ import (
 	"github.com/ethtweet/ethtweet/models"
 	"github.com/ethtweet/ethtweet/p2pNet"
 	"github.com/ethtweet/ethtweet/pRuntime"
-	"github.com/ethtweet/ethtweet/tasks"
-
 	"github.com/kataras/iris/v12"
 	"github.com/sanbornm/go-selfupdate/selfupdate"
 )
@@ -92,7 +91,7 @@ func checkUpdate() {
 
 func checkUpdateTimer() {
 	for {
-		time.Sleep(time.Second * 3600)
+		time.Sleep(time.Second * 3600 * 4)
 		logs.Println("checkUpdateTimer")
 		checkUpdate()
 		update.CheckGithubVersion(global.Version)
