@@ -11,7 +11,6 @@ import (
 
 const (
 	TasksTypeUpIpfsAndBroadcastTweet = "syncIpfsAndBroadcastTweet"
-	TasksTypeIpfsUserSync            = "ipfsUserSync"
 
 	TasksStatusWait     = 0
 	TasksStatusIng      = 1
@@ -37,24 +36,6 @@ func (ts *Tasks) TableName() string {
 func (ts *Tasks) BeforeCreate(tx *gorm.DB) error {
 	ts.ID = uuid.New().String()
 	return nil
-}
-
-func AddIpfsUserUploadTask(userId string, sort int64) (*Tasks, error) {
-	if sort == 0 {
-		sort = 100
-	}
-	task := &Tasks{
-		Type:         TasksTypeIpfsUserSync,
-		Sort:         sort,
-		Status:       TasksStatusWait,
-		NextExecTime: 0, //立即执行
-	}
-	task.SetExtendsJson("userId", userId)
-	err := global.GetDB().Create(task).Error
-	if err != nil {
-		return nil, err
-	}
-	return task, nil
 }
 
 func AddUpIpfsAndBroadcastTweetTask(tw *Tweets, sort int64) (*Tasks, error) {

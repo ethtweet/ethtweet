@@ -10,7 +10,7 @@ import (
 	"github.com/ethtweet/ethtweet/global"
 	"github.com/ethtweet/ethtweet/logs"
 	"github.com/ethtweet/ethtweet/models"
-	
+
 	"gorm.io/gorm"
 )
 
@@ -54,8 +54,6 @@ func RunTasks(ctx context.Context) {
 			switch task.Type {
 			case models.TasksTypeUpIpfsAndBroadcastTweet:
 				err = execUpIpfsAndBroadcastTweet(task, tx)
-			case models.TasksTypeIpfsUserSync:
-				err = execIpfsUserSync(task, tx)
 			default:
 				task.Status = models.TasksStatusFail
 				task.SetExtendsJson("err", "invalid type..")
@@ -204,28 +202,6 @@ func execUpIpfsAndBroadcastTweet(ts *models.Tasks, tx *gorm.DB) (err error) {
 	}
 	err = tx.Select("LatestCid").Save(user).Error
 	return
-}
-
-func execIpfsUserSync(ts *models.Tasks, tx *gorm.DB) error {
-	if ts.Type != models.TasksTypeIpfsUserSync {
-		return fmt.Errorf("invalid type ", ts.Type)
-	}
-	if tx == nil {
-		return fmt.Errorf("invalid tx...")
-	}
-	userId := ts.GetExtendsJson("userId").String()
-	//查找用户
-	user := &models.User{}
-	if global.LockForUpdate(tx.Where("id", userId)).Find(user).RowsAffected == 0 {
-		ts.Status = models.TasksStatusFail
-		tx.Select("status").Save(ts)
-		return fmt.Errorf("not found user by user id ", userId)
-	}
-	if err := user.UploadIpfs(tx); err != nil {
-		return err
-	}
-	ts.Status = models.TasksStatusComplete
-	return tx.Select("Status").Save(ts).Error
 }
 
 func ExecAfter(ts *models.Tasks, tx *gorm.DB, err error) {
