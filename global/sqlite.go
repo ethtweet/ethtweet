@@ -1,6 +1,7 @@
 package global
 
 import (
+	"fmt"
 	"github.com/glebarez/sqlite"
 	"gorm.io/gorm"
 	"os"
@@ -18,7 +19,7 @@ type SqliteDB struct {
 }
 
 func (sdb *SqliteDB) GetDsn() string {
-	return sdb.dir + "/" + sdb.dbName + "?_journal_mode=WAL"
+	return sdb.dir + "/" + sdb.dbName
 }
 
 func GetSqliteDB() *SqliteDB {
@@ -30,6 +31,7 @@ func InitSqliteDatabase(dir, name string) error {
 	if name == "" {
 		name = SqliteDatabaseName
 	}
+	fmt.Println("sqlite dir :" + dir)
 	sqliteDb = &SqliteDB{
 		dbName: name,
 		dir:    dir,
@@ -43,6 +45,8 @@ func InitSqliteDatabase(dir, name string) error {
 	sqliteDb.DB, err = gorm.Open(sqlite.Open(sqliteDb.GetDsn()), &gorm.Config{
 		DisableForeignKeyConstraintWhenMigrating: true,
 	})
+
+	sqliteDb.DB.Exec("PRAGMA temp_store_directory = '" + dir + "'")
 	sqliteDb.DB.Exec("PRAGMA SQLITE_THREADSAFE=2")
 	sqliteDb.DB.Exec("PRAGMA foreign_keys = ON")
 	sqliteDb.DB.Exec("PRAGMA journal_mode = WAL")
