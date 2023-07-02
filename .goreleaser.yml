@@ -33,6 +33,7 @@ archives:
       mode: 0777
     files:
       - templates/*
+      - LICENSE.txt
       - templates/**/*
     format_overrides:
       - goos: windows
@@ -52,3 +53,16 @@ changelog:
     exclude:
       - '^docs:'
       - '^test:'
+
+dockers:
+  -
+    id: ethtweet
+    goos: linux
+    goarch: amd64
+    dockerfile: "goreleaser.dockefile"
+    extra_files:
+      - templates/
+      - bootstrap.txt
+      - LICENSE.txt
+    image_templates:
+      - "chenjia404/{{.ProjectName}}:latest"
