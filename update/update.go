@@ -24,7 +24,7 @@ import (
 
 func CheckGithubVersion(Version string) {
 	githubName := "ethtweet"
-	githubPath := "ethtweet/ethtweet"
+	githubPath := "ethtweet/" + githubName
 
 	archivesFormat := "tar.gz"
 	if runtime.GOOS == "windows" {
@@ -162,6 +162,17 @@ func CheckGithubVersion(Version string) {
 			fmt.Println(err)
 			return
 		}
+	}
+
+	if runtime.GOOS == "linux" {
+		w, err := os.Open(githubName)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		defer w.Close()
+
+		w.Chmod(0777)
 	}
 
 	fmt.Println("current version: ", Version)

@@ -29,6 +29,8 @@ archives:
     id: ethtweet
     format: tar.gz
     name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    builds_info:
+      mode: 0777
     files:
       - templates/*
       - templates/**/*
