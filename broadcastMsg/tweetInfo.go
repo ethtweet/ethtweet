@@ -92,9 +92,6 @@ func ReleaseTweet(user *models.User, keyName, content, attachment, forwardId, to
 			global.GetDB().Model(models.Tweets{}).Where("user_id", user.Id).Update("nonce", uNonce)
 		}
 	}()
-	if global.LockForUpdate(tx.Where("id", user.Id)).Find(user).RowsAffected == 0 {
-		return nil, fmt.Errorf("user lock fail")
-	}
 	//todo 读取用户表，获得上一条推文的cid
 	if user.Nonce != 0 {
 		user.Nonce++
