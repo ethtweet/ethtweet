@@ -197,10 +197,6 @@ func BroadcastTweetSync(tw *models.Tweets) {
 		tw.UserInfo = tw.UserInfo.GetUserInfoToPublic()
 	}
 	usr.UsrNode.EachOnlineNodes(func(nlo *p2pNet.OnlineNode) bool {
-		if tw.UserInfo != nil && nlo.Pi.ID.String() == tw.UserInfo.PeerId {
-			logs.PrintlnInfo("Skip author.................")
-			return true
-		}
 		err := nlo.WriteData(&TweetInfo{Tw: tw})
 		if err != nil {
 			logs.PrintErr("WriteData err ", err, tw.Content, nlo.Pi.ID.String())
