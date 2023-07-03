@@ -47,12 +47,12 @@ start node
 Run the test, close the container data to automatically clear
 
 ```shell
-docekr run  --rm -it -p 8080:8080 -p 4001:4001/udp -p 4001:4001/tcp chenjia404/ethtweet
+docker run  --rm -it -p 8080:8080 -p 4001:4001/udp -p 4001:4001/tcp chenjia404/ethtweet
 ```
 
 save data run
 ```shell
-docekr run -it -v ./databases:/databases -v ./keyStore:/keyStore -p 8080:8080 -p 4001:4001/udp -p 4001:4001/tcp chenjia404/ethtweet
+docker run -it -v ./databases:/databases -v ./keyStore:/keyStore -p 8080:8080 -p 4001:4001/udp -p 4001:4001/tcp chenjia404/ethtweet
 ```
 
 

@@ -66,13 +66,13 @@ go build --tags "android"  -ldflags="-s -w"  -o ethtweet
 运行看效果，关闭容器数据自动清空
 
 ```shell
-docekr run  --rm -it -p 8080:8080 -p 4001:4001/udp -p 4001:4001/tcp chenjia404/ethtweet
+docker run  --rm -it -p 28081:8080 -p 24102:4001/udp -p 4001:4001/tcp chenjia404/ethtweet
 ```
 
 保存数据运行
 
 ```shell
-docekr run -it -v ./databases:/databases -v ./keyStore:/keyStore -p 8080:8080 -p 4001:4001/udp -p 4001:4001/tcp chenjia404/ethtweet
+docker run -it -v ./databases:/databases -v ./keyStore:/keyStore -p 8080:8080 -p 4001:4001/udp -p 4001:4001/tcp chenjia404/ethtweet
 ```
 
 
