@@ -23,15 +23,16 @@ func RegisterApiRoutes(app *iris.Application) {
 		AllowCredentials: true,
 	})
 
-	var templatesDir = "./templates"
 	ex, err := os.Executable()
 	if err != nil {
 		fmt.Println(err)
 	}
 	exPath := filepath.Dir(ex)
+	var templatesDir = exPath + "/templates"
 
-	if update.FileExists("templates.zip") {
-		err := update.Unzip("templates.zip", exPath)
+	fmt.Println("exPath:" + exPath)
+	if update.FileExists(exPath + "/templates.zip") {
+		err := update.Unzip(exPath+"/templates.zip", exPath)
 		if err != nil {
 			fmt.Println("templatesDir Unzip:" + err.Error())
 		}
