@@ -3,14 +3,14 @@ FROM alpine:3
 ARG VERSION
 ENV VERSION=$VERSION
 
-WORKDIR /
+WORKDIR /app/
 RUN apk update --no-cache && apk upgrade && apk add --no-cache ca-certificates
 
-COPY templates ./
-COPY bootstrap.txt ./Bootstrap.txt
-COPY ethtweet /ethtweet
+COPY templates.zip /app/
+COPY bootstrap.txt /app/Bootstrap.txt
+COPY ethtweet /app/ethtweet
 
 EXPOSE 4001/tcp
 EXPOSE 4001/udp
 EXPOSE 8080
-ENTRYPOINT   ["/ethtweet"]
+ENTRYPOINT   ["/app/ethtweet"]

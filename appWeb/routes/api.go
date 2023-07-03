@@ -12,7 +12,6 @@ import (
 	"github.com/kataras/iris/v12/mvc"
 	"os"
 	"path/filepath"
-	"runtime"
 	"strings"
 	"time"
 )
@@ -25,15 +24,14 @@ func RegisterApiRoutes(app *iris.Application) {
 	})
 
 	var templatesDir = "./templates"
-	if runtime.GOOS == "android" {
-		ex, err := os.Executable()
-		if err != nil {
-			fmt.Println(err)
-		}
-		exPath := filepath.Dir(ex)
+	ex, err := os.Executable()
+	if err != nil {
+		fmt.Println(err)
+	}
+	exPath := filepath.Dir(ex)
 
-		templatesDir = exPath + "/templates"
-		err = update.Unzip(exPath+"/templates.zip", templatesDir)
+	if update.FileExists("templates.zip") {
+		err := update.Unzip("templates.zip", exPath)
 		if err != nil {
 			fmt.Println("templatesDir Unzip:" + err.Error())
 		}

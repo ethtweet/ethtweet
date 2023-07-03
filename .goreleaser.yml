@@ -61,7 +61,7 @@ dockers:
     goarch: amd64
     dockerfile: "goreleaser.dockefile"
     extra_files:
-      - templates/
+      - templates.zip
       - bootstrap.txt
       - LICENSE.txt
     image_templates:
