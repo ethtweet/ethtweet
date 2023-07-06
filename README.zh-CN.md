@@ -84,6 +84,14 @@ docker-compose目录下，集成一个带MySQL的环境，可一键启动。
 
 `goreleaser release --skip-publish --skip-validate --clean`
 
+### 验证签名
+
+```
+gpg --recv-key E1346252ED662364CA37F716189BE79683369DA3
+
+gpg --verify .\ethtweet_0.7.4_windows_amd64.zip.asc .\ethtweet_0.7.4_windows_amd64.zip
+```
+如果出现`Primary key fingerprint: E134 6252 ED66 2364 CA37  F716 189B E796 8336 9DA3`就是验证成功
 
 ## todo 
 
