@@ -1,5 +1,5 @@
 [English](./README.md) | [简体中文](./README.zh-CN.md)
-# eth tweet
+# 以太坊推文服务
 以太坊推文服务
 
 技术原理，使用以太坊 personal_sign 对推文信息进行签名，然后提交到 ipfs 上保存，前端也可以读取 ipfs 上的信息，验证签名确保信息准确。
