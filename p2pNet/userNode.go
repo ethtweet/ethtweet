@@ -235,7 +235,11 @@ func (usr *UserNode) ConnectP2p() error {
 		libp2p.DefaultPeerstore,
 		//注册使用路由
 		libp2p.Routing(func(h host.Host) (routing.PeerRouting, error) {
-			usr.dht, err = dht.New(usr.Ctx, h)
+			dhtOpts := []dht.Option{
+				dht.Concurrency(10),
+			}
+			dhtOpts = append(dhtOpts, dht.EnableOptimisticProvide())
+			usr.dht, err = dht.New(usr.Ctx, h, dhtOpts...)
 			return usr.dht, err
 		}),
 		// support TLS connections
@@ -267,6 +271,7 @@ func (usr *UserNode) ConnectP2p() error {
 	}
 
 	usr.Host.SetStreamHandler(protocol.ID(usr.Protocol), usr.handleStream)
+
 	//启动dht
 	if err = usr.dht.Bootstrap(usr.Ctx); err != nil {
 		return err
