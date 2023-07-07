@@ -20,11 +20,11 @@ ENV VERSION=$VERSION
 WORKDIR /
 RUN apk update --no-cache && apk upgrade && apk add --no-cache ca-certificates
 
-COPY templates ./
-COPY Bootstrap.txt ./Bootstrap.txt
-COPY --from=builder /build/EthTweet /EthTweet
+COPY templates.zip /app/
+COPY Bootstrap.txt /app/Bootstrap.txt
+COPY --from=builder /build/EthTweet /app/EthTweet
 
 EXPOSE 4001/tcp
 EXPOSE 4001/udp
 EXPOSE 8080
-ENTRYPOINT   ["/EthTweet"]
+ENTRYPOINT   ["/app/EthTweet"]
