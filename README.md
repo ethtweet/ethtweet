@@ -1,6 +1,6 @@
 [English](./README.md) | [简体中文](./README.zh-CN.md)
-# Ethereum Tweet Service
-Ethereum Tweet Service
+# Ethereum Tweet protocol
+Ethereum Tweet protocol
 
 The technical principle is to use Ethereum personal_sign to sign the tweet information, and then submit it to ipfs for storage. The front end can also read the information on ipfs to verify the signature to ensure the information is accurate.
 
