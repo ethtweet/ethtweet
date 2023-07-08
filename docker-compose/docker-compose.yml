@@ -21,8 +21,8 @@ services:
       - db
 
     volumes:
-      - ./keyStore:/keyStore
-      - ./tweet.yaml:/tweet.yaml
+      - ./keyStore:/app/keyStore
+      - ./tweet.yaml:/app/tweet.yaml
 
     ports:
       - '4001:4001/udp'
