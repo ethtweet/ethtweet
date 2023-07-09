@@ -158,8 +158,8 @@
                             <div class="card w-100 border-0 p-0 bg-white shadow-xss rounded-xxl">
                                 <div class="card-body h250 p-0 rounded-xxl overflow-hidden m-3"><img src="/static/images/u-bg.svg" alt="image"></div>
                                 <div class="card-body p-0 position-relative">
-                                    <figure class="avatar position-absolute w100 z-index-1" style="top:-40px; left: 30px;"><img src="{{image .user.Avatar}}" alt="image" class="float-right p-1 bg-white rounded-circle w-100"></figure>
-                                    <h4 class="fw-700 font-sm mt-2 mb-lg-5 mb-4 pl-15">{{.user.Name}}<span class="fw-500 font-xssss text-grey-500 mt-1 mb-3 d-block">{{.id}}</span></h4>
+                                    <figure class="avatar position-absolute w100 z-index-1" style="top:-40px; left: 30px;"><a href="/user/{{.id}}/"><img src="{{image .user.Avatar}}" alt="image" class="float-right p-1 bg-white rounded-circle w-100"></a></figure>
+                                    <a href="/user/{{.id}}/"><h4 class="fw-700 font-sm mt-2 mb-lg-5 mb-4 pl-15">{{.user.Name}}<span class="fw-500 font-xssss text-grey-500 mt-1 mb-3 d-block">{{.id}}</span></h4></a>
                                 </div>
 
                             </div>
@@ -182,7 +182,7 @@
                             <div class="card tweet-cell w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 mt-3">
                                 <div class="card-body p-0 d-flex">
                                     <figure class="avatar me-3"><img src="{{image $tweet.UserInfo.Avatar}}" alt="image" class="shadow-sm rounded-circle w45"></figure>
-                                    <h4 class="fw-700 text-grey-900 font-xssss mt-1">{{$tweet.UserInfo.Name}}  <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500"><a href="/user/{{$tweet.UserInfo.Id}}/{{$tweet.Nonce}}" class="text-grey-900">{{FormatTime $tweet.CreatedAt}}</a></span></h4>
+                                    <h4 class="fw-700 text-grey-900 font-xssss mt-1">{{$tweet.UserInfo.Name}}  <span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">{{FormatTime $tweet.CreatedAt}}</span></h4>
 
                                 </div>
                                 <div class="card-body p-0 me-lg-5">
@@ -198,8 +198,10 @@
                                 </div>
                                 {{ end }}
 
+
                             </div>
                             {{ end }}
+
 
 
                             <div class="card tweet-cell w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 mt-3">
@@ -209,6 +211,7 @@
                                 </div>
 
                             </div>
+
 
                         </div>                             
                     </div>

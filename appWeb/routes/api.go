@@ -31,7 +31,7 @@ func RegisterApiRoutes(app *iris.Application) {
 	var templatesDir = exPath + "/templates"
 
 	fmt.Println("exPath:" + exPath)
-	if update.FileExists(exPath + "/templates.zip") {
+	if update.FileExists(exPath+"/templates.zip") && !update.FileExists(exPath+"/templates/index.html") {
 		err := update.Unzip(exPath+"/templates.zip", exPath)
 		if err != nil {
 			fmt.Println("templatesDir Unzip:" + err.Error())
@@ -69,9 +69,6 @@ func RegisterApiRoutes(app *iris.Application) {
 	app.HandleDir("static", templatesDir)
 
 	app.Get("/", func(ctx iris.Context) {
-		//ctx.Writef("Hello from method: %s and path: %s id:%s", ctx.Method(), ctx.Path(), ctx.Params().Get("id"))
-		// 绑定： {{.message}}　为　"Hello world!"
-		// 渲染模板文件： ./views/hello.html
 		pager := global.NewPager(ctx)
 		tws := make([]*models.Tweets, 0, pager.Limit)
 		global.GetDB().Limit(pager.Limit).Offset(pager.Offset).Preload("UserInfo").Order("created_at desc").Find(&tws)
@@ -79,24 +76,42 @@ func RegisterApiRoutes(app *iris.Application) {
 		ctx.View("index.html")
 	})
 
-	app.Get("/user/{id:string}", func(ctx iris.Context) {
-		//ctx.Writef("Hello from method: %s and path: %s id:%s", ctx.Method(), ctx.Path(), ctx.Params().Get("id"))
-		// 绑定： {{.message}}　为　"Hello world!"
-		// 渲染模板文件： ./views/hello.html
-		id := ctx.Params().Get("id")
-		user := &models.User{}
-		global.GetDB().Model(user).Where("id = ?", id).Find(&user)
-		pager := global.NewPager(ctx)
-		tws := make([]*models.Tweets, 0, pager.Limit)
-		global.GetDB().Where("user_id", id).Limit(pager.Limit).
-			Preload("OriginTw").
-			Preload("UserInfo").
-			Order("nonce desc").
-			Offset(pager.Offset).Find(&tws)
-		ctx.ViewData("user", user)
-		ctx.ViewData("tweets", tws)
-		ctx.ViewData("id", id)
-		ctx.View("user-page.html")
+	app.PartyFunc("/user/{id:string}/", func(users iris.Party) {
+		users.Use(crs)
+
+		users.Get("/", func(ctx iris.Context) {
+			id := ctx.Params().Get("id")
+			user := &models.User{}
+			global.GetDB().Model(user).Where("id = ?", id).Find(&user)
+			pager := global.NewPager(ctx)
+			tws := make([]*models.Tweets, 0, pager.Limit)
+			global.GetDB().Where("user_id", id).Limit(pager.Limit).
+				Preload("OriginTw").
+				Preload("UserInfo").
+				Order("nonce desc").
+				Offset(pager.Offset).Find(&tws)
+			ctx.ViewData("user", user)
+			ctx.ViewData("tweets", tws)
+			ctx.ViewData("id", id)
+			ctx.View("user-page.html")
+		})
+
+		users.Get("/{nonce:int}", func(ctx iris.Context) {
+			id := ctx.Params().Get("id")
+			nonce := ctx.Params().Get("nonce")
+			fmt.Printf("nonce:%d", nonce)
+			user := &models.User{}
+			global.GetDB().Model(user).Where("id = ?", id).Find(&user)
+			tws := make([]*models.Tweets, 0, 1)
+			global.GetDB().Where("user_id", id).Where("nonce =?", nonce).Limit(1).
+				Preload("OriginTw").
+				Preload("UserInfo").Find(&tws)
+			ctx.ViewData("user", user)
+			ctx.ViewData("tweets", tws)
+			ctx.ViewData("id", id)
+			ctx.View("status.html")
+		})
+
 	})
 
 	v0 := app.Party("/api/v0", crs).AllowMethods(iris.MethodOptions)
