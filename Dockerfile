@@ -17,7 +17,7 @@ FROM alpine:3
 ARG VERSION
 ENV VERSION=$VERSION
 
-WORKDIR /
+WORKDIR /app
 RUN apk update --no-cache && apk upgrade && apk add --no-cache ca-certificates
 
 COPY templates.zip /app/
