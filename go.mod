@@ -13,7 +13,7 @@ require (
 	github.com/libp2p/go-libp2p v0.28.1
 	github.com/libp2p/go-libp2p-kad-dht v0.24.2
 	github.com/mr-tron/base58 v1.2.0
-	github.com/multiformats/go-multiaddr v0.10.0
+	github.com/multiformats/go-multiaddr v0.10.1
 	github.com/sanbornm/go-selfupdate v0.0.0-20210106163404-c9b625feac49
 	github.com/spf13/viper v1.16.0
 	github.com/tidwall/gjson v1.14.4
