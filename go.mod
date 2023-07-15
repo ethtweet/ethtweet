@@ -14,7 +14,6 @@ require (
 	github.com/libp2p/go-libp2p-kad-dht v0.24.2
 	github.com/mr-tron/base58 v1.2.0
 	github.com/multiformats/go-multiaddr v0.10.1
-	github.com/sanbornm/go-selfupdate v0.0.0-20230710153803-5048437bef87
 	github.com/spf13/viper v1.16.0
 	github.com/tidwall/gjson v1.14.4
 	gorm.io/driver/mysql v1.5.1
@@ -92,7 +91,6 @@ require (
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
-	github.com/kardianos/osext v0.0.0-20190222173326-2bc1f35cddc0 // indirect
 	github.com/kataras/blocks v0.0.7 // indirect
 	github.com/kataras/golog v0.1.8 // indirect
 	github.com/kataras/neffos v0.0.21 // indirect
@@ -102,7 +100,6 @@ require (
 	github.com/klauspost/compress v1.16.7 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.5 // indirect
 	github.com/koron/go-ssdp v0.0.4 // indirect
-	github.com/kr/binarydist v0.1.0 // indirect
 	github.com/libp2p/go-buffer-pool v0.1.0 // indirect
 	github.com/libp2p/go-cidranger v1.1.0 // indirect
 	github.com/libp2p/go-flow-metrics v0.1.0 // indirect
@@ -197,7 +194,6 @@ require (
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
 	gonum.org/v1/gonum v0.13.0 // indirect
 	google.golang.org/protobuf v1.30.0 // indirect
-	gopkg.in/inconshreveable/go-update.v0 v0.0.0-20150814200126-d8b0b1d421aa // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	lukechampine.com/blake3 v1.2.1 // indirect

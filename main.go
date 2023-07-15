@@ -27,18 +27,7 @@ import (
 	"github.com/ethtweet/ethtweet/p2pNet"
 	"github.com/ethtweet/ethtweet/pRuntime"
 	"github.com/kataras/iris/v12"
-	"github.com/sanbornm/go-selfupdate/selfupdate"
 )
-
-var updater = selfupdate.Updater{
-	CurrentVersion: global.Version,                                             // Manually update the const, or set it using `go build -ldflags="-X main.VERSION=<newver>" -o ipfsTwitter src/ipfsTwitter/main.go`
-	ApiURL:         "https://ipfstwitter.oss-cn-hongkong.aliyuncs.com/update/", // The server hosting `$CmdName/$GOOS-$ARCH.json` which contains the checksum for the binary
-	BinURL:         "https://ipfstwitter.oss-cn-hongkong.aliyuncs.com/update/", // The server hosting the zip file containing the binary application which is a fallback for the patch method
-	DiffURL:        "https://ipfstwitter.oss-cn-hongkong.aliyuncs.com/update/", // The server hosting the binary patch diff for incremental updates
-	Dir:            "update/",                                                  // The directory created by the app when run which stores the cktime file
-	CmdName:        "ethtweet",                                                 // The app name which is appended to the ApiURL to look for an update
-	ForceCheck:     true,                                                       // For this example, always check for an update unless the version is "dev"
-}
 
 func init() {
 	//需要在加载配置
@@ -74,26 +63,10 @@ func deleteOldFiles() {
 	}
 }
 
-func checkUpdate() {
-	newVersion, _ := updater.UpdateAvailable()
-	deleteOldFiles()
-	if newVersion > global.Version {
-
-		updater.Update()
-
-		logs.Println("current version: ", global.Version)
-		logs.Println("Update to version: ", newVersion)
-		logs.Println("Ready to restart")
-		time.Sleep(time.Second * 5) //更新前休眠5秒，避免重复冲突
-		os.Exit(0)
-	}
-}
-
 func checkUpdateTimer() {
 	for {
 		time.Sleep(time.Second * 3600 * 4)
 		logs.Println("checkUpdateTimer")
-		checkUpdate()
 		update.CheckGithubVersion(global.Version)
 	}
 }
@@ -220,7 +193,6 @@ RE:
 			os.Exit(0)
 		}()
 
-		checkUpdate()
 		update.CheckGithubVersion(global.Version)
 		//子进程才执行更新检测
 		go checkUpdateTimer()
