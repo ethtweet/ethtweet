@@ -295,6 +295,8 @@ github.com/ianlancetaylor/demangle v0.0.0-20200824232613-28f6c0f3b639/go.mod h1:
 github.com/imkira/go-interpol v1.1.0 h1:KIiKr0VSG2CUW1hl1jpiyuzuJeKUUpC8iM1AIE7N1Vk=
 github.com/ipfs/boxo v0.10.2 h1:kspw9HmMyKzLQxpKk417sF69i6iuf50AXtRjFqCYyL4=
 github.com/ipfs/boxo v0.10.2/go.mod h1:1qgKq45mPRCxf4ZPoJV2lnXxyxucigILMJOrQrVivv8=
+github.com/ipfs/boxo v0.11.0 h1:urMxhZ3xoF4HssJVD3+0ssGT9pptEfHfbL8DYdoWFlg=
+github.com/ipfs/boxo v0.11.0/go.mod h1:8IfDmp+FzFGcF4zjAgHMVPpwYw4AjN9ePEzDfkaYJ1w=
 github.com/ipfs/go-cid v0.4.1 h1:A/T3qGvxi4kpKWWcPC/PgbvDA2bjVLO7n4UeVwnbs/s=
 github.com/ipfs/go-cid v0.4.1/go.mod h1:uQHwDeX4c6CtyrFwdqyhpNcxVewur1M7l7fNU7LKwZk=
 github.com/ipfs/go-datastore v0.6.0 h1:JKyz+Gvz1QEZw0LsX1IBn+JFCJQH4SJVFtM4uWU0Myk=
