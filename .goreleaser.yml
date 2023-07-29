@@ -43,6 +43,7 @@ checksum:
   algorithm: sha512
 signs:
   - artifacts: all
+    cmd: C:\soft\GnuPG\bin\gpg.exe
     signature: "${artifact}.asc"
     args: ["--armor","--detach-sign", "${artifact}"]
 snapshot:
@@ -66,3 +67,16 @@ dockers:
       - LICENSE.txt
     image_templates:
       - "chenjia404/{{.ProjectName}}:latest"
+  -
+    id: 2
+    goarch: arm64
+    dockerfile: "goreleaser.dockefile"
+    extra_files:
+      - templates.zip
+      - bootstrap.txt
+      - LICENSE.txt
+    build_flag_templates:
+      - "--platform=linux/arm64"
+    image_templates:
+      - "chenjia404/{{.ProjectName}}:latest-arm64"
+      - "chenjia404/{{.ProjectName}}:arm64"
