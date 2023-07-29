@@ -11,6 +11,7 @@ services:
       MYSQL_ROOT_PASSWORD: '123456'
     volumes:
         - ./mysql-data/:/var/lib/mysql
+    command: --binlog_expire_logs_seconds 3600
 
 
   ethtweet:
