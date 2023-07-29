@@ -11,5 +11,5 @@ const (
 	DateFormatStr     = time.DateOnly
 
 	TwitterProtocol = "/ethtweet/0.1"
-	Version         = "0.7.7"
+	Version         = "0.7.8"
 )
