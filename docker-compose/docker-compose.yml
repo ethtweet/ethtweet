@@ -3,7 +3,7 @@ name: ethtweet
 
 services:
   db:
-    image: mysql:8.0
+    image: mysql:8.1
     restart: always
     container_name: 'mysql'
     environment:
