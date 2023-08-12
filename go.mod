@@ -1,6 +1,8 @@
 module github.com/ethtweet/ethtweet
 
-go 1.20
+go 1.21
+
+toolchain go1.21.0
 
 require (
 	github.com/ethereum/go-ethereum v1.12.0
@@ -9,7 +11,7 @@ require (
 	github.com/gookit/color v1.5.4
 	github.com/ipfs/go-ipfs-api v0.6.1
 	github.com/iris-contrib/middleware/cors v0.0.0-20230707105915-780f3748d374
-	github.com/kataras/iris/v12 v12.2.1
+	github.com/kataras/iris/v12 v12.2.4
 	github.com/libp2p/go-libp2p v0.29.2
 	github.com/libp2p/go-libp2p-kad-dht v0.24.3
 	github.com/mr-tron/base58 v1.2.0
@@ -62,7 +64,7 @@ require (
 	github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572 // indirect
 	github.com/gobwas/httphead v0.1.0 // indirect
 	github.com/gobwas/pool v0.2.1 // indirect
-	github.com/gobwas/ws v1.1.0 // indirect
+	github.com/gobwas/ws v1.3.0 // indirect
 	github.com/godbus/dbus/v5 v5.1.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/mock v1.6.0 // indirect
@@ -94,7 +96,7 @@ require (
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/kataras/blocks v0.0.7 // indirect
 	github.com/kataras/golog v0.1.9 // indirect
-	github.com/kataras/neffos v0.0.21 // indirect
+	github.com/kataras/neffos v0.0.22 // indirect
 	github.com/kataras/pio v0.0.12 // indirect
 	github.com/kataras/sitemap v0.0.6 // indirect
 	github.com/kataras/tunnel v0.0.4 // indirect
@@ -119,7 +121,7 @@ require (
 	github.com/mattn/go-isatty v0.0.19 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.4 // indirect
 	github.com/mediocregopher/radix/v3 v3.8.1 // indirect
-	github.com/microcosm-cc/bluemonday v1.0.24 // indirect
+	github.com/microcosm-cc/bluemonday v1.0.25 // indirect
 	github.com/miekg/dns v1.1.55 // indirect
 	github.com/mikioh/tcpinfo v0.0.0-20190314235526-30a79bb1804b // indirect
 	github.com/mikioh/tcpopt v0.0.0-20190314235656-172688c1accc // indirect
@@ -135,7 +137,7 @@ require (
 	github.com/multiformats/go-multihash v0.2.3 // indirect
 	github.com/multiformats/go-multistream v0.4.1 // indirect
 	github.com/multiformats/go-varint v0.0.7 // indirect
-	github.com/nats-io/nats.go v1.23.0 // indirect
+	github.com/nats-io/nats.go v1.28.0 // indirect
 	github.com/nats-io/nkeys v0.4.4 // indirect
 	github.com/nats-io/nuid v1.0.1 // indirect
 	github.com/onsi/ginkgo/v2 v2.11.0 // indirect
@@ -164,8 +166,8 @@ require (
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/subosito/gotenv v1.4.2 // indirect
-	github.com/tdewolff/minify/v2 v2.12.7 // indirect
-	github.com/tdewolff/parse/v2 v2.6.6 // indirect
+	github.com/tdewolff/minify/v2 v2.12.8 // indirect
+	github.com/tdewolff/parse/v2 v2.6.7 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
@@ -186,7 +188,7 @@ require (
 	go.uber.org/zap v1.24.0 // indirect
 	golang.org/x/exp v0.0.0-20230713183714-613f0c0eb8a1 // indirect
 	golang.org/x/mod v0.12.0 // indirect
-	golang.org/x/net v0.12.0 // indirect
+	golang.org/x/net v0.14.0 // indirect
 	golang.org/x/sync v0.3.0 // indirect
 	golang.org/x/sys v0.11.0 // indirect
 	golang.org/x/text v0.12.0 // indirect
