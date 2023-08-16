@@ -15,7 +15,7 @@ require (
 	github.com/libp2p/go-libp2p v0.29.2
 	github.com/libp2p/go-libp2p-kad-dht v0.24.3
 	github.com/mr-tron/base58 v1.2.0
-	github.com/multiformats/go-multiaddr v0.10.1
+	github.com/multiformats/go-multiaddr v0.11.0
 	github.com/spf13/viper v1.16.0
 	github.com/tidwall/gjson v1.16.0
 	gorm.io/driver/mysql v1.5.1
