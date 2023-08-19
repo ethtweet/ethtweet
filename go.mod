@@ -13,7 +13,7 @@ require (
 	github.com/iris-contrib/middleware/cors v0.0.0-20230707105915-780f3748d374
 	github.com/kataras/iris/v12 v12.2.4
 	github.com/libp2p/go-libp2p v0.29.2
-	github.com/libp2p/go-libp2p-kad-dht v0.24.3
+	github.com/libp2p/go-libp2p-kad-dht v0.25.0
 	github.com/mr-tron/base58 v1.2.0
 	github.com/multiformats/go-multiaddr v0.11.0
 	github.com/spf13/viper v1.16.0
