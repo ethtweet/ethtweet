@@ -12,6 +12,10 @@ services:
     volumes:
         - ./mysql-data/:/var/lib/mysql
     command: --binlog_expire_logs_seconds 3600
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
 
 
   ethtweet:
