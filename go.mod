@@ -5,7 +5,7 @@ go 1.21
 require (
 	github.com/ethereum/go-ethereum v1.12.2
 	github.com/go-gormigrate/gormigrate/v2 v2.1.0
-	github.com/google/uuid v1.3.0
+	github.com/google/uuid v1.3.1
 	github.com/gookit/color v1.5.4
 	github.com/ipfs/go-ipfs-api v0.6.1
 	github.com/iris-contrib/middleware/cors v0.0.0-20230707105915-780f3748d374
