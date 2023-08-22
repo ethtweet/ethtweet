@@ -23,7 +23,7 @@ require (
 
 require (
 	github.com/glebarez/sqlite v1.9.0
-	github.com/ipfs/boxo v0.11.0
+	github.com/ipfs/boxo v0.12.0
 	github.com/polydawn/refmt v0.89.0
 	golang.org/x/crypto v0.12.0
 )
@@ -83,7 +83,7 @@ require (
 	github.com/ipfs/go-datastore v0.6.0 // indirect
 	github.com/ipfs/go-log v1.0.5 // indirect
 	github.com/ipfs/go-log/v2 v2.5.1 // indirect
-	github.com/ipld/go-ipld-prime v0.20.0 // indirect
+	github.com/ipld/go-ipld-prime v0.21.0 // indirect
 	github.com/iris-contrib/go.uuid v2.0.0+incompatible // indirect
 	github.com/iris-contrib/schema v0.0.6 // indirect
 	github.com/jackpal/go-nat-pmp v1.0.2 // indirect
