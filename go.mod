@@ -8,7 +8,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/gookit/color v1.5.4
 	github.com/ipfs/go-ipfs-api v0.7.0
-	github.com/iris-contrib/middleware/cors v0.0.0-20230707105915-780f3748d374
+	github.com/iris-contrib/middleware/cors v12.2.0
 	github.com/kataras/iris/v12 v12.2.10
 	github.com/libp2p/go-libp2p v0.32.2
 	github.com/libp2p/go-libp2p-kad-dht v0.25.2
