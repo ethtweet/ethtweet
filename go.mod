@@ -15,7 +15,7 @@ require (
 	github.com/mr-tron/base58 v1.2.0
 	github.com/multiformats/go-multiaddr v0.12.2
 	github.com/spf13/viper v1.18.2
-	github.com/tidwall/gjson v1.17.0
+	github.com/tidwall/gjson v1.17.1
 	gorm.io/driver/mysql v1.5.4
 	gorm.io/driver/sqlite v1.5.2 // indirect
 	gorm.io/gorm v1.25.7
