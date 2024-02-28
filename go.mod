@@ -23,7 +23,7 @@ require (
 
 require (
 	github.com/glebarez/sqlite v1.10.0
-	github.com/ipfs/boxo v0.17.0
+	github.com/ipfs/boxo v0.18.0
 	github.com/polydawn/refmt v0.89.0
 	golang.org/x/crypto v0.20.0
 )
