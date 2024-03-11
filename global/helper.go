@@ -124,14 +124,14 @@ func UploadIpfs(data interface{}) (string, error) {
 	ipfsUploadMutex.Lock()
 	defer ipfsUploadMutex.Unlock()
 	sh := shell.NewShell(IpfsApi)
-	return sh.Add(bytes.NewReader(b), shell.Pin(false))
+	return sh.Add(bytes.NewReader(b), shell.Pin(false), shell.OnlyHash(true))
 }
 
 func UploadIpfsReader(r *bytes.Reader) (string, error) {
 	ipfsUploadMutex.Lock()
 	defer ipfsUploadMutex.Unlock()
 	sh := shell.NewShell(IpfsApi)
-	return sh.Add(r, shell.Pin(false))
+	return sh.Add(r, shell.Pin(false), shell.OnlyHash(true))
 }
 
 func IsLocalIp(ip string) bool {
