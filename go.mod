@@ -22,7 +22,7 @@ require (
 require (
 	github.com/glebarez/sqlite v1.10.0
 	github.com/ipfs/boxo v0.18.0
-	github.com/iris-contrib/middleware/cors v0.0.0-20240111010557-e34016a4d6ee
+	github.com/iris-contrib/middleware/cors v12.2.0
 	github.com/polydawn/refmt v0.89.0
 	golang.org/x/crypto v0.21.0
 )
