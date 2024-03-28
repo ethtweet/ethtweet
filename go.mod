@@ -16,7 +16,7 @@ require (
 	github.com/spf13/viper v1.18.2
 	github.com/tidwall/gjson v1.17.1
 	gorm.io/driver/mysql v1.5.6
-	gorm.io/gorm v1.25.8
+	gorm.io/gorm v1.25.9
 )
 
 require (
