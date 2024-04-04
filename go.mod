@@ -24,7 +24,7 @@ require (
 	github.com/ipfs/boxo v0.18.0
 	github.com/iris-contrib/middleware/cors v12.2.0
 	github.com/polydawn/refmt v0.89.0
-	golang.org/x/crypto v0.21.0
+	golang.org/x/crypto v0.22.0
 )
 
 require (
