@@ -10,7 +10,7 @@ require (
 	github.com/ipfs/go-ipfs-api v0.7.0
 	github.com/kataras/iris/v12 v12.2.11
 	github.com/libp2p/go-libp2p v0.36.5
-	github.com/libp2p/go-libp2p-kad-dht v0.26.1
+	github.com/libp2p/go-libp2p-kad-dht v0.27.0
 	github.com/mr-tron/base58 v1.2.0
 	github.com/multiformats/go-multiaddr v0.13.0
 	github.com/spf13/viper v1.19.0
