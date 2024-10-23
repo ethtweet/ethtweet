@@ -13,7 +13,6 @@ mv EthTweet-windows-6.0-amd64.exe EthTweet.exe
 zip -r EthTweet-${tag}-windows-amd64.zip EthTweet.exe templates
 sha512sum EthTweet-${tag}-windows-amd64.zip -t > EthTweet-${tag}-windows-amd64.zip.sha512
 
-docker build -t ethtweet --build-arg VERSION="${tag}"  .
-docker image tag ethtweet chenjia404/ethtweet
+docker build -t chenjia404/ethtweet --build-arg VERSION="${tag}"  .
 docker image push  chenjia404/ethtweet
 
