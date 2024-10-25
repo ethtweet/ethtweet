@@ -22,7 +22,7 @@ builds:
       - goos: android
         goarch: amd64
     ldflags:
-      - -s -w -X main.gitRev="{{.ShortCommit}}" -X main.buildTime="{{.CommitDate}}"
+      - -s -w -checklinkname=0 -X main.gitRev="{{.ShortCommit}}" -X main.buildTime="{{.CommitDate}}"
 
 archives:
   -
