@@ -3,7 +3,7 @@ module github.com/ethtweet/ethtweet
 go 1.23
 
 require (
-	github.com/ethereum/go-ethereum v1.14.11
+	github.com/ethereum/go-ethereum v1.14.12
 	github.com/go-gormigrate/gormigrate/v2 v2.1.3
 	github.com/google/uuid v1.6.0
 	github.com/gookit/color v1.5.4
