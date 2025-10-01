@@ -6,7 +6,7 @@ toolchain go1.25.1
 
 require (
 	github.com/ethereum/go-ethereum v1.16.4
-	github.com/go-gormigrate/gormigrate/v2 v2.1.3
+	github.com/go-gormigrate/gormigrate/v2 v2.1.5
 	github.com/google/uuid v1.6.0
 	github.com/gookit/color v1.5.4
 	github.com/ipfs/go-ipfs-api v0.7.0
@@ -18,7 +18,7 @@ require (
 	github.com/spf13/viper v1.20.1
 	github.com/tidwall/gjson v1.18.0
 	gorm.io/driver/mysql v1.5.7
-	gorm.io/gorm v1.25.12
+	gorm.io/gorm v1.26.1
 )
 
 require (
