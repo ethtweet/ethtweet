@@ -8,7 +8,7 @@ require (
 	github.com/ethereum/go-ethereum v1.16.4
 	github.com/go-gormigrate/gormigrate/v2 v2.1.3
 	github.com/google/uuid v1.6.0
-	github.com/gookit/color v1.5.4
+	github.com/gookit/color v1.6.0
 	github.com/ipfs/go-ipfs-api v0.7.0
 	github.com/kataras/iris/v12 v12.2.11
 	github.com/libp2p/go-libp2p v0.43.0
@@ -200,7 +200,7 @@ require (
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	github.com/whyrusleeping/go-keyspace v0.0.0-20160322163242-5b898ac5add1 // indirect
 	github.com/wlynxg/anet v0.0.5 // indirect
-	github.com/xo/terminfo v0.0.0-20210125001918-ca9a967f8778 // indirect
+	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
 	github.com/yosssi/ace v0.0.5 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
