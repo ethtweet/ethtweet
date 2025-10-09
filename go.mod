@@ -17,8 +17,8 @@ require (
 	github.com/multiformats/go-multiaddr v0.16.1
 	github.com/spf13/viper v1.20.1
 	github.com/tidwall/gjson v1.18.0
-	gorm.io/driver/mysql v1.5.7
-	gorm.io/gorm v1.25.12
+	gorm.io/driver/mysql v1.6.0
+	gorm.io/gorm v1.30.0
 )
 
 require (
