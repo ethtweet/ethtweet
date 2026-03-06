@@ -2,7 +2,7 @@ module github.com/ethtweet/ethtweet
 
 go 1.24.6
 
-toolchain go1.25.1
+toolchain go1.26.1
 
 require (
 	github.com/ethereum/go-ethereum v1.16.8
