@@ -1,6 +1,6 @@
 module github.com/ethtweet/ethtweet
 
-go 1.24.6
+go 1.25.0
 
 toolchain go1.25.1
 
@@ -26,7 +26,7 @@ require (
 	github.com/ipfs/boxo v0.35.2
 	github.com/iris-contrib/middleware/cors v0.0.0-20240926134003-a252b7a49da9
 	github.com/polydawn/refmt v0.89.0
-	golang.org/x/crypto v0.45.0
+	golang.org/x/crypto v0.49.0
 )
 
 require (
@@ -215,14 +215,14 @@ require (
 	go.uber.org/zap v1.27.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.3 // indirect
 	golang.org/x/exp v0.0.0-20251023183803-a4bb9ffd2546 // indirect
-	golang.org/x/mod v0.29.0 // indirect
-	golang.org/x/net v0.47.0 // indirect
-	golang.org/x/sync v0.18.0 // indirect
-	golang.org/x/sys v0.38.0 // indirect
-	golang.org/x/telemetry v0.0.0-20251008203120-078029d740a8 // indirect
-	golang.org/x/text v0.31.0 // indirect
+	golang.org/x/mod v0.33.0 // indirect
+	golang.org/x/net v0.51.0 // indirect
+	golang.org/x/sync v0.20.0 // indirect
+	golang.org/x/sys v0.42.0 // indirect
+	golang.org/x/telemetry v0.0.0-20260209163413-e7419c687ee4 // indirect
+	golang.org/x/text v0.35.0 // indirect
 	golang.org/x/time v0.12.0 // indirect
-	golang.org/x/tools v0.38.0 // indirect
+	golang.org/x/tools v0.42.0 // indirect
 	golang.org/x/xerrors v0.0.0-20240903120638-7835f813f4da // indirect
 	gonum.org/v1/gonum v0.16.0 // indirect
 	google.golang.org/protobuf v1.36.10 // indirect
