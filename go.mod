@@ -22,7 +22,7 @@ require (
 require (
 	github.com/glebarez/sqlite v1.11.0
 	github.com/ipfs/boxo v0.37.0
-	github.com/iris-contrib/middleware/cors v0.0.0-20240926134003-a252b7a49da9
+	github.com/iris-contrib/middleware/cors v0.0.0-20251225090426-92c6f28facda
 	github.com/polydawn/refmt v0.89.1-0.20231129105047-37766d95467a
 	golang.org/x/crypto v0.49.0
 )
@@ -31,13 +31,13 @@ require (
 	filippo.io/bigmod v0.1.1-0.20260103110540-f8a47775ebe5 // indirect
 	filippo.io/edwards25519 v1.1.0 // indirect
 	filippo.io/keygen v0.0.0-20260114151900-8e2790ea4c5b // indirect
-	github.com/BurntSushi/toml v1.4.0 // indirect
+	github.com/BurntSushi/toml v1.6.0 // indirect
 	github.com/CloudyKit/fastprinter v0.0.0-20200109182630-33d98a066a53 // indirect
-	github.com/CloudyKit/jet/v6 v6.2.0 // indirect
+	github.com/CloudyKit/jet/v6 v6.3.1 // indirect
 	github.com/Joker/jade v1.1.3 // indirect
 	github.com/ProjectZKM/Ziren/crates/go-runtime/zkvm_runtime v0.0.0-20251001021608-1fe7b43fc4d6 // indirect
-	github.com/Shopify/goreferrer v0.0.0-20240724165105-aceaa0259138 // indirect
-	github.com/andybalholm/brotli v1.1.0 // indirect
+	github.com/Shopify/goreferrer v0.0.0-20250617153402-88c1d9a79b05 // indirect
+	github.com/andybalholm/brotli v1.2.0 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/benbjohnson/clock v1.3.5 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
@@ -72,7 +72,7 @@ require (
 	github.com/godbus/dbus/v5 v5.1.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/snappy v1.0.0 // indirect
-	github.com/gomarkdown/markdown v0.0.0-20240730141124-034f12af3bf6 // indirect
+	github.com/gomarkdown/markdown v0.0.0-20250810172220-2e2c11897d1a // indirect
 	github.com/google/gopacket v1.1.19 // indirect
 	github.com/google/pprof v0.0.0-20241210010833-40e02aabc2ad // indirect
 	github.com/gorilla/css v1.0.1 // indirect
@@ -100,7 +100,7 @@ require (
 	github.com/kataras/pio v0.0.14-0.20240707171706-2005199e2703 // indirect
 	github.com/kataras/sitemap v0.0.6 // indirect
 	github.com/kataras/tunnel v0.0.4 // indirect
-	github.com/klauspost/compress v1.18.0 // indirect
+	github.com/klauspost/compress v1.18.2 // indirect
 	github.com/klauspost/cpuid/v2 v2.3.0 // indirect
 	github.com/koron/go-ssdp v0.0.6 // indirect
 	github.com/libp2p/go-buffer-pool v0.1.0 // indirect
@@ -118,7 +118,7 @@ require (
 	github.com/libp2p/go-yamux/v5 v5.0.1 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/mailgun/raymond/v2 v2.0.48 // indirect
-	github.com/mailru/easyjson v0.7.7 // indirect
+	github.com/mailru/easyjson v0.9.1 // indirect
 	github.com/marten-seemann/tcp v0.0.0-20210406111302-dfbc87cc63fd // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mediocregopher/radix/v3 v3.8.1 // indirect
@@ -194,8 +194,8 @@ require (
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/stretchr/testify v1.11.1 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
-	github.com/tdewolff/minify/v2 v2.20.37 // indirect
-	github.com/tdewolff/parse/v2 v2.7.15 // indirect
+	github.com/tdewolff/minify/v2 v2.24.8 // indirect
+	github.com/tdewolff/parse/v2 v2.8.5 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
@@ -224,7 +224,7 @@ require (
 	golang.org/x/sys v0.42.0 // indirect
 	golang.org/x/telemetry v0.0.0-20260311193753-579e4da9a98c // indirect
 	golang.org/x/text v0.35.0 // indirect
-	golang.org/x/time v0.12.0 // indirect
+	golang.org/x/time v0.14.0 // indirect
 	golang.org/x/tools v0.43.0 // indirect
 	golang.org/x/xerrors v0.0.0-20240903120638-7835f813f4da // indirect
 	gonum.org/v1/gonum v0.17.0 // indirect
