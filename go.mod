@@ -11,7 +11,7 @@ require (
 	github.com/kataras/iris/v12 v12.2.11
 	github.com/libp2p/go-libp2p v0.48.0
 	github.com/libp2p/go-libp2p-kad-dht v0.39.0
-	github.com/mr-tron/base58 v1.2.0
+	github.com/mr-tron/base58 v1.3.0
 	github.com/multiformats/go-multiaddr v0.16.1
 	github.com/spf13/viper v1.21.0
 	github.com/tidwall/gjson v1.18.0
