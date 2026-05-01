@@ -6,7 +6,7 @@ require (
 	github.com/ethereum/go-ethereum v1.17.2
 	github.com/go-gormigrate/gormigrate/v2 v2.1.5
 	github.com/google/uuid v1.6.0
-	github.com/gookit/color v1.6.0
+	github.com/gookit/color v1.6.1
 	github.com/ipfs/go-ipfs-api v0.7.0
 	github.com/kataras/iris/v12 v12.2.11
 	github.com/libp2p/go-libp2p v0.48.0
