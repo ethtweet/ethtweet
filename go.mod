@@ -1,6 +1,6 @@
 module github.com/ethtweet/ethtweet
 
-go 1.25.7
+go 1.26
 
 require (
 	github.com/ethereum/go-ethereum v1.17.2
@@ -22,7 +22,7 @@ require (
 require (
 	github.com/glebarez/sqlite v1.11.0
 	github.com/ipfs/boxo v0.42.2
-	github.com/iris-contrib/middleware/cors v0.0.0-20251225090426-92c6f28facda
+	github.com/iris-contrib/middleware/cors v0.0.0-20260803043034-92b8edf402f2
 	github.com/polydawn/refmt v0.90.0
 	golang.org/x/crypto v0.54.0
 )
