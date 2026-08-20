@@ -21,7 +21,7 @@ require (
 
 require (
 	github.com/glebarez/sqlite v1.11.0
-	github.com/ipfs/boxo v0.42.1
+	github.com/ipfs/boxo v0.42.2
 	github.com/iris-contrib/middleware/cors v0.0.0-20251225090426-92c6f28facda
 	github.com/polydawn/refmt v0.90.0
 	golang.org/x/crypto v0.54.0
