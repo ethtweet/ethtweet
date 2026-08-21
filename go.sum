@@ -460,6 +460,8 @@ github.com/iris-contrib/middleware/cors v0.0.0-20240926134003-a252b7a49da9 h1:Vl
 github.com/iris-contrib/middleware/cors v0.0.0-20240926134003-a252b7a49da9/go.mod h1:eRpZiPbJYIwNPUzLQihk1cOfihozEtMElAwMK92tiA8=
 github.com/iris-contrib/middleware/cors v0.0.0-20251225090426-92c6f28facda h1:wtN/fj3B3xmjLLuDmcykBwx/IlUpwypYBZe+HG1tN5o=
 github.com/iris-contrib/middleware/cors v0.0.0-20251225090426-92c6f28facda/go.mod h1:BGIjcv4ouBVUE0JzrrT1gEG6z8NmG911Jnm3ofNYM74=
+github.com/iris-contrib/middleware/cors v0.0.0-20260803043034-92b8edf402f2 h1:wpaD9hnL3sos6OjKtkEJH4mlih7rFVY52GF3j7CeLK8=
+github.com/iris-contrib/middleware/cors v0.0.0-20260803043034-92b8edf402f2/go.mod h1:RtYTFxPd2Axw9e0TsD3RgnYh0X2ajmsIijnsdi59ubM=
 github.com/iris-contrib/schema v0.0.6 h1:CPSBLyx2e91H2yJzPuhGuifVRnZBBJ3pCOMbOvPZaTw=
 github.com/iris-contrib/schema v0.0.6/go.mod h1:iYszG0IOsuIsfzjymw1kMzTL8YQcCWlm65f3wX8J5iA=
 github.com/jackpal/go-nat-pmp v1.0.2 h1:KzKSgb7qkJvOUTqYl9/Hg/me3pWgBmERKrTGD7BdWus=
