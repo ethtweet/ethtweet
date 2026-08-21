@@ -3,7 +3,7 @@ module github.com/ethtweet/ethtweet
 go 1.26
 
 require (
-	github.com/ethereum/go-ethereum v1.17.2
+	github.com/ethereum/go-ethereum v1.17.5
 	github.com/go-gormigrate/gormigrate/v2 v2.1.5
 	github.com/google/uuid v1.6.0
 	github.com/gookit/color v1.6.1
@@ -71,7 +71,7 @@ require (
 	github.com/gobwas/ws v1.3.2 // indirect
 	github.com/godbus/dbus/v5 v5.1.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
-	github.com/golang/snappy v1.0.0 // indirect
+	github.com/golang/snappy v1.0.1-0.20260716114414-9ae09f520e93 // indirect
 	github.com/gomarkdown/markdown v0.0.0-20250810172220-2e2c11897d1a // indirect
 	github.com/google/gopacket v1.1.19 // indirect
 	github.com/google/pprof v0.0.0-20241210010833-40e02aabc2ad // indirect
