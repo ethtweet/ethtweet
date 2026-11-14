@@ -14,7 +14,7 @@ require (
 	github.com/mr-tron/base58 v1.3.0
 	github.com/multiformats/go-multiaddr v0.16.1
 	github.com/spf13/viper v1.21.0
-	github.com/tidwall/gjson v1.19.0
+	github.com/tidwall/gjson v1.20.3
 	gorm.io/driver/mysql v1.6.0
 	gorm.io/gorm v1.31.2
 )
@@ -197,7 +197,7 @@ require (
 	github.com/tdewolff/minify/v2 v2.24.8 // indirect
 	github.com/tdewolff/parse/v2 v2.8.5 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
-	github.com/tidwall/pretty v1.2.0 // indirect
+	github.com/tidwall/pretty v1.3.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
